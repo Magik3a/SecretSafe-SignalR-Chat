@@ -1,0 +1,241 @@
+﻿html {
+	width:100%;
+    height:100%;
+}
+
+body 
+{
+	font-family: Helvetica;		
+
+    height:100%;
+  
+    margin-top: 65px;
+    overflow-y: hidden;
+} 
+
+.navbar-inverse .navbar-brand{
+    color: #D8D8D8;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+    color: #D8D8D8;
+}
+footer{ 
+   text-align: center;
+   bottom: 0;
+
+}
+.navbar {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e570e7+0,c85ec7+47,a849a3+100;Pink+3D+%233 */
+background: #e570e7; /* Old browsers */
+background: -moz-linear-gradient(top, #e570e7 0%, #c85ec7 47%, #a849a3 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', endColorstr='#a849a3',GradientType=0 ); /* IE6-9 */
+    border-bottom: 2px solid black;
+    box-shadow: 2px 2px 5px gray;
+    height: 50px;
+}
+
+/*#header-title
+{ 
+    margin-top: 10px;    
+    font-size: 30px;
+    font-weight: bold;        
+}*/
+
+#myContainer h1 
+{
+	font-size: 50px;     
+	padding-bottom: 20px;	
+}
+
+#myContainer h2 
+{
+	font-size: 25px;    	
+	padding-left: 20px;
+	font-weight: lighter;
+}
+
+#myContainer ul 
+{
+    list-style: none;
+    list-style-image: none;
+    margin:0px;
+    padding:0px;
+}
+
+#myContainer li {
+	float:left;
+	display:inline;
+	/*margin-left: -25px;	*/
+	padding-bottom: 5px;
+}
+
+#myContainer 
+{   
+    margin-top: 40px;
+        
+}
+
+
+#form-container 
+{
+	display: block;
+	height: 500px;
+	width: 700px;    
+	margin: 0 auto;
+	margin-top: 5%;
+}
+
+
+#description {
+	font-size: larger;
+}
+
+#input-box 
+{
+	margin-top: 40px;
+}
+
+label 
+{    
+	font-size: 18px;
+}
+
+input, button 
+{
+	margin-right: 25px;
+}
+ 
+#username 
+{     
+}
+
+#room-label{
+    margin-top:15px;
+
+}
+
+#room{
+        margin-bottom: 15px;
+}
+/* Chat specific style */
+#chat-list 
+{    
+    position:relative;
+    height: 500px;
+    overflow-y:auto;
+    background-color: White;	    
+    -moz-border-radius: 2px;
+    border-radius: 2px;     
+}
+
+#chat-list div 
+{
+    float:left;
+}
+
+#chat-list ul {
+	list-style: none;				
+}
+#chat-list li:hover {
+	background-color: #ffc578 ;			 
+}
+#chat-list ul li 
+{
+    float:left;
+	display:inline;
+	/*margin-left: -25px;*/
+	border-bottom: 1px solid #F2F2F2;
+	width:100%;
+	height:100%;
+	padding-bottom:0px;
+}
+
+.chat-listitem-username 
+{
+    display:block;
+    float: left;
+    width: 120px;
+    padding: 5px;        
+    background-color:#D8D8D8;    
+}
+
+.chat-listitem-message 
+{   
+    /*width:530px;*/
+    margin-right: 90px;
+    padding: 5px;    
+    word-wrap: break-word;    
+}
+
+.chat-listitem-timestamp 
+{   
+    position: absolute;
+    right: 0px;
+    margin-right:0px;
+    text-align: center; 
+    font-weight:lighter;    
+    padding: 5px;    
+    width: 80px;
+    background-color: #F2F2F2;
+    color: Gray;
+}
+
+#users-list 
+{
+    /*height: 510px;*/
+    overflow-y: auto;    
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+#users-list li 
+{
+    margin-bottom: 5px;
+}
+
+
+.user-box {
+	width: 90%;
+	background-color: #ffc578;
+	-moz-border-radius: 3px;
+    border-radius: 3px;
+    height: 35px;
+    padding: 5px;    
+}
+
+.user-box:hover {
+	width: 90%;
+	background-color: #DF7401;
+	-moz-border-radius: 3px;
+    border-radius: 3px;
+    height: 35px;
+    padding: 5px;
+}
+
+.user-box-name 
+{
+    font-size: larger;
+    margin-left: 3px;
+    font-weight: bolder;
+}
+
+#compose 
+{
+    margin-top: 30px;
+}
+
+#compose-box 
+{    
+    width: 100%;
+}
+
+#send-btn 
+{
+    margin-top:5px;
+    width: 100%;
+}   
+    
+    
