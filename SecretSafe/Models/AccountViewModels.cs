@@ -79,6 +79,10 @@ namespace SecretSafe.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Display name")]
+        public string NickName { get; set; }
     }
 
     public class ResetPasswordViewModel

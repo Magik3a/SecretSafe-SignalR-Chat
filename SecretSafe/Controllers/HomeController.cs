@@ -1,4 +1,8 @@
-﻿using SecretSafe.Models;
+﻿using Data;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Models;
+using SecretSafe.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +14,7 @@ namespace SecretSafe.Controllers
     public class HomeController : Controller
     {
         private InMemoryRepository _repository;
-
+        private SecretSafeDbContext db = new SecretSafeDbContext();
         public HomeController()
         {
             _repository = InMemoryRepository.GetInstance();
@@ -19,7 +23,12 @@ namespace SecretSafe.Controllers
         public ActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
-                return View("Chat", "_Layout", User.Identity.Name);
+            {
+                string currentUserId = User.Identity.GetUserId();
+                SecretSafeUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+
+                return View("Chat", "_Layout", currentUser.NickName);
+            }
 
             return View();
         }

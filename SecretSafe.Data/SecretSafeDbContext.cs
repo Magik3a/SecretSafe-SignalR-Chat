@@ -22,6 +22,8 @@ namespace Data
             return new SecretSafeDbContext();
         }
 
+         
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -41,5 +43,6 @@ namespace Data
             modelBuilder.Entity<IdentityUserLogin>()
                 .ToTable("UserLogins");
         }
+        
     }
 }

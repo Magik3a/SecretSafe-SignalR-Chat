@@ -61,6 +61,7 @@ namespace SecretSafe.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ChangeNickNameSuccess ? "Your NickName has been changed."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -213,6 +214,36 @@ namespace SecretSafe.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
+
+
+
+        public ActionResult ChangeNick()
+        {
+            var model = new EditDetailsUserViewModels();
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            model.NickName = user.NickName;
+
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult ChangeNick(EditDetailsUserViewModels model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            user.NickName = model.NickName;
+
+            var result = UserManager.Update(user);
+
+            if(!result.Succeeded)
+                return View(model);
+
+            return RedirectToAction("Index", new { Message = ManageMessageId.ChangeNickNameSuccess });
+        }
         //
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
@@ -381,7 +412,8 @@ namespace SecretSafe.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
-            Error
+            Error,
+            ChangeNickNameSuccess
         }
 
 #endregion
