@@ -60,8 +60,8 @@ namespace SecretSafe
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "950489315016280",
-               appSecret: "a87895775166182eac409b76755278c2");
+               appId: "602016046625818",
+               appSecret: "a1a8ebc1da429cddba72dbf4793973d1");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
