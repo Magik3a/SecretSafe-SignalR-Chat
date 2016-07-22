@@ -63,11 +63,11 @@ namespace SecretSafe
                appId: "602016046625818",
                appSecret: "a1a8ebc1da429cddba72dbf4793973d1");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "151361180853-er5plgfuujbpeq32osv9k4vfb5resdue.apps.googleusercontent.com",
+                ClientSecret = "m_wp2QkL3L8L1Nf15vqYPDb6"
+            });
         }
     }
 }
