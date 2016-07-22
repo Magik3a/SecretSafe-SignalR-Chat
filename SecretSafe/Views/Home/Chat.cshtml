@@ -40,21 +40,21 @@
 
         <div class="col-md-9">
 
-        <!-- This  is the chat box -->
+            <!-- This  is the chat box -->
 
-        <div id="chat-list" class="span8" data-bind="foreach: messages">
-            <ul>
-                <li>
-                    <div class="chat-listitem-username" data-bind="text: username">
-                    </div>
-                    <div class="chat-listitem-message" data-bind="html: content">
-                    </div>
-                    <div class="chat-listitem-timestamp" data-bind="text: timestamp.toLocaleTimeString()">
-                    </div>
-                </li>
-            </ul>
-        </div>
-            
+            <div id="chat-list" class="span8" data-bind="foreach: messages">
+                <ul>
+                    <li>
+                        <div class="chat-listitem-username" data-bind="text: username">
+                        </div>
+                        <div class="chat-listitem-message" data-bind="html: content">
+                        </div>
+                        <div class="chat-listitem-timestamp" data-bind="text: timestamp.toLocaleTimeString()">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
             <div id="compose" class="row-fluid">
                 <div class="span2"></div>
                 <div class="span8">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 
@@ -80,8 +80,11 @@ on the server. Each hub on the server will become a property on the client side 
 <script type="text/javascript" src="@Url.Content("/signalr/hubs")"></script>
 <script src="~/Scripts/SecretSafe.js"></script>
 <script type="text/javascript">
-
-
+    var favicon = new Favico({
+        animation: 'fade'
+    });
+    var valFavicon = -1;
+    favicon.badge(valFavicon);
     // IE doesn't parse IS8601 formatted dates, so I had to find this function to parse it
     // (URL http://dansnetwork.com/javascript-iso8601rfc3339-date-parser/ )
     Date.prototype.setISO8601 = function (dString) {
@@ -119,13 +122,23 @@ on the server. Each hub on the server will become a property on the client side 
         var chat = new secretSafe.chatViewModel();
         var users = new secretSafe.connectedUsersViewModel();
         var currentUser = new secretSafe.user(@Html.Raw(Json.Encode(Model))); // The username chose by the user is stored in the model
-
+       
         // Proxy creation
         var chatHub = $.connection.chatHub; // chatHub is the name of the Hub as declared in server side code
         chatHub.state.username = currentUser.username; // This is the round-trip state
 
         // Client-side event handlers, as declared inside the  Hub
         chatHub.client.onMessageReceived = function (message) {
+            //Change favicon badge if youser is not on focus
+            var isFocus = $(window).is(":focus");
+            if (isFocus) {
+                favicon.badge(0);
+
+            } else {
+                favicon.badge(valFavicon);
+                valFavicon += 1;
+            }
+
             var date = new Date();
             date.setISO8601(message.Timestamp);
             chat.messages.push(new secretSafe.chatMessage(message.Username, message.Content, date));//new Date(message.Timestamp)));
@@ -143,6 +156,11 @@ on the server. Each hub on the server will become a property on the client side 
         }
 
         function sendMessageContent() {
+
+              valFavicon = 0;
+              favicon.badge(0)
+
+
             var content = $("#compose-box").val();
             if (content != "" && content != null) {
                 var msg = new secretSafe.chatMessage(currentUser.username, content);
