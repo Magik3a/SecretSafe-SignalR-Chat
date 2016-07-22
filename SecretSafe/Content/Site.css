@@ -10,7 +10,6 @@ body
     height:100%;
   
     margin-top: 65px;
-    overflow-y: hidden;
 } 
 
 .navbar-inverse .navbar-brand{
@@ -19,6 +18,13 @@ body
 
 .navbar-inverse .navbar-nav > li > a{
     color: #D8D8D8;
+}
+.in{
+   background: #e570e7; /* Old browsers */
+background: -moz-linear-gradient(top, #e570e7 0%, #c85ec7 47%, #a849a3 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #e570e7 0%,#c85ec7 47%,#a849a3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', endColorstr='#a849a3',GradientType=0 ); /* IE6-9 */
 }
 footer{ 
    text-align: center;
@@ -74,7 +80,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', end
 
 #myContainer 
 {   
-    margin-top: 40px;
+    /*margin-top: 40px;*/
         
 }
 
@@ -87,12 +93,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', end
 	margin: 0 auto;
 	margin-top: 5%;
 }
-@media (min-width: 1024px) {
+@media (min-width: 800px) {
+    #chat-list{
+        height: 500px;
+    }
 #form-container {
 	width: 40%;    
   }
 }
-
+@media (max-width: 800px){
+    #chat-list{
+        min-height: 200px;
+        max-height: 250px;
+    }
+}
 #description {
 	font-size: larger;
 }
@@ -128,7 +142,7 @@ input, button
 #chat-list 
 {    
     position:relative;
-    height: 500px;
+    
     overflow-y:auto;
     background-color: White;	    
     -moz-border-radius: 2px;

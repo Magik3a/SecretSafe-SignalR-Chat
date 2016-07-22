@@ -160,7 +160,7 @@ on the server. Each hub on the server will become a property on the client side 
 
         // Handles Enter keystroke press event
         $('#compose-box').keypress(function (e) {
-            if (e.which == 13) {
+            if (e.which == 13 && $("#compose-box").val().trim().length > 0) {
                 sendMessageContent();
             }
         });
