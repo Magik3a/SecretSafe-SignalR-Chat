@@ -83,11 +83,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', end
 {
 	display: block;
 	height: 500px;
-	width: 700px;    
+	width: 100%;    
 	margin: 0 auto;
 	margin-top: 5%;
 }
-
+@media (min-width: 1024px) {
+#form-container {
+	width: 40%;    
+  }
+}
 
 #description {
 	font-size: larger;
