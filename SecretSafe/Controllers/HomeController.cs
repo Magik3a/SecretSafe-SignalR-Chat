@@ -18,6 +18,9 @@ namespace SecretSafe.Controllers
 
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+                return View("Chat", "_Layout", User.Identity.Name);
+
             return View();
         }
 

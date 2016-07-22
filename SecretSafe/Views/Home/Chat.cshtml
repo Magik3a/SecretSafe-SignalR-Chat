@@ -36,18 +36,13 @@
                 </ul>
             </div>
 
-              <div id="compose" class="row-fluid">
-        <div class="span2"></div>
-        <div class="span8">
-            <div class="row-fluid">
-                <div class="span10"><textarea id="compose-box" rows="5" cols="50" placeholder="Type your message here" class="form-control"></textarea>     </div>
-                <div class="span2"><button id="send-btn" type="submit" class="btn btn-large btn-primary">Send</button>   </div>
-            </div>
         </div>
-    </div>
-        </div>
+
+        <div class="col-md-9">
+
         <!-- This  is the chat box -->
-        <div id="chat-list" class="span8 col-md-9" data-bind="foreach: messages">
+
+        <div id="chat-list" class="span8" data-bind="foreach: messages">
             <ul>
                 <li>
                     <div class="chat-listitem-username" data-bind="text: username">
@@ -59,8 +54,20 @@
                 </li>
             </ul>
         </div>
+            
+            <div id="compose" class="row-fluid">
+                <div class="span2"></div>
+                <div class="span8">
+                    <div class="row-fluid">
+                        <div class="span10"><textarea id="compose-box" rows="5" cols="50" placeholder="Type your message here" class="form-control"></textarea>     </div>
+                        <div class="span2"><button id="send-btn" type="submit" class="btn btn-large btn-primary">Send</button>   </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </div>
-  
+
 </div>
 
 <!--

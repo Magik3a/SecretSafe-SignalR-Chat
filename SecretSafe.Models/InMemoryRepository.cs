@@ -68,6 +68,7 @@ namespace SecretSafe.Models
 
         public void AddMapping(string connectionId, string userId)
         {
+
             if (!string.IsNullOrEmpty(connectionId) && !string.IsNullOrEmpty(userId))
             {
                 _mappings.Add(connectionId, userId);

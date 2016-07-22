@@ -18,6 +18,12 @@ namespace SecretSafe.Hubs
             _repository = InMemoryRepository.GetInstance();
         }
 
+
+        #region Rooms
+
+
+        #endregion
+
         #region IDisconnect and IConnected event handlers implementation
 
         /// <summary>
