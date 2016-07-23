@@ -25,18 +25,7 @@
 
 <div id="myContainer" class="container-fluid">
     <div class="row-fluid">
-        <!-- This  is the contact box -->
-        <div class="col-md-3">
 
-
-            <div id="users-list" class="span2">
-                <h4>Users</h4>
-                <ul data-bind="foreach: contacts">
-                    <li class="user-box"><span class="user-box-name" data-bind="text: username"></span></li>
-                </ul>
-            </div>
-
-        </div>
 
         <div class="col-md-9">
 
@@ -63,6 +52,24 @@
                         <div class="span2"><button id="send-btn" type="submit" class="btn btn-large btn-primary">Send</button>   </div>
                     </div>
                 </div>
+            </div>
+
+        </div>
+        <!-- This  is the contact box -->
+        <div class="col-md-3">
+            <div class="row">
+                <button id="clean-history" class="btn btn-danger pull-right btn-lg btnclean-history">
+                    <span class="glyphicon glyphicon-erase"></span>
+                    Clean history for all users
+                </button>
+
+            </div>
+
+            <div id="users-list" class="span2">
+                <h4>Users</h4>
+                <ul data-bind="foreach: contacts">
+                    <li class="user-box"><span class="user-box-name" data-bind="text: username"></span></li>
+                </ul>
             </div>
 
         </div>
@@ -122,7 +129,7 @@ on the server. Each hub on the server will become a property on the client side 
         var chat = new secretSafe.chatViewModel();
         var users = new secretSafe.connectedUsersViewModel();
         var currentUser = new secretSafe.user(@Html.Raw(Json.Encode(Model))); // The username chose by the user is stored in the model
-       
+
         // Proxy creation
         var chatHub = $.connection.chatHub; // chatHub is the name of the Hub as declared in server side code
         chatHub.state.username = currentUser.username; // This is the round-trip state
@@ -145,6 +152,15 @@ on the server. Each hub on the server will become a property on the client side 
             $("#chat-list").scrollTo('max');
         }
 
+        chatHub.client.cleanHistoryConfirmed = function () {
+            // TODO: put some animation here if someday you have a time
+            valFavicon = 0;
+            favicon.badge(0);
+            $("#chat-list").empty();
+
+        };
+
+
         chatHub.client.leaves = function (userId, username, timestamp) {
             var disconnectedUser = new secretSafe.user(username, userId);
             users.customRemove(disconnectedUser);
@@ -156,11 +172,8 @@ on the server. Each hub on the server will become a property on the client side 
         }
 
         function sendMessageContent() {
-
-              valFavicon = 0;
-              favicon.badge(0)
-
-
+            valFavicon = 0;
+            favicon.badge(0);
             var content = $("#compose-box").val();
             if (content != "" && content != null) {
                 var msg = new secretSafe.chatMessage(currentUser.username, content);
@@ -171,6 +184,18 @@ on the server. Each hub on the server will become a property on the client side 
                 });
             }
         }
+
+        function cleanHistory() {
+            chatHub.server.cleanHistory().done(function () {
+                alert("History is deleted for all connected users! Thank you for keeping this secret!");
+            }).fail(function (e) {
+                alert("Could not connect to server");
+            });
+        };
+        $("#clean-history").click(function () {
+            cleanHistory();
+        });
+
 
         $("#send-btn").click(function () {
             sendMessageContent();

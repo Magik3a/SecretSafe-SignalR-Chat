@@ -83,7 +83,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', end
     /*margin-top: 40px;*/
         
 }
-
+ .btnclean-history{
+     margin-bottom: 20px;
+ }
 
 #form-container 
 {
