@@ -3,17 +3,23 @@
 }
 <a href="https://github.com/"><img style="position: absolute; top: 50px; right: 0; border: 0; z-index: 1000" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
-{    
-    <div id="form-container" class="jumbotron">       
-            <h1>SecretSafe</h1>
-            <span id="description">A secure chat application built with <a href="http://signalr.net/" title="SignalR" target="_blank">SignalR</a></span>
-            <div id="input-box">
-                <label for="username">Choose a user name to start</label>
-                <input type="text" id="username" class="input-medium search-query form-control" placeholder="Type username here..." name="username" autofocus="autofocus" 
-                    maxlength="15" required="required" />
-                                <label for="room" id="room-label">Choose a room name to start</label>
-                <input type="text" id="room" class="input-medium search-query form-control" placeholder="Type room name here..." name="room" maxlength="15" required="required" />
-                <button type="submit" class="btn btn-large btn-default">Let's chat secretly!</button>               
-            </div>
+{
+    <div id="form-container" class="jumbotron">
+        <h1>SecretSafe</h1>
+        <span id="description">
+            A secure chat application built with
+            <a href="http://signalr.net/" title="SignalR" target="_blank">SignalR</a>
+        </span>
+        <h2 style="font-style: italic">
+            Try it for FREE!
+        </h2>
+        <div id="input-box">
+            <label for="username">Choose a user name to start</label>
+            <input type="text" id="username" class="input-medium search-query form-control" placeholder="Type username here..." name="username" autofocus="autofocus"
+                   maxlength="15" required="required" />
+            <label for="room" id="room-label">Choose a room name to start</label>
+            <input type="text" id="room" class="input-medium search-query form-control" placeholder="Type room name here..." name="room" maxlength="15" required="required" />
+            <button type="submit" class="btn btn-large btn-default">Let's chat secretly!</button>
+        </div>
     </div>
 }
