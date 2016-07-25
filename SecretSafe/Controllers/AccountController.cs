@@ -152,7 +152,7 @@ namespace SecretSafe.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new SecretSafeUser { UserName = model.Email, Email = model.Email };
+                var user = new SecretSafeUser { UserName = model.Email, NickName = model.NickName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -60,5 +60,11 @@ namespace SecretSafe.Controllers
                 return View("Chat", "_Layout", username);
             }
         }
+
+
+        public ActionResult Prices()
+        {
+            return View();
+        }
     }
 }

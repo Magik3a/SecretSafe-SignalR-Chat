@@ -256,6 +256,25 @@ input, button
 {
     margin-top:5px;
     width: 100%;
-}   
-    
-    
+}
+
+    /* Start price page */
+
+@media (min-width: 800px) {
+
+    .price-box {
+        width: 24%;
+        margin-right: 10px;
+    }
+}
+.price-box{
+    padding: 6px !important;
+    font-size: 18px;
+}
+    .price-box table {
+    font-style: italic;
+    }
+.footer-price-box{
+    text-align: center;
+
+}

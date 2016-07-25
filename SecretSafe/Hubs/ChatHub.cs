@@ -52,6 +52,9 @@ namespace SecretSafe.Hubs
         #endregion
 
         #region Chat event handlers
+        /// <summary>
+        /// Fired when a client press clean history button.
+        /// </summary>
         public void CleanHistory()
         {
             Clients.All.cleanHistoryConfirmed();
