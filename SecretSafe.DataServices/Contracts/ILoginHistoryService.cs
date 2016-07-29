@@ -4,11 +4,7 @@ namespace DataServices
 {
     public interface ILoginHistoryService
     {
-        int Add(LoginHistory loginHistory);
-
-        LoginHistory Update(LoginHistory loginHistory);
-
-        void Login(string UserName);
+        void Login(string UserName,string BrowserInfo);
 
         void Logoff(string UserName);
     }

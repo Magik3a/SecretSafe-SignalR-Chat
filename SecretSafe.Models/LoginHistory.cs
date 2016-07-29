@@ -15,5 +15,9 @@
         public DateTime StartSession { get; set; }
 
         public DateTime EndSession { get; set; }
+
+        public string BrowserInfo { get; set; }
+
+        public string IPAddress { get; set; }
     }
 }

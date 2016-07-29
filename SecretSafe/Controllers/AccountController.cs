@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using SecretSafe.Models;
 using Models;
 using Data;
+using DataServices;
 
 namespace SecretSafe.Controllers
 {
@@ -19,16 +20,19 @@ namespace SecretSafe.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private SecretSafeUserManager _userManager;
+        private ILoginHistoryService loginHistory;
 
-        public AccountController():base(new SecretSafeDbContext())
+        public AccountController(ILoginHistoryService loginHistory):base(new SecretSafeDbContext())
         {
+            this.loginHistory = loginHistory;
         }
 
-        public AccountController(SecretSafeUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ILoginHistoryService loginHistory, SecretSafeUserManager userManager, ApplicationSignInManager signInManager)
             : base(new SecretSafeDbContext())
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            this.loginHistory = loginHistory;
         }
 
         public ApplicationSignInManager SignInManager
@@ -79,9 +83,11 @@ namespace SecretSafe.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            string browserVersion = Request.UserAgent;
             switch (result)
             {
                 case SignInStatus.Success:
+                    loginHistory.Login(model.Email, browserVersion);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -394,6 +400,7 @@ namespace SecretSafe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            loginHistory.Logoff(User.Identity.Name);
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

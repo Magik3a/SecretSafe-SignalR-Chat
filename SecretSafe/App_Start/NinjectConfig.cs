@@ -12,6 +12,9 @@ namespace SecretSafe.App_Start
     using Ninject;
     using Data;
     using Common.Constants;
+    using Infrastructure;
+    using System.Web.Mvc;
+    using Ninject.Web.Mvc;
 
     public static class NinjectConfig
     {
@@ -47,7 +50,10 @@ namespace SecretSafe.App_Start
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
+                ObjectFactory.Initialize(kernel);
                 RegisterServices(kernel);
+
+                DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
                 return kernel;
             }
             catch
