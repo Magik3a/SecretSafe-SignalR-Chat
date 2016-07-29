@@ -10,20 +10,22 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SecretSafe.Models;
 using Models;
+using Data;
 
 namespace SecretSafe.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController<SecretSafeDbContext>
     {
         private ApplicationSignInManager _signInManager;
         private SecretSafeUserManager _userManager;
 
-        public AccountController()
+        public AccountController():base(new SecretSafeDbContext())
         {
         }
 
-        public AccountController(SecretSafeUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(SecretSafeUserManager userManager, ApplicationSignInManager signInManager)
+            : base(new SecretSafeDbContext())
         {
             UserManager = userManager;
             SignInManager = signInManager;

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Models;
+using SecretSafe.Models;
 
 namespace Data
 {
@@ -16,6 +17,8 @@ namespace Data
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        public virtual IDbSet<LoginHistory> LoginHistory { get; set; }
 
         public static SecretSafeDbContext Create()
         {
