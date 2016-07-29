@@ -20,6 +20,8 @@ namespace Data
 
         public virtual IDbSet<LoginHistory> LoginHistory { get; set; }
 
+        public virtual IDbSet<ChatRoom> ChatRooms { get; set; }
+
         public static SecretSafeDbContext Create()
         {
             return new SecretSafeDbContext();
