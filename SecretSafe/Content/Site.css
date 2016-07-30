@@ -268,7 +268,7 @@ input, button
     }
 }
 .price-box{
-    padding: 6px !important;
+    padding: 6px !important; 
     font-size: 18px;
 }
     .price-box table {
@@ -277,4 +277,12 @@ input, button
 .footer-price-box{
     text-align: center;
 
+}
+
+/*Start rooms page*/
+
+.actives-pannel {
+    -moz-box-shadow: 0 0 10px black;
+    -webkit-box-shadow: 0 0 10px black;
+    box-shadow: 0 0 10px black;
 }

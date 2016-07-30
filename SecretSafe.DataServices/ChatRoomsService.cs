@@ -50,7 +50,7 @@
 
         public IQueryable<ChatRoom> GetChatRoomsForUser(string UserId)
         {
-            return db.All();
+            return db.All().OrderBy(c => c.SecurityLevelId);
         }
     }
 }
