@@ -16,19 +16,24 @@ namespace SecretSafe.Controllers
 {
     public class ChatRoomsController : Controller
     {
-        private readonly IChatRoomsService db;
-
-        public ChatRoomsController(IChatRoomsService db)
+        private readonly IChatRoomsService chatRoomsService;
+        private readonly ISecurityLevelsService securityLevelsService;
+        
+        public ChatRoomsController(IChatRoomsService chatRoomsService, ISecurityLevelsService securityLevelsService)
         {
-            this.db = db;
-            // TODO: This should not be needed, but mapper don't create maps from db to view models
+            this.chatRoomsService = chatRoomsService;
+            this.securityLevelsService = securityLevelsService;
+            // TODO: This should not be needed, but mapper don't create maps from chatRoomsService to view models
             Mapper.CreateMap<ChatRoom, ChatRoomsViewModel>();
+            Mapper.CreateMap<ChatRoom, ChatRoomsViewModel>().ReverseMap();
+
+            //Mapper.AssertConfigurationIsValid();
         }
         // GET: ChatRooms
         public ActionResult Index()
         {
            
-            var chatRooms = db.GetChatRoomsForUser(User.Identity.Name).ProjectTo<ChatRoomsViewModel>().ToList();
+            var chatRooms = chatRoomsService.GetChatRoomsForUser(User.Identity.Name).ProjectTo<ListedChatRoomsViewModel>().ToList();
             return View(chatRooms);
         }
 
@@ -39,17 +44,19 @@ namespace SecretSafe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var chatRoom = db.GetChatRoomById(id).ProjectTo<ChatRoomsViewModel>().FirstOrDefault();
+            var chatRoom = chatRoomsService.GetChatRoomById(id).ProjectTo<ChatRoomsViewModel>().FirstOrDefault();
             if (chatRoom == null)
             {
                 return HttpNotFound();
             }
+            chatRoom.SecurityLevel = securityLevelsService.Get(chatRoom.SecurityLevelId).FirstOrDefault().Name;
             return View(chatRoom);
         }
 
         // GET: ChatRooms/Create
         public ActionResult Create()
         {
+            ViewBag.SecurityLevels = new SelectList(securityLevelsService.GetAll(), "SecurityLevelId", "Name");
             return View();
         }
 
@@ -57,12 +64,14 @@ namespace SecretSafe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ChatRoomsViewModel chatRoomViewModel)
         {
+            var listSecurityLevels = securityLevelsService.GetAll();
             if (ModelState.IsValid)
             {
                 chatRoomViewModel.UserId = User.Identity.GetUserId();
-                db.CreateChatRoom(Mapper.Map<ChatRoomsViewModel, ChatRoom>(chatRoomViewModel));
+                chatRoomsService.CreateChatRoom(Mapper.Map<ChatRoomsViewModel, ChatRoom>(chatRoomViewModel));
                 return RedirectToAction("Index");
             }
+            ViewBag.SecurityLevels = new SelectList(listSecurityLevels, "SecurityLevelId", "Name");
 
             return View(chatRoomViewModel);
         }
@@ -74,7 +83,7 @@ namespace SecretSafe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var chatRoom = db.GetChatRoomById(id).ProjectTo<ChatRoomsViewModel>().FirstOrDefault();
+            var chatRoom = chatRoomsService.GetChatRoomById(id).ProjectTo<ChatRoomsViewModel>().FirstOrDefault();
             if (chatRoom == null)
             {
                 return HttpNotFound();
@@ -88,7 +97,7 @@ namespace SecretSafe.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.UpdateChatRoom(Mapper.Map<ChatRoomsViewModel, ChatRoom>(chatRoomViewModel));
+                chatRoomsService.UpdateChatRoom(Mapper.Map<ChatRoomsViewModel, ChatRoom>(chatRoomViewModel));
                 return RedirectToAction("Index");
             }
             return View(chatRoomViewModel);
@@ -101,11 +110,13 @@ namespace SecretSafe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var chatRoom = db.GetChatRoomById(id).ProjectTo<ChatRoomsViewModel>().FirstOrDefault();
+            var chatRoom = chatRoomsService.GetChatRoomById(id).ProjectTo<ChatRoomsViewModel>().FirstOrDefault();
+
             if (chatRoom == null)
             {
                 return HttpNotFound();
             }
+
             return View(chatRoom);
         }
 
@@ -114,7 +125,7 @@ namespace SecretSafe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            db.DeleteChatRoom(id);
+            chatRoomsService.DeleteChatRoom(id);
             return RedirectToAction("Index");
         }
         

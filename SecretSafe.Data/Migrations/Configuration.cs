@@ -11,6 +11,7 @@ namespace Data.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
+           
         }
 
         protected override void Seed(Data.SecretSafeDbContext context)
@@ -27,6 +28,34 @@ namespace Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            context.SecurityLevels.AddOrUpdate(
+                s => s.SecurityLevelId, 
+                new SecretSafe.Models.SecurityLevel()
+                {
+                    SecurityLevelId = 1,
+                    Name = "Normal Security",
+                    CreatedOn = DateTime.Now
+                },
+                 new SecretSafe.Models.SecurityLevel()
+                 {
+                     SecurityLevelId = 2,
+                     Name = "Medium Security",
+                     CreatedOn = DateTime.Now
+                 },
+                  new SecretSafe.Models.SecurityLevel()
+                  {
+                      SecurityLevelId = 3,
+                      Name = "Pro Security",
+                      CreatedOn = DateTime.Now
+                  },
+                   new SecretSafe.Models.SecurityLevel()
+                   {
+                       SecurityLevelId = 4,
+                       Name = "Maximum Security",
+                       CreatedOn = DateTime.Now
+                   }
+            );
         }
     }
 }

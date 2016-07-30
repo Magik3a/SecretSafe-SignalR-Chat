@@ -22,6 +22,8 @@ namespace Data
 
         public virtual IDbSet<ChatRoom> ChatRooms { get; set; }
 
+        public virtual IDbSet<SecurityLevel> SecurityLevels { get; set; }
+
         public static SecretSafeDbContext Create()
         {
             return new SecretSafeDbContext();

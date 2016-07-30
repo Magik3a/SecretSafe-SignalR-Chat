@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SecretSafe.Models.ChatRoomsViewModel>
+﻿@model IEnumerable<SecretSafe.Models.ListedChatRoomsViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -15,6 +15,9 @@
             @Html.DisplayNameFor(model => model.ChatRoomName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.SecurityLevel)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.CreatedOn)
         </th>
         <th>
@@ -23,23 +26,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChatRoomName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedOn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedOn)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChatRoomName)
+            </td>
+              <td>
+                @Html.DisplayFor(modelItem => item.SecurityLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedOn)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
