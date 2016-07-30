@@ -25,6 +25,44 @@
 
 <div id="myContainer" class="container-fluid">
     <div class="row-fluid">
+        <div class="col-md-12">
+            <div class="col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+
+                            <span class="glyphicon glyphicon-user"></span>
+                            Username:
+                            <span class="pull-right">@Html.Raw(Json.Encode(Model.username))</span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+
+                            <span class="glyphicon glyphicon-home"></span>
+                            Room Name:
+                            <span class="pull-right">@Html.Raw(Json.Encode(Model.roomname))</span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+
+                            <button class="btn btn-success" style="width: 100%" id="share-button">SHARE ROOM</button>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
 
 
         <div class="col-md-9">
@@ -38,7 +76,7 @@
                         </div>
                         <div class="chat-listitem-message" data-bind="html: content">
                         </div>
-                        <div class="chat-listitem-timestamp" data-bind="text: timestamp.toLocaleTimeString(), style: { backgroundColor:  color }"">
+                        <div class="chat-listitem-timestamp" data-bind="text: timestamp.toLocaleTimeString(), style: { backgroundColor:  color }" ">
                         </div>
                     </li>
                 </ul>
@@ -88,10 +126,10 @@ on the server. Each hub on the server will become a property on the client side 
  -->
 <script type="text/javascript" src="@Url.Content("/signalr/hubs")"></script>
 <script src="~/Scripts/SecretSafe.js"></script>
-  <script src="~/Scripts/favico.min.js"></script>
+<script src="~/Scripts/favico.min.js"></script>
 <script src="~/Scripts/jquery.browser.min.js"></script>
 <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
-
+<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v1.5.12/dist/clipboard.min.js"></script>
 <script type="text/javascript">
     // Checking compatibility issues with animated favicon, currently is available only in webkit
     if ($.browser.webkit) {
@@ -236,7 +274,7 @@ on the server. Each hub on the server will become a property on the client side 
                         chatHub.server.getConnectedUsers()
                                     .done(function (connectedUsers) {
                                         ko.utils.arrayForEach(connectedUsers, function (item) {
-                                            
+
                                             users.contacts.push(new secretSafe.user(item.Username, item.Id, item.RoomName, item.Color));
                                         });
                                     }).done(function () {
@@ -245,4 +283,15 @@ on the server. Each hub on the server will become a property on the client side 
                     });
     });
 
+
+    $("#share-button").click(function () { 
+        var url      = window.location.href;
+        console.log(url);
+          copyToClipboard(url)
+    });
+
+    function copyToClipboard(text) {
+    window.prompt("Copy URL to clipboard: Ctrl+C, Enter", text);
+}
+ 
 </script>

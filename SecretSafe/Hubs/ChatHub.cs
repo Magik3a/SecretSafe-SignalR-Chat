@@ -132,7 +132,17 @@ namespace SecretSafe.Hubs
         /// <returns></returns>
         public ICollection<ChatUser> GetConnectedUsers()
         {
-            return _repository.Users.ToList<ChatUser>();
+            string userId = _repository.GetUserByConnectionId(Context.ConnectionId);
+            if (userId != null)
+            {
+                ChatUser user = _repository.Users.Where(u => u.Id == userId).FirstOrDefault();
+                if (user != null)
+                {
+                    return _repository.Users.ToList<ChatUser>().Where(g => g.RoomName == user.RoomName).ToList() ;
+
+                }
+            }
+            return  _repository.Users.ToList<ChatUser>().ToList();
         }
 
         #endregion
