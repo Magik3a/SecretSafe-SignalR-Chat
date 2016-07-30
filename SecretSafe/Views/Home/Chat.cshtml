@@ -68,7 +68,9 @@
             <div id="users-list" class="span2">
                 <h4>Users</h4>
                 <ul data-bind="foreach: contacts">
-                    <li class="user-box"><span class="user-box-name" data-bind="text: username"></span></li>
+                    <li class="user-box" data-bind="style: { backgroundColor:  color }">
+                        <span class="user-box-name" data-bind="text: username"></span>
+                    </li>
                 </ul>
             </div>
 
@@ -135,12 +137,12 @@ on the server. Each hub on the server will become a property on the client side 
     $(document).ready(function () {
         var chat = new secretSafe.chatViewModel();
         var users = new secretSafe.connectedUsersViewModel();
-        var currentUser = new secretSafe.user(@Html.Raw(Json.Encode(Model))); // The username chose by the user is stored in the model
+        var currentUser = new secretSafe.user(@Html.Raw(Json.Encode(Model.username)),@Html.Raw(Json.Encode(Model.roomname))); // The username chose by the user is stored in the model
 
         // Proxy creation
         var chatHub = $.connection.chatHub; // chatHub is the name of the Hub as declared in server side code
         chatHub.state.username = currentUser.username; // This is the round-trip state
-
+        chatHub.state.roomname = currentUser.roomname;
         // Client-side event handlers, as declared inside the  Hub
         chatHub.client.onMessageReceived = function (message) {
             // Play some sound
@@ -177,8 +179,9 @@ on the server. Each hub on the server will become a property on the client side 
             users.customRemove(disconnectedUser);
         }
 
-        chatHub.client.joins = function (userId, username, timestamp) {
-            var connectedUser = new secretSafe.user(username, userId);
+        chatHub.client.joins = function (userId, username, roomname, color, timestamp) {
+            console.log(color);
+            var connectedUser = new secretSafe.user(username, userId , roomname, color);
             users.contacts.push(connectedUser);
         }
 
@@ -232,7 +235,8 @@ on the server. Each hub on the server will become a property on the client side 
                         chatHub.server.getConnectedUsers()
                                     .done(function (connectedUsers) {
                                         ko.utils.arrayForEach(connectedUsers, function (item) {
-                                            users.contacts.push(new secretSafe.user(item.Username, item.Id));
+                                            
+                                            users.contacts.push(new secretSafe.user(item.Username, item.Id, item.RoomName, item.Color));
                                         });
                                     }).done(function () {
                                         chatHub.server.joined();

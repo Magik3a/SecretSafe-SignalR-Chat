@@ -20,7 +20,15 @@ namespace SecretSafe.Hubs
 
 
         #region Rooms
+        public Task JoinRoom(string roomName)
+        {
+            return Groups.Add(Context.ConnectionId, roomName);
+        }
 
+        public Task LeaveRoom(string roomName)
+        {
+            return Groups.Remove(Context.ConnectionId, roomName);
+        }
 
         #endregion
 
@@ -87,11 +95,20 @@ namespace SecretSafe.Hubs
             {
                 //Id = Context.ConnectionId,                
                 Id = Guid.NewGuid().ToString(),
-                Username = Clients.Caller.username
+                Username = Clients.Caller.username,
+                RoomName = Clients.Caller.roomname,
+                Color = RandomColorGenerator.GetRandomColor()
             };
             _repository.Add(user);
             _repository.AddMapping(Context.ConnectionId, user.Id);
-            Clients.All.joins(user.Id, Clients.Caller.username, DateTime.Now);
+
+            Clients.All.joins(
+                user.Id,
+                Clients.Caller.username,
+                Clients.Caller.roomname,
+                user.Color,
+                DateTime.Now
+                );
         }
 
         /// <summary>

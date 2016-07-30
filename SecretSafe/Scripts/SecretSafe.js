@@ -16,10 +16,18 @@ secretSafe.chatMessage = function (sender, content, dateSent) {
     }
 }
 
-secretSafe.user = function (username, userId) {
+secretSafe.user = function (username, userId, roomname, color) {
     var self = this;
     self.username = username;
     self.id = userId;
+    self.roomname = roomname;
+    self.color = color;
+
+    console.log(username + " for js");
+    console.log(userId + " for js");
+    console.log(color + " for js");
+    console.log(roomname + " for js");
+
 }
 
 // ViewModels

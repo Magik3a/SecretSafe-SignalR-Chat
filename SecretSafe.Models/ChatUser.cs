@@ -11,7 +11,11 @@ namespace SecretSafe.Models
         public string Id { get; set; }
         public string Username { get; set; }
 
+        public string RoomName { get; set; }
+
+        public string Color { get; set; }
+        //public virtual ICollection<ConversationRoom> Rooms { get; set; }
         public ICollection<Connection> Connections { get; set; }
-        public virtual ICollection<ConversationRoom> Rooms { get; set; }
+     
     }
 }

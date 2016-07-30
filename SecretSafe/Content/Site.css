@@ -216,24 +216,24 @@ input, button
     margin-bottom: 5px;
 }
 
-
-.user-box {
+ 
+.user-box { 
 	width: 90%;
-	background-color: #ffc578;
-	-moz-border-radius: 3px;
-    border-radius: 3px;
-    height: 35px;
-    padding: 5px;    
-}
-
-.user-box:hover {
-	width: 90%;
-	background-color: #DF7401;
+	/*background-color: #ffc578;*/ 
 	-moz-border-radius: 3px;
     border-radius: 3px;
     height: 35px;
     padding: 5px;
+    opacity: 0.8;    
 }
+
+    .user-box:hover {
+        transition: 0.2s ease-in-out;
+        opacity: 1;
+        -moz-box-shadow: 0 0 5px black;
+        -webkit-box-shadow: 0 0 5px black;
+        box-shadow: 0 0 5px black;
+    }
 
 .user-box-name 
 {

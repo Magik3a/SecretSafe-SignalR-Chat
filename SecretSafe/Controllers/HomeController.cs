@@ -36,7 +36,7 @@ namespace SecretSafe.Controllers
 
 
         [HttpPost]
-        public ActionResult Index(string username, string room)
+        public ActionResult Index(string username, string roomname)
         {
             if (string.IsNullOrEmpty(username))
             {
@@ -44,7 +44,7 @@ namespace SecretSafe.Controllers
                 return View();
             }
 
-            if (string.IsNullOrEmpty(room))
+            if (string.IsNullOrEmpty(roomname))
             {
                 ModelState.AddModelError("room", "Room name is required");
                 return View();
@@ -57,10 +57,15 @@ namespace SecretSafe.Controllers
                     username = _repository.GetRandomizedUsername(username);
                 }
 
-                return View("Chat", "_Layout", username);
+                return View("Chat", "_Layout", new UserTest { username = username, roomname = roomname});
             }
         }
+        public class UserTest
+        {
+            public string username { get; set; }
 
+            public string roomname { get; set; }
+        }
 
         public ActionResult Prices()
         {
