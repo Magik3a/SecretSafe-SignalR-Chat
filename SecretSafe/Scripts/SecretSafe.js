@@ -7,13 +7,20 @@ var secretSafe = {};
 
 // Models
 
-secretSafe.chatMessage = function (sender, content, dateSent) {
+secretSafe.chatMessage = function (sender, content, dateSent, color) {
     var self = this;
     self.username = sender;
     self.content = content;
     if (dateSent != null) {
         self.timestamp = dateSent;
     }
+    self.color = color;
+
+    
+    console.log(sender + " for js");
+    console.log(content + " for js");
+    console.log(dateSent + " for js");
+    console.log(color + " for js");
 }
 
 secretSafe.user = function (username, userId, roomname, color) {
@@ -23,10 +30,6 @@ secretSafe.user = function (username, userId, roomname, color) {
     self.roomname = roomname;
     self.color = color;
 
-    console.log(username + " for js");
-    console.log(userId + " for js");
-    console.log(color + " for js");
-    console.log(roomname + " for js");
 
 }
 

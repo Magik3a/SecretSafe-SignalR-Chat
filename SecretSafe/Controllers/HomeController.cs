@@ -27,7 +27,7 @@ namespace SecretSafe.Controllers
                 string currentUserId = User.Identity.GetUserId();
                 SecretSafeUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
 
-                return View("Chat", "_Layout", currentUser.NickName);
+                return View("Chat", "_Layout", new UserTest { username = currentUser.NickName, roomname = "fix this" });
             }
 
             return View();

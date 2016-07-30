@@ -34,11 +34,11 @@
             <div id="chat-list" class="span8" data-bind="foreach: messages">
                 <ul>
                     <li>
-                        <div class="chat-listitem-username" data-bind="text: username">
+                        <div class="chat-listitem-username" data-bind="text: username, style: { backgroundColor:  color }">
                         </div>
                         <div class="chat-listitem-message" data-bind="html: content">
                         </div>
-                        <div class="chat-listitem-timestamp" data-bind="text: timestamp.toLocaleTimeString()">
+                        <div class="chat-listitem-timestamp" data-bind="text: timestamp.toLocaleTimeString(), style: { backgroundColor:  color }"">
                         </div>
                     </li>
                 </ul>
@@ -160,7 +160,7 @@ on the server. Each hub on the server will become a property on the client side 
             }
             var date = new Date();
             date.setISO8601(message.Timestamp);
-            chat.messages.push(new secretSafe.chatMessage(message.Username, message.Content, date));//new Date(message.Timestamp)));
+            chat.messages.push(new secretSafe.chatMessage(message.Username, message.Content, date, message.Color));//new Date(message.Timestamp)));
             $("#chat-list").scrollTo('max');
         }
 
@@ -192,7 +192,7 @@ on the server. Each hub on the server will become a property on the client side 
             }
             var content = $("#compose-box").val();
             if (content != "" && content != null) {
-                var msg = new secretSafe.chatMessage(currentUser.username, content);
+                var msg = new secretSafe.chatMessage(currentUser.username, content, currentUser.color);
                 chatHub.server.send(msg).done(function () {
                     $("#compose-box").val("");
                 }).fail(function (e) {

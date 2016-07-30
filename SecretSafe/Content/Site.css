@@ -198,7 +198,7 @@ input, button
     text-align: center; 
     font-weight:lighter;    
     padding: 5px;    
-    width: 80px;
+    width: 100px;
     background-color: #F2F2F2;
     color: Gray;
 }
@@ -209,7 +209,7 @@ input, button
     overflow-y: auto;    
     -moz-border-radius: 2px;
     border-radius: 2px;
-}
+} 
 
 #users-list li 
 {

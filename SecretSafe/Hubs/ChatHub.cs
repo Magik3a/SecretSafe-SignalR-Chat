@@ -82,6 +82,8 @@ namespace SecretSafe.Hubs
                 HashSet<string> extractedURLs;
                 message.Content = TextParser.TransformAndExtractUrls(message.Content, out extractedURLs);
                 message.Timestamp = DateTime.Now;
+
+                message.Color = _repository.Users.FirstOrDefault(u => u.Username == message.Username).Color;
                 Clients.All.onMessageReceived(message);
             }
         }
