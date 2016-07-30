@@ -192,7 +192,8 @@ on the server. Each hub on the server will become a property on the client side 
             }
             var content = $("#compose-box").val();
             if (content != "" && content != null) {
-                var msg = new secretSafe.chatMessage(currentUser.username, content, currentUser.color);
+                var date = new Date();
+                var msg = new secretSafe.chatMessage(currentUser.username, content, date, currentUser.color);
                 chatHub.server.send(msg).done(function () {
                     $("#compose-box").val("");
                 }).fail(function (e) {
