@@ -50,7 +50,7 @@ namespace SecretSafe.Hubs
                 if (user != null)
                 {
                     _repository.Remove(user);
-                    return Clients.All.leaves(user.Id, user.Username, DateTime.Now);
+                    return Clients.Group(user.RoomName).leaves(user.Id, user.Username, DateTime.Now);
                 }
             }
 
@@ -65,7 +65,15 @@ namespace SecretSafe.Hubs
         /// </summary>
         public void CleanHistory()
         {
-            Clients.All.cleanHistoryConfirmed();
+            string userId = _repository.GetUserByConnectionId(Context.ConnectionId);
+            if (userId != null)
+            {
+                ChatUser user = _repository.Users.Where(u => u.Id == userId).FirstOrDefault();
+                if (user != null)
+                {
+                    Clients.Group(user.RoomName).cleanHistoryConfirmed();
+                }
+            }
         }
 
         /// <summary>
@@ -83,8 +91,10 @@ namespace SecretSafe.Hubs
                 message.Content = TextParser.TransformAndExtractUrls(message.Content, out extractedURLs);
                 message.Timestamp = DateTime.Now;
 
-                message.Color = _repository.Users.FirstOrDefault(u => u.Username == message.Username).Color;
-                Clients.All.onMessageReceived(message);
+                var user = _repository.Users.FirstOrDefault(u => u.Username == message.Username);
+                message.Color = user.Color;
+
+                Clients.Group(user.RoomName).onMessageReceived(message);
             }
         }
 
@@ -104,7 +114,10 @@ namespace SecretSafe.Hubs
             _repository.Add(user);
             _repository.AddMapping(Context.ConnectionId, user.Id);
 
-            Clients.All.joins(
+            //Join to group
+            Groups.Add(Context.ConnectionId, user.RoomName);
+
+            Clients.Group(user.RoomName).joins(
                 user.Id,
                 Clients.Caller.username,
                 Clients.Caller.roomname,

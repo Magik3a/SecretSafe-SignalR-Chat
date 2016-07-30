@@ -137,7 +137,7 @@ on the server. Each hub on the server will become a property on the client side 
     $(document).ready(function () {
         var chat = new secretSafe.chatViewModel();
         var users = new secretSafe.connectedUsersViewModel();
-        var currentUser = new secretSafe.user(@Html.Raw(Json.Encode(Model.username)),@Html.Raw(Json.Encode(Model.roomname))); // The username chose by the user is stored in the model
+        var currentUser = new secretSafe.user(@Html.Raw(Json.Encode(Model.username)),"",@Html.Raw(Json.Encode(Model.roomname)), ""); // The username chose by the user is stored in the model
 
         // Proxy creation
         var chatHub = $.connection.chatHub; // chatHub is the name of the Hub as declared in server side code
