@@ -6,16 +6,16 @@
 
     public interface IChatRoomsService
     {
-        Guid CreateChatRoom(string ChatRoomName, string UserId);
+        Guid CreateChatRoom(ChatRoom ChatRoom);
 
         void DeleteChatRoom(Guid ChatRoomId);
 
-        void UpdateChatRoom(Guid ChatRoomId, string ChatRoomName);
+        void UpdateChatRoom(ChatRoom chatRoom);
 
         IQueryable<ChatRoom> GetChatRoomsForUser(string UserId);
 
-        ChatRoom GetChatRoomByName(string ChatRoomName);
+        IQueryable<ChatRoom> GetChatRoomByName(string ChatRoomName);
 
-        ChatRoom GetChatRoomById(Guid ChatRoomId);
+        IQueryable<ChatRoom> GetChatRoomById(Guid ChatRoomId);
     }
 }

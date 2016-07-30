@@ -14,19 +14,14 @@
             this.db = db;
         }
 
-        public Guid CreateChatRoom(string ChatRoomName, string UserId)
+        public Guid CreateChatRoom(ChatRoom ChatRoom)
         {
-            var chatRoom = new ChatRoom()
-            {
-                ChatRoomName = ChatRoomName,
-                UserId = UserId,
-                CreatedOn = DateTime.Now,
-                ModifiedOn = DateTime.Now
-            };
-            db.Add(chatRoom);
+            ChatRoom.CreatedOn = DateTime.Now;
+            ChatRoom.ModifiedOn = DateTime.Now;
+            db.Add(ChatRoom);
             db.SaveChanges();
 
-            return chatRoom.Id;
+            return ChatRoom.Id;
         }
 
         public void DeleteChatRoom(Guid ChatRoomId)
@@ -35,28 +30,27 @@
             db.Delete(chatRoom);
             db.SaveChanges();
         }
-        public void UpdateChatRoom(Guid ChatRoomId, string ChatRoomName)
+
+        public void UpdateChatRoom(ChatRoom chatRoom)
         {
-            var chatRoom = db.GetById(ChatRoomId);
-            chatRoom.ChatRoomName = ChatRoomName;
+            chatRoom.ModifiedOn = DateTime.Now;
+            db.Update(chatRoom);
             db.SaveChanges();
         }
 
-        public ChatRoom GetChatRoomById(Guid ChatRoomId)
+        public IQueryable<ChatRoom> GetChatRoomById(Guid ChatRoomId)
         {
-            return db.GetById(ChatRoomId);
+            return db.All().Where(c => c.Id == ChatRoomId);
         }
 
-        public ChatRoom GetChatRoomByName(string ChatRoomName)
+        public IQueryable<ChatRoom> GetChatRoomByName(string ChatRoomName)
         {
-            return db.All().Where(c => c.ChatRoomName == ChatRoomName).FirstOrDefault();
+            return db.All().Where(c => c.ChatRoomName == ChatRoomName);
         }
 
         public IQueryable<ChatRoom> GetChatRoomsForUser(string UserId)
         {
             return db.All();
         }
-
-        
     }
 }
