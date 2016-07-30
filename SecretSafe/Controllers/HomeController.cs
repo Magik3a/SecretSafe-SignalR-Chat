@@ -82,6 +82,11 @@ namespace SecretSafe.Controllers
             public string roomname { get; set; }
         }
 
+
+        public JsonResult DeleteRoomAjax(Guid id)
+        {
+            return Json(new { id = id }, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Prices()
         {
             return View();
