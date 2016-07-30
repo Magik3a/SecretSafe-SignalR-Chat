@@ -26,7 +26,7 @@ namespace SecretSafe.Controllers
             {
                 Random rnd = new Random();
                 var username = rnd.Next(1000);
-                return View("~/Views/Home/Chat.cshtml", "_Layout", new UserTest { username = username, roomname = roomname });
+                return View("~/Views/Home/Chat.cshtml", "_Layout", new UserTest { username = username.ToString(), roomname = roomname });
 
             }
         }
