@@ -4,16 +4,30 @@
         <div class="panel-heading">
 
             <h3 class="panel-title">
-                @Ajax.ActionLink(" ", "DeleteRoomAjax", new { id = Model.RoomId }, new AjaxOptions { OnSuccess = "DeleteRoom" }, new { @class = "pull-right glyphicon glyphicon-remove" })
+                @Ajax.ActionLink(" ", "DeleteRoomAjax",
+               new { id = Model.RoomId },
+               new AjaxOptions { OnSuccess = "DeleteRoom" },
+               new
+               {
+                   @class = "pull-right glyphicon glyphicon-remove",
+                   data_toggle = "tooltip",
+                   data_placement="top",
+                   title="Delete room"
+               })
                 @Model.ChatRoomName
             </h3>
+
         </div>
         <div class="panel-body">
             Created on:
             @Model.CreatedOn
         </div>
         <div class="panel-footer">
-            <button class="btn btn-@Model.SecurityLevelClass btn-sm share-button" onmouseup="CopyLink()">
+            <button class="btn btn-@Model.SecurityLevelClass btn-sm share-button"
+                    onmouseup="CopyLink()"
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title="Copy the link and send it to friend">
                 Copy Link
             </button>
         </div>
