@@ -6,16 +6,15 @@
 body 
 {
 	font-family: Helvetica;		
-
-    height:100%;
+      
   
-    margin-top: 65px;
+    margin-top: 65px; 
 } 
-
+ 
 .navbar-inverse .navbar-brand{
     color: #D8D8D8;
 }
-
+ 
 .navbar-inverse .navbar-nav > li > a{
     color: #D8D8D8; 
 }
@@ -293,4 +292,9 @@ input, button
 
 .rooms{
            cursor:  pointer;
+}
+
+.login{
+
+    
 }

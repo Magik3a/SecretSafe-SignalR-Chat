@@ -43,5 +43,10 @@
     </div>
 
     @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+    </script>
 </body>
 </html>
