@@ -2,6 +2,14 @@
     ViewBag.Title = "Home Page";
 }
 <a href="https://github.com/"><img style="position: absolute; top: 50px; right: 0; border: 0; z-index: 1000" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+@if (!Html.ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+      <strong>@Html.ValidationSummary(null, new { @class= ""})</strong>  
+    </div>
+}
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     <div id="form-container" class="jumbotron">
@@ -13,13 +21,27 @@
         <h2 style="font-style: italic">
             Try it for FREE!
         </h2>
+
         <div id="input-box">
-            <label for="username">Choose a user name to start</label>
+
+            <label for="username" id="username-label">Choose a user name to start</label>
+
             <input type="text" id="username" class="input-medium search-query form-control" placeholder="Type username here..." name="username" autofocus="autofocus"
                    maxlength="15" required="required" />
             <label for="roomname" id="room-label">Choose a room name to start</label>
             <input type="text" id="roomname" class="input-medium search-query form-control" placeholder="Type room name here..." name="roomname" maxlength="15" required="required" />
-            <button type="submit" class="btn btn-large btn-default">Let's chat secretly!</button>
+            <button type="submit" class="btn  btn-danger" style="margin-top: 15px">Let's chat secretly!</button>
         </div>
+
     </div>
+}
+@if (User.Identity.IsAuthenticated || !Html.ViewData.ModelState.IsValid)
+{
+    <script>
+        $(document).ready(function () {
+            $("#username").attr("disabled", "disabled");
+            $("#username").val("@ViewBag.UserNickName");
+            $("#username-label").html("Change your display name from  <a href='../Manage/ChangeNick' alt='Change Nick' title='Change Nick'>here</a> ")
+        });
+    </script>
 }

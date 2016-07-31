@@ -35,9 +35,8 @@ namespace SecretSafe.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 string currentUserId = User.Identity.GetUserId();
-                SecretSafeUser currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
-
-                return View("Chat", "_Layout", new UserTest { username = currentUser.NickName, roomname = "fix this" });
+                var currentUserNickName = db.Users.FirstOrDefault(x => x.Id == currentUserId).NickName;
+                ViewBag.UserNickName = currentUserNickName;
             }
 
             return View();
@@ -48,10 +47,16 @@ namespace SecretSafe.Controllers
         [HttpPost]
         public ActionResult Index(string username, string roomname)
         {
-            if (string.IsNullOrEmpty(username))
+            if (string.IsNullOrEmpty(username) && !User.Identity.IsAuthenticated)
             {
                 ModelState.AddModelError("username", "Username is required");
                 return View();
+            }
+            else
+            {
+                string currentUserId = User.Identity.GetUserId();
+                var currentUserNickName = db.Users.FirstOrDefault(x => x.Id == currentUserId).NickName;
+                username = currentUserNickName;
             }
 
             if (string.IsNullOrEmpty(roomname))
@@ -61,6 +66,13 @@ namespace SecretSafe.Controllers
             }
             else
             {
+                var chatRoomDb = chatRoomsService.GetChatRoomByName(roomname);
+                if(chatRoomDb != null)
+                {
+                    ModelState.AddModelError("room", "Room name is reserved for private user");
+                    ViewBag.UserNickName = username;
+                    return View();
+                }
                 // if we have an already logged user with the same username, then append a random number to it
                 if (_repository.Users.Where(u => u.Username.Equals(username)).ToList().Count > 0)
                 {
