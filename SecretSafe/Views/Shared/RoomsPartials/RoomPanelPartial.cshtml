@@ -1,0 +1,21 @@
+﻿@model SecretSafe.Models.RoomPanelPartialViewModel
+<div class="col-md-4 ">
+    <div class="panel panel-@Model.SecurityLevelClass rooms" data-guid="@Model.RoomId" onmousedown="ClientClick(this)">
+        <div class="panel-heading">
+
+            <h3 class="panel-title">
+                @Ajax.ActionLink(" ", "DeleteRoomAjax", new { id = Model.RoomId }, new AjaxOptions { OnSuccess = "DeleteRoom" }, new { @class = "pull-right glyphicon glyphicon-remove" })
+                @Model.ChatRoomName
+            </h3>
+        </div>
+        <div class="panel-body">
+            Created on:
+            @Model.CreatedOn
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-@Model.SecurityLevelClass btn-sm share-button" onmouseup="CopyLink()">
+                Copy Link
+            </button>
+        </div>
+    </div>
+</div>

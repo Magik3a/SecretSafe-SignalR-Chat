@@ -142,6 +142,7 @@ input, button
 
 #room{
         margin-bottom: 15px;
+ 
 }
 /* Chat specific style */
 #chat-list 
@@ -288,4 +289,8 @@ input, button
     -moz-box-shadow: 0 0 10px black;
     -webkit-box-shadow: 0 0 10px black;
     box-shadow: 0 0 10px black;
+}
+
+.rooms{
+           cursor:  pointer;
 }

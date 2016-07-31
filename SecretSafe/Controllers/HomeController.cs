@@ -10,6 +10,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
+using AutoMapper;
+
 namespace SecretSafe.Controllers
 {
     public class HomeController : Controller
@@ -17,12 +19,15 @@ namespace SecretSafe.Controllers
         private InMemoryRepository _repository;
         private SecretSafeDbContext db = new SecretSafeDbContext();
 
+        private readonly ISecurityLevelsService securityLevels;
         private readonly IChatRoomsService chatRoomsService;
-        public HomeController(IChatRoomsService chatRoomsService)
+
+        public HomeController(IChatRoomsService chatRoomsService, ISecurityLevelsService securityLevels)
         {
             _repository = InMemoryRepository.GetInstance();
 
             this.chatRoomsService = chatRoomsService;
+            this.securityLevels = securityLevels;
         }
 
         public ActionResult Index()
@@ -69,7 +74,10 @@ namespace SecretSafe.Controllers
         [Authorize]
         public ActionResult Rooms()
         {
-            var chatRooms = chatRoomsService.GetChatRoomsForUser(User.Identity.Name).ProjectTo<ChooseRoomsViewModel>().ToList();
+            var chatRooms = chatRoomsService
+                .GetChatRoomsForUser(User.Identity.Name)
+                .ProjectTo<ChooseRoomsViewModel>()
+                .ToList();
             return View(chatRooms);
         }
 
@@ -85,8 +93,63 @@ namespace SecretSafe.Controllers
 
         public JsonResult DeleteRoomAjax(Guid id)
         {
-            return Json(new { id = id }, JsonRequestBehavior.AllowGet);
+            if (Request.IsAjaxRequest())
+            {
+                chatRoomsService.DeleteChatRoom(id);
+                return Json(new { id = id }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+
+            }
         }
+
+
+        public ActionResult CreateRoomAjax(string SecurityLevel)
+        {
+     
+
+            return PartialView("RoomsPartials/BoxCreateRoomPartial", new CreateRoomPartialModel {  securitylevel = SecurityLevel });
+        }
+
+        public ActionResult SaveRoomAjax(string SecurityLevel, string roomname)
+        {
+            var securityLevelTitle = GetClassSecurityLevel(SecurityLevel);
+            int securityLevelId = securityLevels.GetByName(securityLevelTitle);
+
+            var model = new RoomPanelPartialViewModel()
+            {
+                ChatRoomName = roomname,
+                RoomId = new Guid(),
+                CreatedOn = DateTime.Now,
+                SecurityLevelClass = SecurityLevel,
+                SecurityLevelId = securityLevelId,
+                UserId = User.Identity.GetUserId()
+            };
+
+            model.RoomId = chatRoomsService.CreateChatRoom(Mapper.Map<RoomPanelPartialViewModel, ChatRoom>(model));
+            
+            return PartialView("RoomsPartials/RoomPanelPartial", model);
+        }
+        public string GetClassSecurityLevel(string securityLevelTitle)
+        {
+            switch (securityLevelTitle)
+            {
+                case "info": return "Normal Security";
+                case "success": return "Medium Security";
+                case "warning": return "Pro Security";
+                case "danger": return "Maximum Security";
+                default: return "";
+            }
+        }
+        public class CreateRoomPartialModel
+        {
+            public string securitylevel { get; set; }
+        }
+
+        
+
         public ActionResult Prices()
         {
             return View();

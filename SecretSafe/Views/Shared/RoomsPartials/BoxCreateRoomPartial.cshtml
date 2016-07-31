@@ -1,0 +1,43 @@
+﻿@{
+    var securityLevelTitle = Json.Encode(Model.securitylevel).ToString().Replace("\"","");
+
+}
+<form class="form-horizontal" role="form" style="padding: 15px">
+ 
+</form>
+@using (Ajax.BeginForm("SaveRoomAjax", "Home", new { SecurityLevel = GetClassSecurityLevel(securityLevelTitle) },
+                    new AjaxOptions {
+                        InsertionMode = InsertionMode.InsertBefore,
+                        UpdateTargetId = securityLevelTitle.Replace(" ", "")+ "-box"
+                    },
+                    new { }))
+        {
+   <div class="form-group">
+        <label class="" for="exampleInputEmail">Room name</label>
+
+        <input type="text" class="form-control" id="roomname" required="required" name="roomname" placeholder="Enter room name">
+
+    </div>
+
+    <div class="form-group">
+        <div class="text-center">
+            <button type="submit" class="btn btn-@GetClassSecurityLevel(securityLevelTitle)">Save room</button>
+        </div>
+    </div>
+
+}
+
+@functions{
+    // TODO: Fix this! Dont ever think about to copy something from another file. For now its OK because is 4 am.
+    public string GetClassSecurityLevel(string securityLevelTitle)
+    {
+        switch (securityLevelTitle)
+        {
+            case "Normal Security": return "info";
+            case "Medium Security": return "success";
+            case "Pro Security": return "warning";
+            case "Maximum Security": return "danger";
+            default: return "";
+        }
+    }
+}
