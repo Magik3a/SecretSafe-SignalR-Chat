@@ -50,7 +50,7 @@
 
         public IQueryable<ChatRoom> GetChatRoomsForUser(string UserId)
         {
-            return db.All().OrderBy(c => c.SecurityLevelId).ThenByDescending(c => c.CreatedOn);
+            return db.All().Where(u => u.UserId == UserId).OrderBy(c => c.SecurityLevelId).ThenByDescending(c => c.CreatedOn);
         }
     }
 }

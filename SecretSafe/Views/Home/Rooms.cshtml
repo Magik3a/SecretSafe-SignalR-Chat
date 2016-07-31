@@ -4,9 +4,9 @@
 }
 
 <h2>Choose room</h2>
-@foreach (var securityLevel in Model.GroupBy(m => m.SecurityLevel))
+@foreach (var securityLevel in (List<SecretSafe.Models.SecurityLevel>)ViewBag.SecurityLevels)
 {
-    var securityLevelTitle = securityLevel.FirstOrDefault().SecurityLevel;
+    var securityLevelTitle = securityLevel.Name;
     var securityLevelClass = GetClassSecurityLevel(securityLevelTitle);
     <div class="panel panel-@securityLevelClass panel-box">
         <div class="panel-heading">
@@ -132,7 +132,7 @@
 
 
          function CopyLink() {
-            var url = GenerateLinkForRoom();
+            var url = document.location.origin + "/" + GenerateLinkForRoom();
             console.log(url);
             copyToClipboard(url)
         };

@@ -86,10 +86,11 @@ namespace SecretSafe.Controllers
         [Authorize]
         public ActionResult Rooms()
         {
-            var chatRooms = chatRoomsService
-                .GetChatRoomsForUser(User.Identity.Name)
+            List <ChooseRoomsViewModel> chatRooms = chatRoomsService
+                .GetChatRoomsForUser(User.Identity.GetUserId())
                 .ProjectTo<ChooseRoomsViewModel>()
                 .ToList();
+            ViewBag.SecurityLevels = securityLevels.GetAll().ToList();
             return View(chatRooms);
         }
 
