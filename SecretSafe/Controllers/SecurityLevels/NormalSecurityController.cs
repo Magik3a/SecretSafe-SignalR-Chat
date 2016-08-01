@@ -23,7 +23,14 @@ namespace SecretSafe.Controllers
             var roomname = chatRoomsService.GetChatRoomById(id).FirstOrDefault().ChatRoomName;
             if (User.Identity.IsAuthenticated)
             {
-                return View("~/Views/Home/Chat.cshtml", "_Layout", new UserTest { username = User.Identity.Name, roomname = roomname });
+                string currentUserId = User.Identity.GetUserId();
+                var currentUserNickName = db.Users.FirstOrDefault(x => x.Id == currentUserId).NickName;
+                 // if we have an already logged user with the same username, then append a random number to it
+                if (_repository.Users.Where(u => u.Username.Equals(currentUserNickName)).ToList().Count > 0)
+                {
+                    currentUserNickName = _repository.GetRandomizedUsername(currentUserNickName);
+                }
+                return View("~/Views/Home/Chat.cshtml", "_Layout", new UserTest { username = currentUserNickName, roomname = roomname });
             }
             else
             {
