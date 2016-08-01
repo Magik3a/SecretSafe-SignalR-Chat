@@ -1,4 +1,6 @@
-﻿using SecretSafe.DataServices;
+﻿using Data;
+using Microsoft.AspNet.Identity;
+using SecretSafe.DataServices;
 using SecretSafe.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,7 @@ namespace SecretSafe.Controllers
     {
         private InMemoryRepository _repository;
         private readonly IChatRoomsService chatRoomsService;
+        private SecretSafeDbContext db = new SecretSafeDbContext();
         public NormalSecurityController(IChatRoomsService chatRoomsService)
         {
             _repository = InMemoryRepository.GetInstance();
