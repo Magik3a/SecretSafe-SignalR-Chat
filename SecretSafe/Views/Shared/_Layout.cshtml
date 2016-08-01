@@ -45,13 +45,24 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+       
+    </div>
+     <footer class="" id="footer">
             <p>&copy; www.secretsafe.com @DateTime.Now.Year - Version @typeof(SecretSafe.MvcApplication).Assembly.GetName().Version <br /> Programmed and designed by Svetlin Krastanov - www.s2kdesign.com </p>
         </footer>
-    </div>
-
     @RenderSection("scripts", required: false)
     <script>
+        
+  $(document).ready(function() {
+
+   var docHeight = $(window).height();
+   var footerHeight = $('#footer').height();
+   var footerTop = $('#footer').position().top + footerHeight;
+
+   if (footerTop < docHeight) {
+    $('#footer').css('margin-top',  (docHeight - footerTop) -15 + 'px');
+   }
+  });
         $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
