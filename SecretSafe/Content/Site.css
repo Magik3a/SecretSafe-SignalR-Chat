@@ -183,6 +183,8 @@ input, button
     width: 120px;
     padding: 5px;        
     background-color:#D8D8D8;    
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .chat-listitem-message 
