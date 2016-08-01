@@ -23,12 +23,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("SecretSafe", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        
+                <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-brand" title="SecretSafe" style="padding: 5px">
+                    <img src="~/Images/logochat2.png" style="height: 40px; opacity: 0.85"/>
+                </a>
+                        @Html.ActionLink("SecretSafe", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse navbarUpper">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Subscribe", "Prices", "Home")</li>
-                    <li>@Html.ActionLink("Rooms", "Rooms", "Home")</li>
+                    <li>
+                        @Html.ActionLink("Subscribe", "Prices", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Rooms", "Rooms", "Home")
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
