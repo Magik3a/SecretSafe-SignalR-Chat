@@ -18,7 +18,21 @@ namespace SecretSafe
              url: "NormalSecurity/{id}",
              defaults: new { controller = "NormalSecurity", action = "Index", id = UrlParameter.Optional }
          );
-
+            routes.MapRoute(
+          name: "Default3",
+          url: "MediumSecurity/{id}",
+          defaults: new { controller = "MediumSecurity", action = "Index", id = UrlParameter.Optional }
+      );
+            routes.MapRoute(
+          name: "Default4",
+          url: "ProSecurity/{id}",
+          defaults: new { controller = "ProSecurity", action = "Index", id = UrlParameter.Optional }
+      );
+            routes.MapRoute(
+          name: "Default5",
+          url: "MaximumSecurity/{id}",
+          defaults: new { controller = "MaximumSecurity", action = "Index", id = UrlParameter.Optional }
+      );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

@@ -119,7 +119,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', end
 {
 	margin-top: 40px;
 }
-
+.security-rooms-alert{
+    margin-top: 40px;
+}
 label 
 {    
 	font-size: 18px;

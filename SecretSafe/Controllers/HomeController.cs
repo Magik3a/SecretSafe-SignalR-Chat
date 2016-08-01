@@ -47,12 +47,13 @@ namespace SecretSafe.Controllers
         [HttpPost]
         public ActionResult Index(string username, string roomname)
         {
+
             if (string.IsNullOrEmpty(username) && !User.Identity.IsAuthenticated)
             {
                 ModelState.AddModelError("username", "Username is required");
                 return View();
             }
-            else
+            else if (User.Identity.IsAuthenticated)
             {
                 string currentUserId = User.Identity.GetUserId();
                 var currentUserNickName = db.Users.FirstOrDefault(x => x.Id == currentUserId).NickName;
@@ -66,7 +67,7 @@ namespace SecretSafe.Controllers
             }
             else
             {
-                var chatRoomDb = chatRoomsService.GetChatRoomByName(roomname);
+                var chatRoomDb = chatRoomsService.GetChatRoomByName(roomname).FirstOrDefault();
                 if(chatRoomDb != null)
                 {
                     ModelState.AddModelError("room", "Room name is reserved for private user");

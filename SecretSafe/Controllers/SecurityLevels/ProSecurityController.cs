@@ -1,26 +1,26 @@
-﻿using Data;
-using Microsoft.AspNet.Identity;
-using Models;
-using SecretSafe.DataServices;
-using SecretSafe.Models;
-using System;
-using System.Linq;
-using System.Web.Mvc;
-
-namespace SecretSafe.Controllers
+﻿namespace SecretSafe.Controllers
 {
-    public class NormalSecurityController : Controller
+    using Data;
+    using global::Models;
+    using Microsoft.AspNet.Identity;
+    using SecretSafe.DataServices;
+    using SecretSafe.Models;
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+    public class ProSecurityController : Controller
     {
+        // GET: ProSecurity
         private InMemoryRepository _repository;
         private readonly IChatRoomsService chatRoomsService;
         private IRepository<SecretSafeUser> db;
-        public NormalSecurityController(IChatRoomsService chatRoomsService, IRepository<SecretSafeUser> db)
+        public ProSecurityController(IChatRoomsService chatRoomsService, IRepository<SecretSafeUser> db)
         {
             _repository = InMemoryRepository.GetInstance();
             this.chatRoomsService = chatRoomsService;
             this.db = db;
         }
-        // GET: NormalSecurity
+        // GET: MaximumSecurity
         public ActionResult Index(Guid id)
         {
             var room = chatRoomsService.GetChatRoomById(id).FirstOrDefault();
@@ -31,7 +31,7 @@ namespace SecretSafe.Controllers
             {
                 string currentUserId = User.Identity.GetUserId();
                 var currentUserNickName = db.All().FirstOrDefault(x => x.Id == currentUserId).NickName;
-                 // if we have an already logged user with the same username, then append a random number to it
+                // if we have an already logged user with the same username, then append a random number to it
                 if (_repository.Users.Where(u => u.Username.Equals(currentUserNickName)).ToList().Count > 0)
                 {
                     currentUserNickName = _repository.GetRandomizedUsername(currentUserNickName);

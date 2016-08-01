@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-@using (Html.BeginForm("Index", "NormalSecurity", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("Index", "MaximumSecurity", FormMethod.Post, new { @class = "form-horizontal" }))
 {
     <div id="form-container" class="jumbotron">
         <h1>SecretSafe</h1>
@@ -18,8 +18,8 @@
                    maxlength="15" required="required" />
             <button type="submit" class="btn btn-danger" style="margin-top: 15px">Let's chat secretly!</button>
         </div>
-         <div class="alert alert-info security-rooms-alert">
-            This is Normal Security room!
+          <div class="alert alert-danger security-rooms-alert" >
+            This is Maximum Security room!
         </div>
     </div>
 }
