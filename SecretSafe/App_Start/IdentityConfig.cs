@@ -13,18 +13,22 @@ using Microsoft.Owin.Security;
 using SecretSafe.Models;
 using Models;
 using Data;
+using SecretSafe.Common.Functions;
+using System.Net.Mail;
 
 namespace SecretSafe
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await Email.SendAsync(message);
         }
+        
     }
 
+ 
     public class SmsService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)

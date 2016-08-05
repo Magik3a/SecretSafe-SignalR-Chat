@@ -11,10 +11,10 @@ namespace SecretSafe.App_Start
     using System.Linq;
     using Ninject;
     using Data;
-    using Common.Constants;
     using Infrastructure;
     using System.Web.Mvc;
     using Ninject.Web.Mvc;
+    using global::Common.Constants;
 
     public static class NinjectConfig
     {

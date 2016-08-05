@@ -6,8 +6,8 @@
 <div class="panel panel-info">
     <div class="panel-heading">
         <div class="panel-title">
-            <span class="glyphicon glyphicon-alert pull-right" style="font-size: 25px; margin-right: 15px"  data-toggle="tooltip" data-placement="right" title="You have to be logged in the system to use full functionalities"></span>
-       
+            <span class="glyphicon glyphicon-alert pull-right" style="font-size: 25px; margin-right: 15px" data-toggle="tooltip" data-placement="right" title="You have to be logged in the system to use full functionalities"></span>
+
             <h3>@ViewBag.Title.</h3>
         </div>
     </div>
@@ -60,11 +60,6 @@
                                     <input type="submit" value="Log in" class="btn btn-info" />
                                 </div>
                             </div>
-
-                            @* Enable this once you have account confirmation enabled for password reset functionality
-                                <p>
-                                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                                </p>*@
                         }
                     </section>
                 </div>
@@ -88,11 +83,13 @@
     <div class="panel-footer">
         <p>
             @Html.ActionLink("Register as a new user", "Register", null, new { @class = "btn btn-success" })
+    
+            @Html.ActionLink("Forgot your password?", "ForgotPassword", null, new { @class = "btn btn-primary" })
         </p>
     </div>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-   
+
 }
