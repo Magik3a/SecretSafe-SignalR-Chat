@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Magik3a/SecretSafe-SignalR-Chat.png?label=ready&title=Ready)](https://waffle.io/Magik3a/SecretSafe-SignalR-Chat)
 # SecretSafe-SignalR-Chat
 
 <image src="https://ci.appveyor.com/api/projects/status/5d7yummllxva8aq3?svg=true" width="300">
