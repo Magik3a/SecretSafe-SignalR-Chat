@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Robotic Template
+        http://www.templatemo.com/preview/templatemo_430_robotic
+    -->
+    <title>Robotic - Free Responsive Template</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+
+
+
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/templatemo_misc.css" rel="stylesheet" />
+    <link href="~/Content/templatemo_style.css" rel="stylesheet" />
+    <link href="~/Content/ChatBox.css" rel="stylesheet" />
+    <!-- JavaScripts -->
+    <!-- JavaScripts -->
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+
+
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/jquery.scrollTo.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/templatemo_custom.js"></script>
+    <script src="~/Scripts/bootstrap-collapse.js"></script>
+    <script src="~/Scripts/jquery.lightbox.js"></script>
+</head>
+<body>
+    <div id="templatemo_home" class="templatemo_headerimg"><img src="../images/templatemo_header.jpg" alt="templatemo header"></div>
+    <div class="templatemo_headerimg_cover"><img src="../images/templatemo_header.png" alt="templatemo header"></div>
+    <div class="templatemo_headerwrapper">
+        <div class="templatemo_menu">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div id="top-menu">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="@ViewBag.IndexLinkActive"><a class="menu first" href="@Url.Action("Index", "Home")"><span>HOME</span></a></li>
+
+                                <li class="@ViewBag.PricesLinkActive"><a class="menu" href="@Url.Action("Prices", "Home")"><span>PACKAGES</span></a></li>
+                                <li class="@ViewBag.RoomsLinkActive"><a class="menu" href="@Url.Action("Rooms", "Home")"><span>ROOMS</span></a></li>
+                               @Html.Partial("_LoginPartial")
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+            <div class="templatemo_socialmedia">
+                <div class="templatemo_social"><a href="#"><img src="../images/facebook.png" alt="templatemo facebook"></a></div>
+                <div class="templatemo_social"><a href="#"><img src="../images/twitter.png" alt="templatemo twitter"></a></div>
+                <div class="templatemo_social"><a href="#"><img src="../images/googleplus.png" alt="templatemo googleplus"></a></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div style="min-height: 60em">
+        @RenderBody()
+            </div>
+
+
+            @RenderSection("scripts", required: false)
+
+        <div class="templatemo_footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        Copyright &copy; 2084 <a href="#">Company Name</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

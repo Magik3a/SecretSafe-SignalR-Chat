@@ -37,7 +37,7 @@
                 {
                     currentUserNickName = _repository.GetRandomizedUsername(currentUserNickName);
                 }
-                return View("~/Views/Home/Chat.cshtml", "_Layout", new UserTest { username = currentUserNickName, roomname = roomname });
+                return View("~/Views/Home/Chat.cshtml", "_LayoutTemplate", new UserTest { username = currentUserNickName, roomname = roomname });
             }
             else
             {
@@ -53,7 +53,7 @@
             {
                 username = _repository.GetRandomizedUsername(username);
             }
-            return View("~/Views/Home/Chat.cshtml", "_Layout", new UserTest { username = username, roomname = roomname });
+            return View("~/Views/Home/Chat.cshtml", "_LayoutTemplate", new UserTest { username = username, roomname = roomname });
         }
 
         public class UserTest

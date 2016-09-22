@@ -1,239 +1,150 @@
 ﻿
 @{
     ViewBag.Title = "Subscribe";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+    ViewBag.PricesLinkActive = "active";
 }
 
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <div class="panel-title">
-            <h3>Monthly plans</h3>
+
+
+<div class="container templatemo_wrapper">
+    <!-- home start -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="templatemo_title"><span>SECRET</span>SAVED</div>
+            <div class="templatemo_subtitle">No one will ever know!</div>
+        </div>
+        <div class="col-sm-6 templatemo_home">
+            <div class="templatemo_headertitle">SECRET PACKAGES</div>
+            <div class="clear"></div>
+            <div class="templatemmo_subheader">CHOOSE HOW MUCH YOUR PRIVACY COST</div>
+            <div class="clear"></div>
+            <div class="templatemo_hometext">
+
+                <div id="templatemo_packages" class="row">
+
+                    <div class="col-sm-10 pull-right" style="text-align: left">
+                        <div class="templatemo_pricing_table">
+                            <div class="templatemo_pricingbg_first">
+                                <img src="../images/templatemo_pricing_bg.jpg" alt="templatemo price img">
+                            </div>
+                            <div class="templatemo_pricing_box">
+                                <span class="price_title">NORMAL SECURITY</span>
+                                <span class="sign">$</span><span class="price">FREE </span> <span class="month">/ after registration    </span>
+                            </div>
+                            <div class="templatemo_pricing_list">
+                                <ul>
+                                    <li>Conversation history will not be saved in anywhere!</li>
+                                    <li>All your rooms will use HTTPS connection</li>
+                                    <li>Rooms can be shared</li>
+                                    <li>You can create up to 15 rooms</li>
+                                    <li>Every room has limit of 50 people</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="templatemo_homebuton"><a href="#templatemo_packages">REGISTER NOW</a></div>
         </div>
     </div>
-    <div class="panel-body">
-
-        <div class="col-md-3">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div class="panel-title">
-                        Normal Security
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-hover  table-condensed" style="width:100%;">
-                        <tr class="info">
-                            <td>
-                                Conversation history will be saved in database.
-                            </td>
-                        </tr>
-                        <tr class="info">
-                            <td>
-                                Room names will be saved in database.
-                            </td>
-                        </tr>
-                        <tr class="info">
-                            <td>
-                                Messages will not be crypted.
-                            </td>
-                        </tr>
-                        <tr class="info">
-                            <td>
-                                Rooms can be shared with link
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="panel-footer">
-                    <div class="footer-price-box">
-                        <button class="btn btn-success">
-                            SUBSCRIBE NOW
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div class="col-md-3">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <div class="panel-title">
-                        Medium Security
-                    </div>
-                </div>
-                <div class="panel-body">
-
-                    <table class="table table-hover  table-condensed" style="width:100%;">
-                        <tr class="success">
-                            <td>
-                                Chat history will be saved in database.
-                            </td>
-                        </tr>
-                        <tr class="success">
-                            <td>
-                                Room names will be saved in database.
-                            </td>
-                        </tr>
-                        <tr class="success">
-                            <td>
-                                Messages will not be crypted.
-                            </td>
-                        </tr>
-                        <tr class="success">
-                            <td>
-                                Rooms can be shared with link
-                            </td>
-                        </tr>
-                        <tr class="success">
-                            <td>
-                                Every user in the room have button for cleaning chat history
-                            </td>
-                        </tr>
-                        <tr class="success">
-                            <td>
-                                You can create rooms with normal security
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="panel-footer panel-success">
-                    <div class="footer-price-box">
-                        <button class="btn btn-success">
-                            SUBSCRIBE NOW
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div class="col-md-3">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <div class="panel-title">
-                        Pro Security
-                    </div>
-                </div>
-                <div class="panel-body">
-
-                    <table class="table table-hover  table-condensed" style="width:100%;">
-                        <tr class="warning">
-                            <td>
-                                Conversation history will be saved in database.
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>
-                                Room names will be saved in database.
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>
-                                !!! Messages will be crypted.
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>
-                                Rooms can be shared with link
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>
-                                Every user in the room have button for cleaning chat history
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>
-                                You can create rooms with normal and medium security
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>
-                                Your PRO rooms will use HTTPS connection
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="panel-footer">
-                    <div class="footer-price-box">
-                        <button class="btn btn-success">
-                            SUBSCRIBE NOW
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-3">
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <div class="panel-title">
-                        Maximum Security
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-hover  table-condensed" style="width:100%;">
-                        <tr class="danger">
-                            <td>
-                                Conversation history will not be saved in database.
-                            </td>
-                        </tr>
-                        <tr class="danger">
-                            <td>
-                                Room names will be saved in client cookies with 1 day expire date.
-                            </td>
-                        </tr>
-                        <tr class="danger">
-                            <td>
-                                !!! Messages will be crypted.
-                            </td>
-                        </tr>
-                        <tr class="danger">
-                            <td>
-                                Rooms can be shared with link
-                            </td>
-                        </tr>
-                        <tr class="danger">
-                            <td>
-                                Every user in the room have button for cleaning chat history
-                            </td>
-                        </tr>
-                        <tr class="danger">
-                            <td>
-                                You can create rooms with normal, medium and pro security
-                            </td>
-                        </tr>
-                        <tr class="danger">
-                            <td>
-                                You can BAN user by IP from ALL your rooms
-                            </td>
-                        </tr>
-                        <tr class="danger">
-                            <td>
-                                All your rooms will use HTTPS connection
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="panel-footer">
-                    <div class="footer-price-box">
-                        <button class="btn btn-success">
-                            SUBSCRIBE NOW
-                        </button>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="templatemo_separater">
+                <span class="page">
+                   <label class="fa fa-hand-o-down"></label>
+                </span>
             </div>
         </div>
     </div>
+    <!-- home end -->
+</div>
 
-    <div class="panel-footer">
+<div class="container">
+    <div id="templatemo_packages" class="row">
+        <div class="col-md-12">
+            <div class="templatemo_pricing_title">OUR PACKAGES</div>
+            <div class="templatemo_pricing_subtitle">AMET NIBH VUL UTATE DUIC URSUS VALUPATE URSUS ASIT</div>
+        </div>
+        <div class="col-sm-4">
+            <div class="templatemo_pricing_table">
+                <div class="templatemo_pricingbg">
+                    <img src="../images/templatemo_pricing_bg.jpg" alt="templatemo price img">
+                </div>
+                <div class="templatemo_pricing_box">
+                    <span class="price_title">MEDIUM SECURITY</span>
+                    <span class="sign">$</span><span class="price">150</span> <span class="month">/ month    </span>
+                </div>
+                <div class="templatemo_pricing_list">
+                    <ul>
+                        <li>Octa Core 2.4 GHz</li>
+                        <li>750 GB Storage</li>
+                        <li>64 GB Memory</li>
+                        <li>30,000 GB Bandwidth</li>
+                        <li>10 Email Addresses</li>
+                        <li>24/7 Level 1 Support</li>
+                    </ul>
+                </div>
+                <a href="#" class="templatemo_signup">SIGN UP NOW</a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="templatemo_pricing_table">
+                <div class="templatemo_pricingbg">
+                    <img src="../images/templatemo_pricing_bg.jpg" alt="templatemo price img">
+                </div>
+                <div class="templatemo_pricing_box">
+                    <span class="price_title">PRO SECURITY</span>
+                    <span class="sign">$</span><span class="price">250 </span> <span class="month">/ month    </span>
+                </div>
+                <div class="templatemo_pricing_list">
+                    <ul>
+                        <li>Octa Core 3.2 GHz</li>
+                        <li>1,500 GB Storage</li>
+                        <li>128 GB Memory</li>
+                        <li>50,000 GB Bandwidth</li>
+                        <li>20 Email Addresses</li>
+                        <li>24/7 Level 2 Support</li>
+                    </ul>
+                </div>
+                <a href="#" class="templatemo_signup">SIGN UP NOW</a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="templatemo_pricing_table">
+                <div class="templatemo_pricingbg">
+                    <img src="../images/templatemo_pricing_bg.jpg" alt="templatemo price img">
+                </div>
+                <div class="templatemo_pricing_box">
+                    <span class="price_title">MAXIMUM SECURITY</span>
+                    <span class="sign">$</span><span class="price">350 </span> <span class="month">/ month    </span>
+                </div>
+                <div class="templatemo_pricing_list">
+                    <ul>
+                        <li>Octa Core 4.0 GHz</li>
+                        <li>2,500 GB Storage</li>
+                        <li>256 GB Memory</li>
+                        <li>80,000 GB Bandwidth</li>
+                        <li>30 Email Addresses</li>
+                        <li>24/7 Level 3 Support</li>
+                    </ul>
+                </div>
+                <a href="#" class="templatemo_signup">SIGN UP NOW</a>
+            </div>
+        </div>
 
-        <img src="~/Images/paypal-icons.png" class="img-responsive img-thumbnail right" />
+    </div>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="templatemo_separater">
+                <span class="page"><label class="fa fa-hand-o-up"></label>
+</span>
+            </div>
+        </div>
     </div>
 </div>

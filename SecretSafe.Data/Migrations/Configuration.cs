@@ -1,5 +1,8 @@
 namespace Data.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -28,6 +31,13 @@ namespace Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            if (!(context.Users.Any(u => u.UserName == "svetlin.krastanov90@gmail.com")))
+            {
+                var userStore = new UserStore<SecretSafeUser>(context);
+                var userManager = new UserManager<SecretSafeUser>(userStore);
+                var userToInsert = new SecretSafeUser { UserName = "svetlin.krastanov90@gmail.com", PhoneNumber = "0888017004", Email = "svetlin.krastanov90@gmail.com" };
+                userManager.Create(userToInsert, "svetlin90");
+            }
 
             context.SecurityLevels.AddOrUpdate(
                 s => s.SecurityLevelId, 

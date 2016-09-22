@@ -43,7 +43,16 @@ namespace SecretSafe.Controllers
         }
 
 
-
+        public ActionResult TestSPA()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                string currentUserId = User.Identity.GetUserId();
+                var currentUserNickName = db.Users.FirstOrDefault(x => x.Id == currentUserId).NickName;
+                ViewBag.UserNickName = currentUserNickName;
+            }
+            return View();
+        }
         [HttpPost]
         public ActionResult Index(string username, string roomname)
         {
@@ -80,7 +89,7 @@ namespace SecretSafe.Controllers
                     username = _repository.GetRandomizedUsername(username);
                 }
 
-                return View("Chat", "_Layout", new UserTest { username = username, roomname = roomname});
+                return View("Chat", "_LayoutTemplate", new UserTest { username = username, roomname = roomname});
             }
         }
 
@@ -96,7 +105,7 @@ namespace SecretSafe.Controllers
         }
 
 
-        // For some stupid reason anonymous object can't be send to the view 
+        // For some stupid reason anonymous object can't be send to the view
         public class UserTest
         {
             public string username { get; set; }
@@ -122,7 +131,7 @@ namespace SecretSafe.Controllers
 
         public ActionResult CreateRoomAjax(string SecurityLevel)
         {
-     
+
 
             return PartialView("RoomsPartials/BoxCreateRoomPartial", new CreateRoomPartialModel {  securitylevel = SecurityLevel });
         }
@@ -143,7 +152,7 @@ namespace SecretSafe.Controllers
             };
 
             model.RoomId = chatRoomsService.CreateChatRoom(Mapper.Map<RoomPanelPartialViewModel, ChatRoom>(model));
-            
+
             return PartialView("RoomsPartials/RoomPanelPartial", model);
         }
         public string GetClassSecurityLevel(string securityLevelTitle)
@@ -162,7 +171,7 @@ namespace SecretSafe.Controllers
             public string securitylevel { get; set; }
         }
 
-        
+
 
         public ActionResult Prices()
         {

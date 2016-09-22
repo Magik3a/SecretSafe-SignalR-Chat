@@ -1,26 +1,62 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+
 }
 
-@using (Html.BeginForm("Index", "NormalSecurity", FormMethod.Post, new { @class = "form-horizontal" }))
-{
-    <div id="form-container" class="jumbotron">
-        <h1>SecretSafe</h1>
-        <span id="description">
-            A secure chat application built with
-            <a href="http://signalr.net/" title="SignalR" target="_blank">SignalR</a>
-        </span>
-        
-        <div id="input-box">
-            <label for="username">Choose a user name to start</label>
-            <input type="text" id="username" class="input-medium search-query form-control" placeholder="Type username here..." name="username" autofocus="autofocus"
-                   maxlength="15" required="required" />
-            <button type="submit" class="btn btn-danger" style="margin-top: 15px">Let's chat secretly!</button>
+<div class="container templatemo_wrapper">
+    <!-- home start -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="templatemo_title"><span>SECRET</span>SAVED</div>
+            <div class="templatemo_subtitle">No one will ever know!</div>
         </div>
-         <div class="alert alert-info security-rooms-alert">
-            This is Normal Security room!
-        </div>
+        @using (Html.BeginForm("Index", "NormalSecurity", FormMethod.Post, new { @class = "form-horizontal col-sm-6 pull-right" }))
+        {
+
+            <div id="form-container" class="">
+                <div class="templatemo_headertitle">NORMAL SECURITY ROOM</div>
+                <div class="clear"></div>
+                <div class="templatemmo_subheader">A secure chat application built with SignalR</div>
+
+
+                <div id="input-box">
+                    <label for="username">Choose a user name to start</label>
+                    <input type="text" id="username" class="input-medium search-query form-control" placeholder="Type username here..." name="username" autofocus="autofocus"
+                           maxlength="15" required="required" />
+                    <button type="submit" class="btn btn-danger" style="margin-top: 15px">Let's chat secretly!</button>
+                </div>
+            </div>
+        }
+
+            <div class="templatemo_hometext">
+
+                <div id="templatemo_packages" class="row">
+
+                    <div class="col-sm-5 pull-right" style="text-align: left">
+                        <div class="templatemo_pricing_table">
+                            <div class="templatemo_pricingbg_first">
+                                <img src="../images/templatemo_pricing_bg.jpg" alt="templatemo price img">
+                            </div>
+                            <div class="templatemo_pricing_box">
+                                <span class="price_title">NORMAL SECURITY</span>
+                                <span class="sign">$</span><span class="price">FREE </span> <span class="month">/ after registration    </span>
+                            </div>
+                            <div class="templatemo_pricing_list">
+                                <ul>
+                                    <li>Conversation history will not be saved in anywhere!</li>
+                                    <li>All your rooms will use HTTPS connection</li>
+                                    <li>Rooms can be shared</li>
+                                    <li>You can create up to 15 rooms</li>
+                                    <li>Every room has limit of 50 people</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
-}
+</div>
 
