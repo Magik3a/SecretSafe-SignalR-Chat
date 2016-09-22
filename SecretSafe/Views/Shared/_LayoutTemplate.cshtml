@@ -51,7 +51,7 @@
 
                                 <li class="@ViewBag.PricesLinkActive"><a class="menu" href="@Url.Action("Prices", "Home")"><span>PACKAGES</span></a></li>
                                 <li class="@ViewBag.RoomsLinkActive"><a class="menu" href="@Url.Action("Rooms", "Home")"><span>ROOMS</span></a></li>
-                               @Html.Partial("_LoginPartial")
+                                @Html.Partial("_LoginPartial")
                             </ul>
                         </div>
                     </div>
@@ -67,17 +67,25 @@
         </div>
         <div class="clear"></div>
         <div style="min-height: 60em">
-        @RenderBody()
-            </div>
+            @RenderBody()
+        </div>
 
 
-            @RenderSection("scripts", required: false)
+        @RenderSection("scripts", required: false)
 
         <div class="templatemo_footer">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        Copyright &copy; 2084 <a href="#">Company Name</a>
+                    <p class="pull-left col-md-6">
+                        &copy; www.secretsaved.com @DateTime.Now.Year - Version @typeof(SecretSafe.MvcApplication).Assembly.GetName().Version <br />
+                        Programmed and designed by Svetlin Krastanov - www.s2kdesign.com
+
+                    </p>
+                    <div id="https-logo" class="pull-right col-md-6 text-center" >
+
+                        <img src="~/Images/paypal-icons.png"  class="img-responsive img-thumbnail pull-right col-md-7" />
+                        @*<img class="img-responsive img-thumbnail pull-right col-md-5" src="~/Images/secure.png" style="height: 70px;"  />*@
+
                     </div>
                 </div>
             </div>
