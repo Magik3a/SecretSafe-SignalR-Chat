@@ -51,8 +51,9 @@
                         @Ajax.ActionLink("LOG IN", "Login", "Account", null,
                new AjaxOptions { UpdateTargetId = "loginRegisterAjax", InsertionMode = InsertionMode.Replace },
                new { @class = "templatemo_homebuton", style = "margin-left: 50px;" })
-
-                        @Html.ActionLink("FORGOT YOUR PASSWORD?", "ForgotPassword", null, new { @class = "templatemo_homebuton" })
+                             @Ajax.ActionLink("FORGOT YOUR PASSWORD?", "ForgotPassword", null,
+               new AjaxOptions { UpdateTargetId = "loginRegisterAjax", InsertionMode = InsertionMode.Replace },
+       new { @class = "templatemo_homebuton" })
                     </p>
                 </div>
 

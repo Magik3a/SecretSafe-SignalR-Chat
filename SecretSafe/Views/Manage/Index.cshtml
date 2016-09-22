@@ -1,64 +1,78 @@
 ﻿@model SecretSafe.Models.IndexViewModel
 @{
     ViewBag.Title = "Manage";
+    ViewBag.ManageLinkActive = "active";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
 }
 
 
-
-<div class="panel panel-warning">
-    <div class="panel-heading">
-        <div class="panel-title">
-              <span class="glyphicon glyphicon-alert pull-right" 
-                    style="font-size: 25px; margin-right: 15px" 
-                     data-toggle="tooltip" data-placement="right"
-                     title="You can change your account settings from here and you can manage you external logins connections."></span>
-       
-            <h3>@ViewBag.Title.</h3>
-            <p class="text-success">@ViewBag.StatusMessage</p>
+<div class="container templatemo_wrapper">
+    <!-- home start -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="templatemo_title"><span>SECRET</span>SAVED</div>
+            <div class="templatemo_subtitle">No one will ever know!</div>
         </div>
-    </div>
-    <div class="panel-body">
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    Change your account settings
+        <div class="col-sm-6 templatemo_home">
+            <div class="templatemo_headertitle">SECRET ACCOUNT</div>
+            <div class="clear"></div>
+            <div class="templatemmo_subheader">MANAGE YOUR ACCOUNT SETTINGS </div>
+            <div class="clear"></div>
+             <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">
+                        <div class="templatemo_separater">
+                            <span class="page"> </span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="panel-body">
-                <hr />
+
+            <div class="templatemo_hometext">
+                <p class="text-success">@ViewBag.StatusMessage</p>
+
+
                 <dl class="dl-horizontal">
                     <dt>Password:</dt>
                     <dd>
                         @if (Model.HasPassword)
                         {
-                            @Html.ActionLink("Change your password", "ChangePassword",  null, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Change your password", "ChangePassword", null, new { @class = "templatemo_homebuton" })
                         }
                         else
                         {
-                            @Html.ActionLink("Create", "SetPassword",  null, new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Create", "SetPassword", null, new { @class = "templatemo_homebuton" })
                         }
                     </dd>
                 </dl>
                 <dl class="dl-horizontal">
                     <dt>DIsplay name:</dt>
                     <dd>
-                        @Html.ActionLink("Change display name", "ChangeNick", "Manage", null, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Change display name", "ChangeNick", "Manage", null, new { @class = "templatemo_homebuton" })
                     </dd>
                 </dl>
                 <dl class="dl-horizontal">
                     <dt>External Logins:</dt>
                     <dd>
 
-                        <a class="btn btn-warning" href="@Url.Action("ManageLogins")" title="Manage Logins">
+                        <a class="templatemo_homebuton" href="@Url.Action("ManageLogins")" title="Manage Logins">
                             Manage
                             <span class="badge"> @Model.Logins.Count</span>
                         </a>
                     </dd>
 
                 </dl>
-                <hr />
+
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="templatemo_separater">
+                <span class="page"> </span>
             </div>
         </div>
     </div>
+    <!-- home end -->
 </div>
-

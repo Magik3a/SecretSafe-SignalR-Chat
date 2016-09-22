@@ -2,25 +2,45 @@
 
 @{
     ViewBag.Title = "View";
+       Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+    ViewBag.ManageLinkActive = "active";
 }
+<div class="container templatemo_wrapper">
+    <!-- home start -->
 
-<h2>View</h2>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="templatemo_title"><span>SECRET</span>SAVED</div>
+            <div class="templatemo_subtitle">No one will ever know!</div>
+        </div>
+        <div class="col-sm-6 templatemo_home">
+            <div class="templatemo_headertitle">SECRET ACCOUNT</div>
+            <div class="clear"></div>
+            <div class="templatemmo_subheader">CHANGE YOUR PASSWORD</div>
+            <div class="clear"></div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div class="templatemo_separater">
+                        <span class="page"> </span>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>SecretSafeUser</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
- 
+
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NickName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.NickName, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => model.NickName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
             </div>
@@ -28,16 +48,23 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="SAVE" class="templatemo_homebuton" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+  </div>
+        <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="templatemo_separater">
+                <span class="page"> </span>
+            </div>
+        </div>
+    </div>
+    </div>
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

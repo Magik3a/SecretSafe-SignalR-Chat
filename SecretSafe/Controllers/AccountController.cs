@@ -202,7 +202,7 @@ namespace SecretSafe.Controllers
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
-            return View();
+            return PartialView();
         }
 
         //
@@ -236,7 +236,7 @@ namespace SecretSafe.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return PartialView(model);
         }
 
         //
