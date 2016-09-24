@@ -37,8 +37,7 @@ namespace Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<IdentityUser>()
+            modelBuilder.Entity<SecretSafeUser>()
                 .ToTable("Users");
 
             modelBuilder.Entity<IdentityRole>()
@@ -51,6 +50,7 @@ namespace Data
                .ToTable("UserClaims");
 
             modelBuilder.Entity<IdentityUserLogin>()
+                .HasKey(l => new { l.UserId, l.LoginProvider, l.ProviderKey })
                 .ToTable("UserLogins");
         }
 
