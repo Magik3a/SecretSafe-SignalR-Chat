@@ -54,6 +54,8 @@ namespace SecretSafe.Controllers
             {
                 username = _repository.GetRandomizedUsername(username);
             }
+            ViewBag.SecurityLevelName = "Normal Security";
+            ViewBag.CssClass = "info";
             return View("~/Views/Home/Chat.cshtml", "_LayoutTemplate", new UserTest { username = username, roomname = roomname });
         }
 

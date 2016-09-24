@@ -54,6 +54,8 @@
             {
                 username = _repository.GetRandomizedUsername(username);
             }
+            ViewBag.SecurityLevelName = "Pro Security";
+            ViewBag.CssClass = "warning";
             return View("~/Views/Home/_LayoutTemplate.cshtml", "_Layout", new UserTest { username = username, roomname = roomname });
         }
 

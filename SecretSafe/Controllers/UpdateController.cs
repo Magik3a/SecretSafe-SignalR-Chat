@@ -24,7 +24,10 @@ namespace SecretSafe.Controllers
         public ActionResult Index(int SecurityLevel)
         {
             var roleManager = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(db));
-
+            if(SecurityLevel > 4 || SecurityLevel <= 0)
+            {
+                return RedirectToAction("Index", "Home", null);
+            }
             var securityLevel = roleManager.Roles.Where(r => r.Level == SecurityLevel).Single();
             var price = securityLevels.GetByName(securityLevel.Name).price;
             var model = new UpdateViewModel() { SecurityLevelName = securityLevel.Name, price = String.Format("{0}.00", price) };
