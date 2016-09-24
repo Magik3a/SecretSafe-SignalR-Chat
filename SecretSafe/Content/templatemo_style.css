@@ -484,6 +484,13 @@ h1 {
     margin-top: 30px;
 }
 
+.rooms{
+    cursor: pointer;
+}
+
+.actives-pannel{
+    box-shadow: 0 0 25px black;
+}
 @media (min-width: 340px) and (max-width:767px) {
     .templatemo_pricing_table {
         width: 310px;

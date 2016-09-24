@@ -36,6 +36,8 @@
                 {
                     currentUserNickName = _repository.GetRandomizedUsername(currentUserNickName);
                 }
+                ViewBag.SecurityLevelName = "Pro Security";
+                ViewBag.CssClass = "warning";
                 return View("~/Views/Home/_LayoutTemplate.cshtml", "_Layout", new UserTest { username = currentUserNickName, roomname = roomname });
             }
             else

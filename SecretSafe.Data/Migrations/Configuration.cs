@@ -95,28 +95,32 @@ namespace Data.Migrations
                     SecurityLevelId = 1,
                     Name = "Normal Security",
                     CreatedOn = DateTime.Now,
-                    Level = 1
+                    Level = 1,
+                    price =0
                 },
                  new SecretSafe.Models.SecurityLevel()
                  {
                      SecurityLevelId = 2,
                      Name = "Medium Security",
                      CreatedOn = DateTime.Now,
-                     Level = 2
+                     Level = 2,
+                     price = 5
                  },
                   new SecretSafe.Models.SecurityLevel()
                   {
                       SecurityLevelId = 3,
                       Name = "Pro Security",
                       CreatedOn = DateTime.Now,
-                      Level = 3
+                      Level = 3,
+                      price = 10
                   },
                    new SecretSafe.Models.SecurityLevel()
                    {
                        SecurityLevelId = 4,
                        Name = "Maximum Security",
                        CreatedOn = DateTime.Now,
-                       Level = 4
+                       Level = 4,
+                       price = 15
                    }
             );
 

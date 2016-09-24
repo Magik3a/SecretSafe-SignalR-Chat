@@ -21,9 +21,9 @@
             <div class="templatemo_subtitle">No one will ever know!</div>
         </div>
         <div class="col-sm-6 templatemo_home">
-            <div class="templatemo_headertitle">SECRET ROOMS</div>
+            <div class="templatemo_headertitle">SECRET ROOM</div>
             <div class="clear"></div>
-            <div class="templatemmo_subheader">CREATE AND SHARE ROOMS TO INVITE OTHERS TO TELL YOUR SECRET</div>
+            <div class="templatemmo_subheader">THIS ROOM IS WITH @ViewBag.SecurityLevelName.ToUpper()</div>
             <div class="clear"></div>
 
         </div>
@@ -32,7 +32,7 @@
              <!-- DIRECT CHAT PRIMARY -->
     <div class="row">
         <div class="col-md-7 pull-right" style="margin-top: 30px">
-      <div class="box box-primary direct-chat direct-chat-primary">
+      <div class="box box-@ViewBag.CssClass direct-chat direct-chat-@ViewBag.CssClass">
         <div class="box-header with-border">
           <h3 class="box-title">Direct Chat</h3>
 
@@ -106,7 +106,7 @@
             <div class="input-group">
               <input id="compose-box" type="text" name="message" placeholder="Type Message ..." class="form-control">
                   <span class="input-group-btn">
-                    <button id="send-btn" type="submit" class="btn btn-primary btn-flat">Send</button>
+                    <button id="send-btn" type="submit" class="btn btn-@ViewBag.CssClass btn-flat">Send</button>
                   </span>
             </div>
 
@@ -176,7 +176,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
 
-                    <button class="btn btn-success" style="width: 100%" id="share-button">SHARE ROOM</button>
+                    <button class="btn btn-@ViewBag.CssClass" style="width: 100%" id="share-button">SHARE ROOM</button>
                 </h4>
             </div>
         </div>

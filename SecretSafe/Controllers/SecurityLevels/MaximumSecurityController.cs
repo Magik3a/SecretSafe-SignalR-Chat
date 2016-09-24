@@ -36,6 +36,8 @@
                 {
                     currentUserNickName = _repository.GetRandomizedUsername(currentUserNickName);
                 }
+                ViewBag.SecurityLevelName = "Maximum Security";
+                ViewBag.CssClass = "danger";
                 return View("~/Views/Home/Chat.cshtml", "_LayoutTemplate", new UserTest { username = currentUserNickName, roomname = roomname });
             }
             else
