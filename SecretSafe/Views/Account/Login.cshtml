@@ -63,7 +63,14 @@
 </div>
 
 @section Scripts {
+
     @Scripts.Render("~/bundles/jqueryval")
 
-
+    <script>
+        function RedirectToRooms(response, status) {
+            if (response.status == true) {
+                window.location.href = '../Home/Rooms';
+            }
+        };
+    </script>
 }

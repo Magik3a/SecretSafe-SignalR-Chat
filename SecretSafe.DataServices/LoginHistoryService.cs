@@ -28,8 +28,11 @@
         public void Logoff(string UserName)
         {
             var logetUser = db.All().Where(s => s.UserId == UserName).OrderByDescending(l => l.StartSession).FirstOrDefault();
-            logetUser.EndSession = DateTime.Now;
-            db.SaveChanges();
+            if (logetUser != null)
+            {
+                logetUser.EndSession = DateTime.Now;
+                db.SaveChanges();
+            }
         }
     }
 }

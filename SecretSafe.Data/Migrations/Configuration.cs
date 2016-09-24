@@ -36,34 +36,34 @@ namespace Data.Migrations
 
             #region Roles
 
-            if (!roleManager.RoleExists("NormalUser"))
+            if (!roleManager.RoleExists("Normal Security"))
             {
                 var role = new ApplicationRole();
-                role.Name = "NormalUser";
+                role.Name = "Normal Security";
                 role.Level = 1;
                 roleManager.Create(role);
             }
 
-            if (!roleManager.RoleExists("MediumUser"))
+            if (!roleManager.RoleExists("Medium Security"))
             {
                 var role = new ApplicationRole();
-                role.Name = "MediumUser";
+                role.Name = "Medium Security";
                 role.Level = 2;
                 roleManager.Create(role);
             }
 
-            if (!roleManager.RoleExists("ProUser"))
+            if (!roleManager.RoleExists("Pro Security"))
             {
                 var role = new ApplicationRole();
-                role.Name = "ProUser";
+                role.Name = "Pro Security";
                 role.Level = 3;
                 roleManager.Create(role);
             }
 
-            if (!roleManager.RoleExists("MaximumUser"))
+            if (!roleManager.RoleExists("Maximum Security"))
             {
                 var role = new ApplicationRole();
-                role.Name = "MaximumUser";
+                role.Name = "Maximum Security";
                 role.Level = 4;
                 roleManager.Create(role);
             }

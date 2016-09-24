@@ -60,6 +60,20 @@
                 <!-- /.container-fluid -->
             </nav>
             <div class="templatemo_socialmedia">
+                @using Microsoft.AspNet.Identity
+                @using Microsoft.AspNet.Identity.Owin;
+
+                @if (Request.IsAuthenticated)
+                {
+                    var userManager = Request.GetOwinContext().GetUserManager<SecretSafeUserManager>();
+                    var userRoles = userManager.GetRoles(User.Identity.GetUserId());
+                    var role = userRoles[0].ToUpper();
+                    <div class="templatemo_social">
+                        <button class="btn btn-success"> @role</button>
+                    </div>
+
+                }
+
                 <div class="templatemo_social"><a href="#"><img src="../images/facebook.png" alt="templatemo facebook"></a></div>
                 <div class="templatemo_social"><a href="#"><img src="../images/twitter.png" alt="templatemo twitter"></a></div>
                 <div class="templatemo_social"><a href="#"><img src="../images/googleplus.png" alt="templatemo googleplus"></a></div>

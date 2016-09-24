@@ -7,7 +7,7 @@
                 <div class="clear"></div>
 
                 @using (Ajax.BeginForm("Register", "Account", FormMethod.Post,
-                    new AjaxOptions { UpdateTargetId = "loginRegisterAjax", InsertionMode = InsertionMode.Replace},
+                    new AjaxOptions { UpdateTargetId = "loginRegisterAjax", InsertionMode = InsertionMode.Replace, OnSuccess="RedirectToRooms"},
                     new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()

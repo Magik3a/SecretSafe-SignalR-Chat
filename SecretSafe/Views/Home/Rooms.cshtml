@@ -21,22 +21,14 @@
             <div class="clear"></div>
             <div class="templatemmo_subheader">CREATE AND SHARE ROOMS TO INVITE OTHERS TO TELL YOUR SECRET</div>
             <div class="clear"></div>
-            <div class="templatemo_hometext">
-                <p>Robotic Template is free responsive layout from templatemo. Credits go to <a rel="nofollow" href="http://www.smashingmagazine.com/2012/11/20/art-professions-icons-png/">Art Professions</a> Icon and <a rel="nofollow" href="http://unsplash.com">Unsplash</a> for images used in this template.</p>
-                <p>
-                    Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat
-                    consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                </p>
-            </div>
-            <div class="clear"></div>
-            <div class="templatemo_homebuton"><a href="#templatemo_packages">CHOOSE YOUR ROOM</a></div>
+            <div class="templatemo_homebuton"><a href="@Url.Action("Prices","Home")">CHANGE YOUR SECURITY LEVEL</a></div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6"></div>
         <div class="col-md-6">
             <div class="templatemo_separater">
-                <span class="page">1</span>
+                <span class="page"> </span>
             </div>
         </div>
     </div>
@@ -46,13 +38,13 @@
 <div class="container templatemo_wrapper">
     <div id="templatemo_packages" class="row">
         <div class="col-md-12">
-            <div class="templatemo_pricing_title">YOUR ROOMS</div>
-            <div class="templatemo_pricing_subtitle">CHOOSE A SECURITY LEVEL AND CREATE NEW ROOM OR CLICK ON ROOM AND JOIN</div>
+            <div class="templatemo_pricing_title">YOUR SECURE ROOMS </div>
+            <div class="templatemo_pricing_subtitle"><br />CHOOSE A SECURITY LEVEL AND CREATE NEW ROOM OR CLICK ON ROOM AND JOIN</div>
         </div>
         <div class="col-md-12">
 
 
-<h2>Choose room</h2>
+<h2></h2>
 @foreach (var securityLevel in (List<SecretSafe.Models.SecurityLevel>)ViewBag.SecurityLevels)
 {
     var securityLevelTitle = securityLevel.Name;
@@ -194,7 +186,7 @@
         <div class="col-md-6"></div>
         <div class="col-md-6">
             <div class="templatemo_separater">
-                <span class="page">2</span>
+                <span class="page"> </span>
             </div>
         </div>
     </div>

@@ -166,7 +166,7 @@ namespace SecretSafe.Controllers
 
                 var user = new SecretSafeUser { UserName = model.Email, NickName = model.NickName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                result = await UserManager.AddToRoleAsync(user.Id, "NormalUser");
+                result = await UserManager.AddToRoleAsync(user.Id, "Normal Security");
 
                 if (result.Succeeded)
                 {
@@ -177,7 +177,11 @@ namespace SecretSafe.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Rooms", "Home");
+                    string browserVersion = Request.UserAgent;
+
+                    loginHistory.Login(model.Email, browserVersion);
+
+                    return Json(new { status = true }, JsonRequestBehavior.AllowGet);
                 }
                 AddErrors(result);
             }

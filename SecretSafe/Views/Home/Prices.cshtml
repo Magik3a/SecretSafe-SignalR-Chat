@@ -48,8 +48,11 @@
                     </div>
                 </div>
             </div>
-            <div class="clear"></div>
-            <div class="templatemo_homebuton"><a href="../../Account/Login">REGISTER NOW</a></div>
+            @if (!Request.IsAuthenticated)
+            {
+                <div class="clear"></div>
+                <div class="templatemo_homebuton"><a href="../../Account/Login">REGISTER NOW</a></div>
+            }
         </div>
     </div>
     <div class="row">
@@ -69,7 +72,7 @@
     <div id="templatemo_packages" class="row">
         <div class="col-md-12">
             <div class="templatemo_pricing_title">OUR PACKAGES</div>
-            <div class="templatemo_pricing_subtitle">AMET NIBH VUL UTATE DUIC URSUS VALUPATE URSUS ASIT</div>
+            <div class="templatemo_pricing_subtitle">CHOOSE FROM DIFFERENT LEVEL OF SECURITY</div>
         </div>
         <div class="col-sm-4">
             <div class="templatemo_pricing_table">
@@ -78,16 +81,18 @@
                 </div>
                 <div class="templatemo_pricing_box">
                     <span class="price_title">MEDIUM SECURITY</span>
-                    <span class="sign">$</span><span class="price">150</span> <span class="month">/ month    </span>
+                    <span class="sign">$</span><span class="price">5.00</span> <span class="month">/ month    </span>
                 </div>
                 <div class="templatemo_pricing_list">
                     <ul>
-                        <li>Octa Core 2.4 GHz</li>
-                        <li>750 GB Storage</li>
-                        <li>64 GB Memory</li>
-                        <li>30,000 GB Bandwidth</li>
-                        <li>10 Email Addresses</li>
-                        <li>24/7 Level 1 Support</li>
+                        <li>Conversation history will not be saved in anywhere!</li>
+                        <li>All your rooms will use HTTPS connection</li>
+                        <li>Rooms can be shared</li>
+                        <li>You can create up to 50 rooms</li>
+                        <li>Every room has limit of 150 people</li>
+                        <li>You can delete conversation history for all users with one click</li>
+                        <li>No limit on Normal Security rooms</li>
+
                     </ul>
                 </div>
                 <a href="#" class="templatemo_signup">SIGN UP NOW</a>
@@ -100,16 +105,20 @@
                 </div>
                 <div class="templatemo_pricing_box">
                     <span class="price_title">PRO SECURITY</span>
-                    <span class="sign">$</span><span class="price">250 </span> <span class="month">/ month    </span>
+                    <span class="sign">$</span><span class="price">10.00 </span> <span class="month">/ month    </span>
                 </div>
                 <div class="templatemo_pricing_list">
                     <ul>
-                        <li>Octa Core 3.2 GHz</li>
-                        <li>1,500 GB Storage</li>
-                        <li>128 GB Memory</li>
-                        <li>50,000 GB Bandwidth</li>
-                        <li>20 Email Addresses</li>
-                        <li>24/7 Level 2 Support</li>
+                        <li>Conversation history will not be saved in anywhere!</li>
+                        <li>All your rooms will use HTTPS connection</li>
+                        <li>Rooms can be shared</li>
+                        <li>You can create up to 50 rooms</li>
+                        <li>Every room has limit of 150 people</li>
+                        <li>You can delete conversation history for all users with one click</li>
+                        <li>You can ban users by IP </li>
+                        <li>No limit on Normal Security rooms</li>
+                        <li>No limit on Medium Security rooms</li>
+
                     </ul>
                 </div>
                 <a href="#" class="templatemo_signup">SIGN UP NOW</a>
@@ -122,16 +131,22 @@
                 </div>
                 <div class="templatemo_pricing_box">
                     <span class="price_title">MAXIMUM SECURITY</span>
-                    <span class="sign">$</span><span class="price">350 </span> <span class="month">/ month    </span>
+                    <span class="sign">$</span><span class="price">15.00 </span> <span class="month">/ month    </span>
                 </div>
                 <div class="templatemo_pricing_list">
                     <ul>
-                        <li>Octa Core 4.0 GHz</li>
-                        <li>2,500 GB Storage</li>
-                        <li>256 GB Memory</li>
-                        <li>80,000 GB Bandwidth</li>
-                        <li>30 Email Addresses</li>
-                        <li>24/7 Level 3 Support</li>
+                        <li>Conversation history will not be saved in anywhere!</li>
+                        <li>All your rooms will use HTTPS connection</li>
+                        <li>Rooms can be shared</li>
+                        <li>You can create up to 50 rooms</li>
+                        <li>You can choose the limit of people for every room up to 300</li>
+                        <li>You can delete conversation history for all users with one click</li>
+                        <li>You can choose which user can delete conversation history</li>
+                        <li>You can ban users by IP</li>
+                        <li>Messages will be encrypted</li>
+                        <li>No limit on Normal Security rooms</li>
+                        <li>No limit on Medium Security rooms</li>
+                        <li>No limin on Pro Security rooms</li>
                     </ul>
                 </div>
                 <a href="#" class="templatemo_signup">SIGN UP NOW</a>
