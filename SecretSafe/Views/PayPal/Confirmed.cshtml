@@ -1,0 +1,61 @@
+﻿@model SecretSafe.Models.ConfirmedViewData
+@{
+    ViewBag.Title = "Confirmed";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+        ViewBag.PricesLinkActive = "active";
+
+}
+
+<div class="container templatemo_wrapper">
+    <!-- home start -->
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="templatemo_title"><span>SECRET</span>SAVED</div>
+            <div class="templatemo_subtitle">No one will ever know!</div>
+        </div>
+        <div class="col-sm-6 templatemo_home">
+            <div class="templatemo_headertitle">SECRET ORDER</div>
+            <div class="clear"></div>
+            <div class="templatemmo_subheader">CONFIRM YOUR ORDER</div>
+
+            <div class="clear"></div>
+            <div class="templatemo_hometext">
+                    <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div class="templatemo_separater">
+                        <span class="page"> </span>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+                <hr />
+                <form action="/paypal/capture" method="post">
+                    <input type="hidden" name="authorizationId" value="@Model.AuthorizationId" />
+                    <button type="submit" class="templatemo_signup">SUBMIT</button>
+                </form>
+                <form action="/paypal/void" method="post">
+                    <input type="hidden" name="authorizationId" value="@Model.AuthorizationId" />
+                    <button type="submit" class="templatemo_signup">CANCEL</button>
+                </form>
+
+                <p><a href="@Url.Action("Rooms","Home")" class="templatemo_signup">START OVER</a></p>
+                <hr />
+            </div>
+            <div class="clear"></div>
+
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <div class="templatemo_separater">
+                    <span class="page"> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

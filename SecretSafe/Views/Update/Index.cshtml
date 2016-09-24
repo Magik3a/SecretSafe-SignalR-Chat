@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
-        ViewBag.PricesLinkActive = "active";
+    ViewBag.PricesLinkActive = "active";
 
 }
 
@@ -48,10 +48,15 @@
                     </div>
                 </div>
             </div>
-            @if (!Request.IsAuthenticated)
+            @using (Html.BeginForm("CreatePayment", "PayPal", new { Total = Model.price, SecurityLevelName = Model.SecurityLevelName }, FormMethod.Post, new { role = "form", @class = "text-center" }))
             {
-                <div class="clear"></div>
-                <div class="templatemo_homebuton"><a href="../../Account/Login">REGISTER NOW</a></div>
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <button type="submit" class="templatemo_homebuton">PAY WITH PAYPAL</button>
+
+                </div>
+
             }
         </div>
     </div>

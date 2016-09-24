@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+    ViewBag.PricesLinkActive = "active";
+
+}
+
+<div class="container templatemo_wrapper">
+    <!-- home start -->
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="templatemo_title"><span>SECRET</span>SAVED</div>
+            <div class="templatemo_subtitle">No one will ever know!</div>
+        </div>
+        <div class="col-sm-6 templatemo_home">
+            <div class="templatemo_headertitle">SECRET ORDER</div>
+            <div class="clear"></div>
+            <div class="templatemmo_subheader">AN ERROR OCCURRED WHILE PROCESSING YOUR REQUEST.</div>
+
+            <div class="clear"></div>
+            <div class="templatemo_hometext">
+                <hr />
+                @if (Model.ErrorMessage != null)
+                {
+                    <h3>Error message</h3>
+                    <p>@Model.ErrorMessage</p>
+                }
+                @if (Model.JsonRequest != null)
+                {
+                    <h3>JSON Request</h3>
+                    <pre>@Model.JsonRequest</pre>
+                }
+                @if (Model.JsonResponse != null)
+                {
+                    <h3>JSON Response</h3>
+                    <pre>@Model.JsonResponse</pre>
+                }
+                <a href="@Url.Action("Prices", "Home")" title="Packages" class="templatemo_signup">RETURN TO PACKAGES</a>
+                <hr />
+            </div>
+            <div class="clear"></div>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div class="templatemo_separater">
+                        <span class="page"> </span>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <div class="templatemo_separater">
+                    <span class="page"> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,11 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "RoomNotFound";
-           Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
-    ViewBag.RoomsLinkActive = "active";
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+  ViewBag.PricesLinkActive = "active";
+
 }
-
-
 
 <div class="container templatemo_wrapper">
     <!-- home start -->
@@ -16,10 +15,18 @@
             <div class="templatemo_subtitle">No one will ever know!</div>
         </div>
         <div class="col-sm-6 templatemo_home">
-            <div class="templatemo_headertitle">SECRET ACCOUNT</div>
+            <div class="templatemo_headertitle">SECRET ORDER</div>
             <div class="clear"></div>
-            <div class="templatemmo_subheader">CHANGE YOUR DISPLAY NAME</div>
+            <div class="templatemmo_subheader">ORDER SUCCESS</div>
+
             <div class="clear"></div>
+            <div class="templatemo_hometext">
+                <hr />
+              <a href="@Url.Action("Prices", "Home")" title="Packages" class="templatemo_signup">RETURN TO PACKAGES</a>
+                <hr />
+            </div>
+            <div class="clear"></div>
+
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
@@ -31,14 +38,14 @@
             <div class="clear"></div>
 
 
-  </div>
+        </div>
         <div class="row">
-        <div class="col-md-6"></div>
-        <div class="col-md-6">
-            <div class="templatemo_separater">
-                <span class="page"> </span>
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <div class="templatemo_separater">
+                    <span class="page"> </span>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </div>
