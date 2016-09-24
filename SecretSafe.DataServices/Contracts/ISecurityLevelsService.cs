@@ -9,6 +9,6 @@ namespace SecretSafe.DataServices
 
         IQueryable<SecurityLevel> Get(int SecurityLevelId);
 
-        int GetByName(string SecurityLevelName);
+        SecurityLevel GetByName(string SecurityLevelName);
     }
 }

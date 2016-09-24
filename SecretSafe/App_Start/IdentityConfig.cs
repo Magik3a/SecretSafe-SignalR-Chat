@@ -25,10 +25,10 @@ namespace SecretSafe
             // Plug in your email service here to send an email.
             await Email.SendAsync(message);
         }
-        
+
     }
 
- 
+
     public class SmsService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
@@ -46,7 +46,7 @@ namespace SecretSafe
         {
         }
 
-        public static SecretSafeUserManager Create(IdentityFactoryOptions<SecretSafeUserManager> options, IOwinContext context) 
+        public static SecretSafeUserManager Create(IdentityFactoryOptions<SecretSafeUserManager> options, IOwinContext context)
         {
             var manager = new SecretSafeUserManager(new UserStore<SecretSafeUser>(context.Get<SecretSafeDbContext>()));
             // Configure validation logic for usernames
@@ -87,7 +87,7 @@ namespace SecretSafe
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<SecretSafeUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;

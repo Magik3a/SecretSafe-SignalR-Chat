@@ -25,9 +25,9 @@ namespace SecretSafe.DataServices
             return securityLevel.All();
         }
 
-        public int GetByName(string SecurityLevelName)
+        public SecurityLevel GetByName(string SecurityLevelName)
         {
-            return securityLevel.All().Where(s => s.Name == SecurityLevelName).FirstOrDefault().SecurityLevelId;
+            return securityLevel.All().Where(s => s.Name == SecurityLevelName).FirstOrDefault();
         }
     }
 }

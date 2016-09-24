@@ -3,7 +3,7 @@
 {
     <li class="@ViewBag.ManageLinkActive"><a class="menu" href="@Url.Action("Index", "Manage")"><span>ACCOUNT</span></a></li>
 
-        <li><a href="javascript:document.getElementById('logoutForm').submit()" class="menu"><span>LOG OFF</span></a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" class="menu menu-logoff"><span>LOG OFF</span></a></li>
 
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {

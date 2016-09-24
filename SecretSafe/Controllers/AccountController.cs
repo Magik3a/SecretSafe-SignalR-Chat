@@ -163,12 +163,14 @@ namespace SecretSafe.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var user = new SecretSafeUser { UserName = model.Email, NickName = model.NickName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                result = await UserManager.AddToRoleAsync(user.Id, "NormalUser");
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

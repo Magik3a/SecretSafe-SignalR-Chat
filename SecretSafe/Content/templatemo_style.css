@@ -475,6 +475,9 @@ h1 {
     font-size: 50px;
 }
 
+.menu-logoff:hover {
+    background: rgba(133, 0, 0, 0.67) !important;
+}
 .templatemo_footer {
     background: #222222;
     padding: 10px 0px;

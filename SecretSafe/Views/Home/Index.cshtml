@@ -1,8 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "TestSPA";
     Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
-        ViewBag.IndexLinkActive = "active";
+    ViewBag.IndexLinkActive = "active";
 
 }
 
@@ -20,48 +19,48 @@
             <div class="templatemo_headertitle">Try it for FREE!</div>
             <div class="clear"></div>
             <div class="templatemmo_subheader">A secure chat application built with SignalR</div>
-               <div class="clear"></div>
-             <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">
-                        <div class="templatemo_separater">
-                            <span class="page"> </span>
-                        </div>
+            <div class="clear"></div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div class="templatemo_separater">
+                        <span class="page"> </span>
                     </div>
                 </div>
+            </div>
             <div class="clear"></div>
-                @if (!Html.ViewData.ModelState.IsValid)
-                {
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            @if (!Html.ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 
-                        <strong>@Html.ValidationSummary(null, new { @class = "" })</strong>
-                    </div>
-                }
-                @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "templatemo_hometext" }))
-                {
-                        <div id="input-box">
+                    <strong>@Html.ValidationSummary(null, new { @class = "" })</strong>
+                </div>
+            }
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "templatemo_hometext" }))
+            {
+                <div id="input-box">
 
-                            <label for="username" id="username-label">Choose a user name to start</label>
+                    <label for="username" id="username-label">Choose a user name to start</label>
 
-                            <input type="text" id="username" class="input-medium search-query form-control" placeholder="Type username here..." name="username" autofocus="autofocus"
-                                   maxlength="15" required="required" />
-                            <label for="roomname" id="room-label">Choose a room name to start</label>
-                            <input type="text" id="roomname" class="input-medium search-query form-control" placeholder="Type room name here..." name="roomname" maxlength="15" required="required" />
-                        </div>
-                        <button type="submit" class="templatemo_homebuton">Let's chat secretly!</button>
+                    <input type="text" id="username" class="input-medium search-query form-control" placeholder="Type username here..." name="username" autofocus="autofocus"
+                           maxlength="15" required="required" />
+                    <label for="roomname" id="room-label">Choose a room name to start</label>
+                    <input type="text" id="roomname" class="input-medium search-query form-control" placeholder="Type room name here..." name="roomname" maxlength="15" required="required" />
+                </div>
+                <button type="submit" class="templatemo_homebuton">Let's chat secretly!</button>
 
-                }
-                @if (User.Identity.IsAuthenticated || !Html.ViewData.ModelState.IsValid)
-                {
-                    <script>
-                        $(document).ready(function () {
-                            $("#username").attr("disabled", "disabled");
-                            $("#username").val("@ViewBag.UserNickName");
-                            $("#username-label").html("Change your display name from  <a href='../Manage/ChangeNick' alt='Change Nick' title='Change Nick'>here</a> ")
-                        });
-                    </script>
-                }
+            }
+            @if (User.Identity.IsAuthenticated || !Html.ViewData.ModelState.IsValid)
+            {
+                <script>
+                    $(document).ready(function () {
+                        $("#username").attr("disabled", "disabled");
+                        $("#username").val("@ViewBag.UserNickName");
+                        $("#username-label").html("Change your display name from  <a href='../Manage/ChangeNick' alt='Change Nick' title='Change Nick'>here</a> ")
+                    });
+                </script>
+            }
         </div>
     </div>
     <div class="row">
@@ -88,24 +87,28 @@
             </div>
         </div>
         <div class="col-md-6 templatemo_service">
-            <div class="templatemo_service_title">VULPUTATE CURSUS A SIT</div>
-            <div class="templatemo_service_subtitle">AMET NIBH VUL UTATE CURSUS DOLOR AMEIS</div>
+            <div class="templatemo_service_title">ASP.NET SignalR</div>
+            <div class="templatemo_service_subtitle">WHAT IS IT AND HOW WE USED IT</div>
             <div class="templatemo_service_text">
-                <p>Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit.                </p>
+                <p>
+                    SignalR takes advantage of several transports, automatically selecting the best available transport given the client's and server's best available transport. SignalR takes advantage of WebSocket, an HTML5 API that enables bi-directional communication between the browser and server. SignalR will use WebSockets under the covers when it's available, and gracefully fall back to other techniques and technologies when it isn't, while the application code remains the same
+                </p>
                 <div class="clear"></div>
             </div>
-            <div class="templatemo_morebutton"><a href="#">READ MORE</a></div>
+            <div><a href="http://www.asp.net/signalr" class="templatemo_morebutton center-block" target="_blank">READ MORE</a></div>
         </div>
     </div>
     <div class="row templatemo_ordering">
         <div class="col-md-6 templatemo_service one">
-            <div class="templatemo_service_title">VULPUTATE CURSUS A SIT</div>
-            <div class="templatemo_service_subtitle">AMET NIBH VUL UTATE CURSUS DOLOR AMEIS</div>
+            <div class="templatemo_service_title">SSL (SECURE SOCKETS LAYER)</div>
+            <div class="templatemo_service_subtitle">WHAT IS IT AND HOW WE USED IT</div>
             <div class="templatemo_service_text">
-                <p>Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit.                </p>
+                <p>
+                    SSL (Secure Sockets Layer) is the standard security technology for establishing an encrypted link between a web server and a browser. This link ensures that all data passed between the web server and browsers remain private and integral. SSL is an industry standard and is used by millions of websites in the protection of their online transactions with their customers.
+                </p>
                 <div class="clear"></div>
             </div>
-            <div class="templatemo_morebutton"><a href="#">READ MORE</a></div>
+            <div class="templatemo_morebutton"><a href="http://info.ssl.com/article.aspx?id=10241" target="_blank">READ MORE</a></div>
         </div>
         <div class="col-md-6 templatemo_service two">
             <div class="gallery-item">
@@ -130,10 +133,12 @@
             </div>
         </div>
         <div class="col-md-6 templatemo_service">
-            <div class="templatemo_service_title">VULPUTATE CURSUS A SIT</div>
-            <div class="templatemo_service_subtitle">AMET NIBH VUL UTATE CURSUS DOLOR AMEIS</div>
+            <div class="templatemo_service_title">DATABASE MANAGEMENT SYSTEM</div>
+            <div class="templatemo_service_subtitle">WHAT IS IT AND HOW WE USED IT</div>
             <div class="templatemo_service_text">
-                <p>Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit.</p>
+                <p>
+                  We don't save any line you write in our database! For us, security is the more important thing and we decide to not track our users messages and to offer them complete solution, with no way, to anyone ever find what is written in the chat rooms.
+                  </p>
                 <div class="clear"></div>
             </div>
             <div class="templatemo_morebutton"><a href="#">READ MORE</a></div>
@@ -143,20 +148,20 @@
         <div class="col-md-6"></div>
         <div class="col-md-6">
             <div class="templatemo_separater">
-                <span class="page">2</span>
+                <span class="page"> </span>
             </div>
         </div>
     </div>
     <!-- service end -->
     <!-- promotion start -->
     @*<div class="row">
-        <div class="col-md-6"></div>
-        <div class="col-md-6">
-            <div class="templatemo_separater">
-                <span class="page">3</span>
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <div class="templatemo_separater">
+                    <span class="page">3</span>
+                </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
     <!-- promotion end -->
     <!-- work start -->
     <div id="templatemo_about" class="row">

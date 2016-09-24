@@ -11,6 +11,9 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Security;
+using System.Net;
 
 namespace SecretSafe.Controllers
 {
@@ -139,8 +142,23 @@ namespace SecretSafe.Controllers
         public ActionResult SaveRoomAjax(string SecurityLevel, string roomname)
         {
             var securityLevelTitle = GetClassSecurityLevel(SecurityLevel);
-            int securityLevelId = securityLevels.GetByName(securityLevelTitle);
+            int securityLevelId = securityLevels.GetByName(securityLevelTitle).SecurityLevelId;
+            string currentUserId = User.Identity.GetUserId();
 
+            var rolesForUser = "";
+            using (var userManager = new UserManager<SecretSafeUser>(new UserStore<SecretSafeUser>(new SecretSafeDbContext())))
+            {
+                rolesForUser = userManager.GetRoles(currentUserId).FirstOrDefault();
+
+            }
+            var roleManager = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(db));
+
+            var roleLevel = roleManager.Roles.Where(r => r.Name == rolesForUser).Single().Level;
+
+            if (!CheckUserPermissions(securityLevelTitle, roleLevel))
+            {
+                return Json(new { status = false, title = securityLevelTitle, cssClass=SecurityLevel }, JsonRequestBehavior.AllowGet);
+            }
             var model = new RoomPanelPartialViewModel()
             {
                 ChatRoomName = roomname,
@@ -155,6 +173,19 @@ namespace SecretSafe.Controllers
 
             return PartialView("RoomsPartials/RoomPanelPartial", model);
         }
+
+
+
+        private bool CheckUserPermissions(string SecurityLevel, int RoleLevel)
+        {
+            var securityLevel = this.securityLevels.GetByName(SecurityLevel).Level;
+            if (RoleLevel < securityLevel)
+                return false;
+            else
+                return true;
+        }
+
+
         public string GetClassSecurityLevel(string securityLevelTitle)
         {
             switch (securityLevelTitle)

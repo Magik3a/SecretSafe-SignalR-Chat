@@ -3,12 +3,13 @@
 
 }
 <form class="form-horizontal" role="form" style="padding: 15px">
- 
+
 </form>
 @using (Ajax.BeginForm("SaveRoomAjax", "Home", new { SecurityLevel = GetClassSecurityLevel(securityLevelTitle) },
                     new AjaxOptions {
                         InsertionMode = InsertionMode.InsertBefore,
-                        UpdateTargetId = securityLevelTitle.Replace(" ", "")+ "-box"
+                        UpdateTargetId = securityLevelTitle.Replace(" ", "")+ "-box",
+                               OnComplete = "NotEnoughPermissions"
                     },
                     new { }))
         {

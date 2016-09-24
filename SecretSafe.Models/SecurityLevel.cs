@@ -13,5 +13,7 @@
         public string Name { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public int Level { get; set; }
     }
 }
