@@ -7,5 +7,4 @@
 Real-time chat application built on top of SignalR and Asp.Net MVC technology.
 
 Live Preview:
-<a href="http://secretsafe.apphb.com/" title="Live Preview" alt="SecretSafe" target="_blank" >
-<img src="http://i.imgur.com/5usI5UT.png" /></a>
+[![ssssa.png](http://s4.postimg.org/yjyyh7eul/ssssa.png)](https://secretsaved.com/)
