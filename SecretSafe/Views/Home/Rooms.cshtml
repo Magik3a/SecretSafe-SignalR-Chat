@@ -126,7 +126,7 @@
             console.log(panel);
             var obj = jQuery.parseJSON(response.responseText);
             if (obj.status == false) {
-                $(panel).html("<div class='alert alert-"+ obj.cssClass+"'>You don't have enough permissions for "+ obj.title+". Please update your packages from <a class='btn btn-"+obj.cssClass+"' href='" + "@Url.Action("Prices","Home")" +"'>Here </a></div>")
+                $(panel).html("<div class='alert alert-" + obj.cssClass + "'>You don't have enough permissions for " + obj.title + ". Please update your packages from <a class='btn btn-" + obj.cssClass + "' href='" + "@Url.Action("Index","Update")" + "?SecurityLevel=" + obj.securityLevel + "'>Here </a></div>")
             }
         };
         function DeleteRoom(response) {

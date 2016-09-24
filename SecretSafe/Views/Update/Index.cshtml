@@ -1,0 +1,69 @@
+﻿@model SecretSafe.Models.UpdateViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
+        ViewBag.PricesLinkActive = "active";
+
+}
+
+
+
+<div class="container templatemo_wrapper">
+    <!-- home start -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="templatemo_title"><span>SECRET</span>SAVED</div>
+            <div class="templatemo_subtitle">No one will ever know!</div>
+        </div>
+        <div class="col-sm-6 templatemo_home">
+            <div class="templatemo_headertitle">UPDATE YOUR SECURITY</div>
+            <div class="clear"></div>
+            <div class="templatemmo_subheader">NO INFORMATION WILL BE SAVED DURING PAYMENT</div>
+
+
+            <div class="templatemo_hometext">
+
+                <div id="templatemo_packages" class="row">
+
+                    <div class="col-sm-10 pull-right" style="text-align: left">
+                        <div class="templatemo_pricing_table">
+                            <div class="templatemo_pricingbg_first">
+                                <img src="../images/templatemo_pricing_bg.jpg" alt="templatemo price img">
+                            </div>
+                            <div class="templatemo_pricing_box">
+                                <span class="price_title">@Model.SecurityLevelName</span>
+                                <span class="sign">$</span><span class="price">@Model.price </span> <span class="month">/ month    </span>
+                            </div>
+                            <div class="templatemo_pricing_list">
+                                <ul>
+                                    <li>Conversation history will not be saved in anywhere!</li>
+                                    <li>All your rooms will use HTTPS connection</li>
+                                    <li>Rooms can be shared</li>
+                                    <li>You can create up to 15 rooms</li>
+                                    <li>Every room has limit of 50 people</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (!Request.IsAuthenticated)
+            {
+                <div class="clear"></div>
+                <div class="templatemo_homebuton"><a href="../../Account/Login">REGISTER NOW</a></div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="templatemo_separater">
+                <span class="page">
+                    <label class="fa fa-hand-o-down"></label>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- home end -->
+</div>

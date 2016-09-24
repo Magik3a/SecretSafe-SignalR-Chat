@@ -147,7 +147,9 @@ namespace SecretSafe.Controllers
 
             if (!CheckUserPermissions(securityLevelTitle, GetSecurityLevelForUser()))
             {
-                return Json(new { status = false, title = securityLevelTitle, cssClass = SecurityLevel }, JsonRequestBehavior.AllowGet);
+                int securityLevel = securityLevels.GetByName(securityLevelTitle).Level;
+
+                return Json(new { status = false, title = securityLevelTitle, cssClass = SecurityLevel, securityLevel = securityLevel }, JsonRequestBehavior.AllowGet);
             }
             var model = new RoomPanelPartialViewModel()
             {

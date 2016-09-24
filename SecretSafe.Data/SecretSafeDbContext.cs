@@ -24,12 +24,15 @@ namespace Data
 
         public virtual IDbSet<SecurityLevel> SecurityLevels { get; set; }
 
+        public virtual IDbSet<SecurityLelvelAddons> SecurityLelvelAddons { get; set; }
+
+
         public static SecretSafeDbContext Create()
         {
             return new SecretSafeDbContext();
         }
 
-         
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -50,6 +53,6 @@ namespace Data
             modelBuilder.Entity<IdentityUserLogin>()
                 .ToTable("UserLogins");
         }
-        
+
     }
 }

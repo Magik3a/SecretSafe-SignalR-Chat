@@ -85,25 +85,25 @@
                 </div>
                 <div class="templatemo_pricing_list">
                     <ul>
-                        <li>Conversation history will not be saved in anywhere!</li>
+                        <li>Conversation history will not be saved anywhere!</li>
                         <li>All your rooms will use HTTPS connection</li>
                         <li>Rooms can be shared</li>
                         <li>You can create up to 50 rooms</li>
                         <li>Every room has limit of 150 people</li>
-                        <li>You can delete conversation history for all users with one click</li>
-                        <li>No limit on Normal Security rooms</li>
+                        <li class="text-primary">You can delete conversation history for all users with one click</li>
+                        <li class="text-primary">No limit on Normal Security rooms</li>
 
                     </ul>
                 </div>
                 @if (!Request.IsAuthenticated)
                 {
-                    <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                    <a href="@Url.Action("Login", "Account")" class="templatemo_signup">UPDATE NOW</a>
                 }
                 else
                 {
                     if ((int)ViewBag.SecurityLevel < 2)
                     {
-                        <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                        <a href="@Url.Action("Index", "Update", new { SecurityLevel = 2 })" class="templatemo_signup">UPDATE NOW</a>
                     }
                 }
             </div>
@@ -119,27 +119,28 @@
                 </div>
                 <div class="templatemo_pricing_list">
                     <ul>
-                        <li>Conversation history will not be saved in anywhere!</li>
+                        <li>Conversation history will not be saved anywhere!</li>
                         <li>All your rooms will use HTTPS connection</li>
                         <li>Rooms can be shared</li>
                         <li>You can create up to 50 rooms</li>
                         <li>Every room has limit of 150 people</li>
-                        <li>You can delete conversation history for all users with one click</li>
-                        <li>You can ban users by IP </li>
-                        <li>No limit on Normal Security rooms</li>
-                        <li>No limit on Medium Security rooms</li>
+                        <li class="text-primary">You can delete conversation history for all users with one click</li>
+                        <li class="text-primary">You can ban users by IP </li>
+                        <li class="text-primary">No limit on Normal Security rooms</li>
+                        <li class="text-primary">No limit on Medium Security rooms</li>
 
                     </ul>
                 </div>
                 @if (!Request.IsAuthenticated)
                 {
-                    <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                    <a href="@Url.Action("Login", "Account")" class="templatemo_signup">UPDATE NOW</a>
                 }
                 else
                 {
                     if ((int)ViewBag.SecurityLevel < 3)
                     {
-                        <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                        <a href="@Url.Action("Index", "Update", new { SecurityLevel = 3 })" class="templatemo_signup">UPDATE NOW</a>
+
                     }
                 }
             </div>
@@ -155,29 +156,30 @@
                 </div>
                 <div class="templatemo_pricing_list">
                     <ul>
-                        <li>Conversation history will not be saved in anywhere!</li>
+                        <li>Conversation history will not be saved anywhere!</li>
                         <li>All your rooms will use HTTPS connection</li>
                         <li>Rooms can be shared</li>
                         <li>You can create up to 50 rooms</li>
-                        <li>You can choose the limit of people for every room up to 300</li>
-                        <li>You can delete conversation history for all users with one click</li>
-                        <li>You can choose which user can delete conversation history</li>
-                        <li>You can ban users by IP</li>
-                        <li>Messages will be encrypted</li>
-                        <li>No limit on Normal Security rooms</li>
-                        <li>No limit on Medium Security rooms</li>
-                        <li>No limin on Pro Security rooms</li>
+                        <li class="text-primary">You can choose the limit of people for every room up to 300</li>
+                        <li class="text-primary">You can delete conversation history for all users with one click</li>
+                        <li class="text-primary">You can choose which user can delete conversation history</li>
+                        <li class="text-primary">You can ban users by IP</li>
+                        <li class="text-primary">Messages will be encrypted</li>
+                        <li class="text-primary">No limit on Normal Security rooms</li>
+                        <li class="text-primary">No limit on Medium Security rooms</li>
+                        <li class="text-primary">No limin on Pro Security rooms</li>
                     </ul>
                 </div>
                 @if (!Request.IsAuthenticated)
                 {
-                    <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                    <a href="@Url.Action("Login", "Account")" class="templatemo_signup">UPDATE NOW</a>
                 }
                 else
                 {
                     if ((int)ViewBag.SecurityLevel < 4)
                     {
-                        <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                        <a href="@Url.Action("Index", "Update", new { SecurityLevel = 4 })" class="templatemo_signup">UPDATE NOW</a>
+
                     }
                 }
             </div>

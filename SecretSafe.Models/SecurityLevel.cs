@@ -15,5 +15,7 @@
         public DateTime CreatedOn { get; set; }
 
         public int Level { get; set; }
+        
+        public int price { get; set; }
     }
 }
