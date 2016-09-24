@@ -95,7 +95,17 @@
 
                     </ul>
                 </div>
-                <a href="#" class="templatemo_signup">SIGN UP NOW</a>
+                @if (!Request.IsAuthenticated)
+                {
+                    <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                }
+                else
+                {
+                    if ((int)ViewBag.SecurityLevel < 2)
+                    {
+                        <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                    }
+                }
             </div>
         </div>
         <div class="col-sm-4">
@@ -121,7 +131,17 @@
 
                     </ul>
                 </div>
-                <a href="#" class="templatemo_signup">SIGN UP NOW</a>
+                @if (!Request.IsAuthenticated)
+                {
+                    <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                }
+                else
+                {
+                    if ((int)ViewBag.SecurityLevel < 3)
+                    {
+                        <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                    }
+                }
             </div>
         </div>
         <div class="col-sm-4">
@@ -149,7 +169,17 @@
                         <li>No limin on Pro Security rooms</li>
                     </ul>
                 </div>
-                <a href="#" class="templatemo_signup">SIGN UP NOW</a>
+                @if (!Request.IsAuthenticated)
+                {
+                    <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                }
+                else
+                {
+                    if ((int)ViewBag.SecurityLevel < 4)
+                    {
+                        <a href="#" class="templatemo_signup">UPDATE NOW</a>
+                    }
+                }
             </div>
         </div>
 

@@ -18,14 +18,14 @@
             <div class="clear"></div>
             <div class="templatemmo_subheader">MANAGE YOUR ACCOUNT SETTINGS </div>
             <div class="clear"></div>
-             <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">
-                        <div class="templatemo_separater">
-                            <span class="page"> </span>
-                        </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div class="templatemo_separater">
+                        <span class="page"> </span>
                     </div>
                 </div>
+            </div>
 
             <div class="templatemo_hometext">
                 <p class="text-success">@ViewBag.StatusMessage</p>
@@ -61,7 +61,26 @@
                     </dd>
 
                 </dl>
+                @using Microsoft.AspNet.Identity
+                @using Microsoft.AspNet.Identity.Owin;
 
+                @if (Request.IsAuthenticated)
+                {
+                    var userManager = Request.GetOwinContext().GetUserManager<SecretSafeUserManager>();
+                    var userRoles = userManager.GetRoles(User.Identity.GetUserId());
+                    var role = userRoles[0].ToUpper();
+
+                    <dl class="dl-horizontal">
+                        <dt>Security level:</dt>
+                        <dd>
+
+                            <a class="templatemo_homebuton" href="@Url.Action("Prices","Home")" title="Security Level">
+                              @role
+                            </a>
+                        </dd>
+
+                    </dl>
+                }
             </div>
             <div class="clear"></div>
         </div>

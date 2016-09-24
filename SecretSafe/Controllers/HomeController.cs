@@ -80,7 +80,7 @@ namespace SecretSafe.Controllers
             else
             {
                 var chatRoomDb = chatRoomsService.GetChatRoomByName(roomname).FirstOrDefault();
-                if(chatRoomDb != null)
+                if (chatRoomDb != null)
                 {
                     ModelState.AddModelError("room", "Room name is reserved for private user");
                     ViewBag.UserNickName = username;
@@ -92,14 +92,14 @@ namespace SecretSafe.Controllers
                     username = _repository.GetRandomizedUsername(username);
                 }
 
-                return View("Chat", "_LayoutTemplate", new UserTest { username = username, roomname = roomname});
+                return View("Chat", "_LayoutTemplate", new UserTest { username = username, roomname = roomname });
             }
         }
 
         [Authorize]
         public ActionResult Rooms()
         {
-            List <ChooseRoomsViewModel> chatRooms = chatRoomsService
+            List<ChooseRoomsViewModel> chatRooms = chatRoomsService
                 .GetChatRoomsForUser(User.Identity.GetUserId())
                 .ProjectTo<ChooseRoomsViewModel>()
                 .ToList();
@@ -136,28 +136,18 @@ namespace SecretSafe.Controllers
         {
 
 
-            return PartialView("RoomsPartials/BoxCreateRoomPartial", new CreateRoomPartialModel {  securitylevel = SecurityLevel });
+            return PartialView("RoomsPartials/BoxCreateRoomPartial", new CreateRoomPartialModel { securitylevel = SecurityLevel });
         }
 
         public ActionResult SaveRoomAjax(string SecurityLevel, string roomname)
         {
             var securityLevelTitle = GetClassSecurityLevel(SecurityLevel);
             int securityLevelId = securityLevels.GetByName(securityLevelTitle).SecurityLevelId;
-            string currentUserId = User.Identity.GetUserId();
 
-            var rolesForUser = "";
-            using (var userManager = new UserManager<SecretSafeUser>(new UserStore<SecretSafeUser>(new SecretSafeDbContext())))
+
+            if (!CheckUserPermissions(securityLevelTitle, GetSecurityLevelForUser()))
             {
-                rolesForUser = userManager.GetRoles(currentUserId).FirstOrDefault();
-
-            }
-            var roleManager = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(db));
-
-            var roleLevel = roleManager.Roles.Where(r => r.Name == rolesForUser).Single().Level;
-
-            if (!CheckUserPermissions(securityLevelTitle, roleLevel))
-            {
-                return Json(new { status = false, title = securityLevelTitle, cssClass=SecurityLevel }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = false, title = securityLevelTitle, cssClass = SecurityLevel }, JsonRequestBehavior.AllowGet);
             }
             var model = new RoomPanelPartialViewModel()
             {
@@ -174,7 +164,20 @@ namespace SecretSafe.Controllers
             return PartialView("RoomsPartials/RoomPanelPartial", model);
         }
 
+        private int GetSecurityLevelForUser()
+        {
+            string currentUserId = User.Identity.GetUserId();
+            var rolesForUser = "";
+            using (var userManager = new UserManager<SecretSafeUser>(new UserStore<SecretSafeUser>(new SecretSafeDbContext())))
+            {
+                rolesForUser = userManager.GetRoles(currentUserId).FirstOrDefault();
 
+            }
+            var roleManager = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(db));
+
+            var roleLevel = roleManager.Roles.Where(r => r.Name == rolesForUser).Single().Level;
+            return roleLevel;
+        }
 
         private bool CheckUserPermissions(string SecurityLevel, int RoleLevel)
         {
@@ -206,6 +209,9 @@ namespace SecretSafe.Controllers
 
         public ActionResult Prices()
         {
+            if (User.Identity.IsAuthenticated)
+                ViewBag.SecurityLevel = GetSecurityLevelForUser();
+
             return View();
         }
     }
