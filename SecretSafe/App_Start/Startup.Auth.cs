@@ -8,6 +8,7 @@ using Owin;
 using SecretSafe.Models;
 using Data;
 using Models;
+using Microsoft.Owin.Security.Facebook;
 
 [assembly: OwinStartup(typeof(SecretSafe.Startup))]
 namespace SecretSafe
@@ -34,12 +35,12 @@ namespace SecretSafe
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.
-                    // This is a security feature which is used when you change a password or add an external login to your account.  
+                    // This is a security feature which is used when you change a password or add an external login to your account.
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<SecretSafeUserManager, SecretSafeUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -59,10 +60,13 @@ namespace SecretSafe
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "602016046625818",
-               appSecret: "a1a8ebc1da429cddba72dbf4793973d1");
-
+            var facebookAuthenticationOptions = new FacebookAuthenticationOptions()
+            {
+                AppId = "602016046625818",
+                AppSecret = "a1a8ebc1da429cddba72dbf4793973d1"
+            };
+            facebookAuthenticationOptions.Scope.Add("email");
+            app.UseFacebookAuthentication(facebookAuthenticationOptions);
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "151361180853-er5plgfuujbpeq32osv9k4vfb5resdue.apps.googleusercontent.com",

@@ -357,6 +357,8 @@ namespace SecretSafe.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    string browserVersion = Request.UserAgent;
+                    loginHistory.Login(loginInfo.Email, browserVersion);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -396,9 +398,13 @@ namespace SecretSafe.Controllers
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    result = await UserManager.AddToRoleAsync(user.Id, "Normal Security");
+
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        string browserVersion = Request.UserAgent;
+                        loginHistory.Login(model.Email, browserVersion);
                         return RedirectToLocal(returnUrl);
                     }
                 }
