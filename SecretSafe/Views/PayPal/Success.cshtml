@@ -1,11 +1,20 @@
-﻿
+﻿@model SecretSafe.Models.PayPalViewData
 @{
     ViewBag.Title = "Success";
     Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
-  ViewBag.PricesLinkActive = "active";
+    ViewBag.PricesLinkActive = "active";
 
 }
+<script src="~/Scripts/SecretSafe.js"></script>
 
+<script type="text/javascript">
+    var viewModel;
+
+    $(function () {
+        var viewModel = new SuccessPaymentViewModel(@Html.Raw(Model.JsonResponse));
+        ko.applyBindings(viewModel);
+    });
+</script>
 <div class="container templatemo_wrapper">
     <!-- home start -->
 
@@ -18,7 +27,8 @@
             <div class="templatemo_headertitle">SECRET ORDER</div>
             <div class="clear"></div>
             <div class="templatemmo_subheader">ORDER SUCCESS</div>
-         <div class="clear"></div>
+            <div class="clear"></div>
+            <div class="templatemmo_subheader text-capitalize">YOU ARE NOW WITH @Model.SecurityLevelName</div>
 
             <div class="row">
                 <div class="col-md-2"></div>
@@ -29,9 +39,26 @@
                 </div>
             </div>
             <div class="clear"></div>
-            <div class="templatemo_hometext">
+            <div class="templatemo_hometext" style="font-size: 15px;">
+                Transaction ID:
+                <p data-bind="text: parent_payment">
+                </p>
+                Transaction fee:
+                <p>
+                    Currency:    <span data-bind="text: transaction_fee.currency"></span>
+                    <br />
+                    Value:  <span data-bind="text: transaction_fee.value"></span>
+                </p>
+                Total
+                <p>
+                    Currency:   <span data-bind="text: amount.currency"></span>
+                    <br />
+                    Total:  <span data-bind="text: amount.total"></span>
+                </p>
+                State
+                <p data-bind="text: state"></p>
                 <hr />
-              <a href="@Url.Action("Prices", "Home")" title="Packages" class="templatemo_signup">RETURN TO PACKAGES</a>
+                <a href="@Url.Action("Prices", "Home")" title="Packages" class="templatemo_signup">RETURN TO PACKAGES</a>
                 <hr />
             </div>
             <div class="clear"></div>

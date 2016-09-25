@@ -5,5 +5,7 @@
         public string JsonRequest { get; set; }
         public string JsonResponse { get; set; }
         public string ErrorMessage { get; set; }
+
+        public string SecurityLevelName { get; set; }
     }
 }

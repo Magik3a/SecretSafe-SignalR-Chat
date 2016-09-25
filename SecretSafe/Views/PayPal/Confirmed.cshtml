@@ -2,10 +2,19 @@
 @{
     ViewBag.Title = "Confirmed";
     Layout = "~/Views/Shared/_LayoutTemplate.cshtml";
-        ViewBag.PricesLinkActive = "active";
+    ViewBag.PricesLinkActive = "active";
 
 }
 
+<script src="~/Scripts/SecretSafe.js"></script>
+<script type="text/javascript">
+    var viewModel;
+
+    $(function () {
+        var viewModel = new SuccessPaymentViewModel(@Html.Raw(Model.JsonResponse));
+        ko.applyBindings(viewModel);
+    });
+</script>
 <div class="container templatemo_wrapper">
     <!-- home start -->
 
@@ -17,22 +26,80 @@
         <div class="col-sm-6 templatemo_home">
             <div class="templatemo_headertitle">SECRET ORDER</div>
             <div class="clear"></div>
-            <div class="templatemmo_subheader">CONFIRM YOUR ORDER</div>
+            <div class="templatemmo_subheader">CONFIRM YOUR ORDER <br /> <span class="text-capitalize" data-bind="text: id"></span></div>
 
             <div class="clear"></div>
             <div class="templatemo_hometext">
-                    <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-10">
-                    <div class="templatemo_separater">
-                        <span class="page"> </span>
+                <div id="templatemo_packages" class="row">
+
+                    <div class="col-sm-10 pull-right" style="text-align: left">
+                        <div class="templatemo_pricing_table">
+                            <div class="templatemo_pricingbg_first">
+                                <img src="../images/templatemo_pricing_bg.jpg" alt="templatemo price img">
+                            </div>
+                            <div class="templatemo_pricing_box">
+                                <span class="price_title">@Model.SecurityLevelName</span>
+                                <span class="sign">$</span><span class="price" data-bind="text: transactions()[0].amount.total"> </span> <span class="month">/ month    </span>
+                            </div>
+                            <div class="templatemo_pricing_list">
+                                <ul>
+                                    @if (Model.SecurityLevelName == "Medium Security")
+                                    {
+                                        <li>Conversation history will not be saved anywhere!</li>
+                                        <li>All your rooms will use HTTPS connection</li>
+                                        <li>Rooms can be shared</li>
+                                        <li>You can create up to 50 rooms</li>
+                                        <li>Every room has limit of 150 people</li>
+                                        <li class="text-primary">You can delete conversation history for all users with one click</li>
+                                        <li class="text-primary">No limit on Normal Security rooms</li>
+
+                                    }
+                                    else if (Model.SecurityLevelName == "Pro Security")
+                                    {
+                                        <li>Conversation history will not be saved anywhere!</li>
+                                        <li>All your rooms will use HTTPS connection</li>
+                                        <li>Rooms can be shared</li>
+                                        <li>You can create up to 50 rooms</li>
+                                        <li>Every room has limit of 150 people</li>
+                                        <li class="text-primary">You can delete conversation history for all users with one click</li>
+                                        <li class="text-primary">You can ban users by IP </li>
+                                        <li class="text-primary">No limit on Normal Security rooms</li>
+                                        <li class="text-primary">No limit on Medium Security rooms</li>
+
+                                    }
+                                    else if (Model.SecurityLevelName == "Maximum Security")
+                                    {
+                                        <li>Conversation history will not be saved anywhere!</li>
+                                        <li>All your rooms will use HTTPS connection</li>
+                                        <li>Rooms can be shared</li>
+                                        <li>You can create up to 50 rooms</li>
+                                        <li class="text-primary">You can choose the limit of people for every room up to 300</li>
+                                        <li class="text-primary">You can delete conversation history for all users with one click</li>
+                                        <li class="text-primary">You can choose which user can delete conversation history</li>
+                                        <li class="text-primary">You can ban users by IP</li>
+                                        <li class="text-primary">Messages will be encrypted</li>
+                                        <li class="text-primary">No limit on Normal Security rooms</li>
+                                        <li class="text-primary">No limit on Medium Security rooms</li>
+                                        <li class="text-primary">No limin on Pro Security rooms</li>
+                                    }
+                                    else
+                                    {
+                                        <li>Conversation history will not be saveds anywhere!</li>
+                                        <li>All your rooms will use HTTPS connection</li>
+                                        <li>Rooms can be shared</li>
+                                        <li>You can create up to 15 rooms</li>
+                                        <li>Every room has limit of 50 people</li>
+
+                                    }
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="clear"></div>
                 <hr />
                 <form action="/paypal/capture" method="post">
                     <input type="hidden" name="authorizationId" value="@Model.AuthorizationId" />
+                    <input type="hidden" name="securityLevelName" value="@Model.SecurityLevelName" />
                     <button type="submit" class="templatemo_signup">SUBMIT</button>
                 </form>
                 <form action="/paypal/void" method="post">

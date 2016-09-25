@@ -10,12 +10,18 @@ using SecretSafe.Common;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using SecretSafe.DataServices;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+using Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Data;
 
 namespace SecretSafe.Controllers
 {
     public class PayPalController : Controller
     {
         private readonly ISecurityLevelsService securityLevels;
+
 
         public PayPalController(ISecurityLevelsService securityLevels)
         {
@@ -69,7 +75,7 @@ namespace SecretSafe.Controllers
 
                 if (approvalUrl != null)
                 {
-                    Session.Add(guid, createdPayment.id);
+                    Session.Add(guid, new PaymentDescription{ Id = createdPayment.id, SecurityLevelName = SecurityLevelName });
 
                     return Redirect(approvalUrl.href);
                 }
@@ -97,9 +103,11 @@ namespace SecretSafe.Controllers
 
             var accessToken = new OAuthTokenCredential(ConfigManager.Instance.GetProperties()["ClientID"], ConfigManager.Instance.GetProperties()["ClientSecret"]).GetAccessToken();
             var apiContext = new APIContext(accessToken);
+
+            var session = (PaymentDescription)Session[id.ToString()];
             var payment = new Payment()
             {
-                id = (string)Session[id.ToString()],
+                id = session.Id
             };
 
             var executedPayment = payment.Execute(apiContext, new PaymentExecution { payer_id = payerId });
@@ -107,7 +115,7 @@ namespace SecretSafe.Controllers
             viewData.AuthorizationId = executedPayment.transactions[0].related_resources[0].authorization.id;
             viewData.JsonRequest = JObject.Parse(payment.ConvertToJson()).ToString(Formatting.Indented);
             viewData.JsonResponse = JObject.Parse(executedPayment.ConvertToJson()).ToString(Formatting.Indented);
-
+            viewData.SecurityLevelName = session.SecurityLevelName;
             return View(viewData);
         }
 
@@ -116,7 +124,7 @@ namespace SecretSafe.Controllers
             return View();
         }
 
-        public ActionResult Capture(string authorizationId)
+        public ActionResult Capture(string authorizationId, string securityLevelName)
         {
             var viewData = new PayPalViewData();
 
@@ -142,7 +150,20 @@ namespace SecretSafe.Controllers
 
 
                     viewData.JsonResponse = JObject.Parse(capture.ConvertToJson()).ToString(Formatting.Indented);
+                    if (capture.state == "completed")
+                    {
 
+                        using (var userManager = new UserManager<SecretSafeUser>(new UserStore<SecretSafeUser>(new SecretSafeDbContext())))
+                        {
+                            var userID = User.Identity.GetUserId();
+                            var currentRole = userManager.GetRoles(userID);
+                            userManager.RemoveFromRole(userID, currentRole[0]);
+
+                            userManager.AddToRole(userID, securityLevelName);
+                        }
+
+                    }
+                    viewData.SecurityLevelName = securityLevelName;
                     return View("Success", viewData);
                 }
 
@@ -187,6 +208,13 @@ namespace SecretSafe.Controllers
 
                 return View("Error", viewData);
             }
+        }
+
+        private class PaymentDescription
+        {
+          public  string Id { get; set; }
+
+          public  string SecurityLevelName { get; set; }
         }
     }
 }
