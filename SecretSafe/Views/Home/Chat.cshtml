@@ -29,93 +29,96 @@
         </div>
 
 
-             <!-- DIRECT CHAT PRIMARY -->
-    <div class="row">
-        <div class="col-md-7 pull-right" style="margin-top: 30px">
-      <div class="box box-@ViewBag.CssClass direct-chat direct-chat-@ViewBag.CssClass">
-        <div class="box-header with-border">
-          <h3 class="box-title">Direct Chat</h3>
+        <!-- DIRECT CHAT PRIMARY -->
+        <div class="row">
+            <div class="col-md-7 pull-right" style="margin-top: 30px">
+                <div class="box box-@ViewBag.CssClass direct-chat direct-chat-@ViewBag.CssClass">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Direct Chat</h3>
 
-          <div class="box-tools pull-right">
-            <span data-toggle="tooltip" title="" class="badge bg-light-blue" data-original-title="3 New Messages">3</span>
+                        <div class="box-tools pull-right">
+                            <span data-toggle="tooltip" title="" class="badge bg-light-blue" data-original-title="3 New Messages">3</span>
 
-                <button id="clean-history" class="btn btn-box-tool btn-danger btnclean-history">
-                                    <span class="glyphicon glyphicon-erase"></span>
-                                    Clean history for all users
-                                </button>
-          </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <!-- Conversations are loaded here -->
-          <div  id="chat-list" class="direct-chat-messages" data-bind="foreach: messages">
-            <!-- Message. Default to the left -->
-            <div class="direct-chat-msg">
-              <div class="direct-chat-info clearfix">
-                <span class="direct-chat-name pull-left"  data-bind="text: username"></span>
-                <span class="direct-chat-timestamp pull-right" data-bind="text: timestamp.toLocaleTimeString()" ></span>
-              </div>
-              <!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="http://bootdey.com/img/Content/user_1.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-              <div class="direct-chat-text"  data-bind="html: content">
-              </div>
-              <!-- /.direct-chat-text -->
+
+                            <button id="clean-history" class="btn btn-box-tool btn-@ViewBag.CssClass btnclean-history">
+                                <span class="glyphicon glyphicon-erase"></span>
+                                Clean history for all users
+                            </button>
+                            <button class="btn btn-box-tool btn-@ViewBag.CssClass" id="volume-control" data-volume="100">
+                                <i class="fa fa-volume-up" aria-hidden="true"></i>
+                               Toggle sound
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <!-- Conversations are loaded here -->
+                        <div id="chat-list" class="direct-chat-messages" data-bind="foreach: messages">
+                            <!-- Message. Default to the left -->
+                            <div class="direct-chat-msg">
+                                <div class="direct-chat-info clearfix">
+                                    <span class="direct-chat-name pull-left" data-bind="text: username"></span>
+                                    <span class="direct-chat-timestamp pull-right" data-bind="text: timestamp.toLocaleTimeString()"></span>
+                                </div>
+                                <!-- /.direct-chat-info -->
+                                <img class="direct-chat-img" src="http://bootdey.com/img/Content/user_1.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
+                                <div class="direct-chat-text" data-bind="html: content">
+                                </div>
+                                <!-- /.direct-chat-text -->
+                            </div>
+                            <!-- /.direct-chat-msg -->
+                            <!-- Message to the right -->
+                            <!-- <div class="direct-chat-msg right">
+                              <div class="direct-chat-info clearfix">
+                                <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                                <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                              </div>
+                              <img class="direct-chat-img" src="http://bootdey.com/img/Content/user_2.jpg" alt="Message User Image">
+                              <div class="direct-chat-text">
+                                You better believe it!
+                              </div>
+                            </div>-->
+                            <!-- /.direct-chat-msg -->
+                        </div>
+                        <!--/.direct-chat-messages-->
+                        <!-- Contacts are loaded here -->
+                        <div class="direct-chat-contacts">
+                            <ul class="contacts-list">
+                                <li>
+                                    <a href="#">
+                                        <img class="contacts-list-img" src="http://bootdey.com/img/Content/user_1.jpg">
+
+                                        <div class="contacts-list-info">
+                                            <span class="contacts-list-name">
+                                                Count Dracula
+                                                <small class="contacts-list-date pull-right">2/28/2015</small>
+                                            </span>
+                                            <span class="contacts-list-msg">How have you been? I was...</span>
+                                        </div>
+                                        <!-- /.contacts-list-info -->
+                                    </a>
+                                </li>
+                                <!-- End Contact Item -->
+                            </ul>
+                            <!-- /.contatcts-list -->
+                        </div>
+                        <!-- /.direct-chat-pane -->
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="input-group">
+                            <input id="compose-box" type="text" name="message" placeholder="Type Message ..." class="form-control">
+                            <span class="input-group-btn">
+                                <button id="send-btn" type="submit" class="btn btn-@ViewBag.CssClass btn-flat">Send</button>
+                            </span>
+                        </div>
+
+                    </div>
+                    <!-- /.box-footer-->
+                </div>
             </div>
-            <!-- /.direct-chat-msg -->
-
-            <!-- Message to the right -->
-             <!-- <div class="direct-chat-msg right">
-              <div class="direct-chat-info clearfix">
-                <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-              </div>
-              <img class="direct-chat-img" src="http://bootdey.com/img/Content/user_2.jpg" alt="Message User Image">
-              <div class="direct-chat-text">
-                You better believe it!
-              </div>
-            </div>-->
-            <!-- /.direct-chat-msg -->
-          </div>
-          <!--/.direct-chat-messages-->
-
-          <!-- Contacts are loaded here -->
-          <div class="direct-chat-contacts">
-            <ul class="contacts-list">
-              <li>
-                <a href="#">
-                  <img class="contacts-list-img" src="http://bootdey.com/img/Content/user_1.jpg">
-
-                  <div class="contacts-list-info">
-                        <span class="contacts-list-name">
-                          Count Dracula
-                          <small class="contacts-list-date pull-right">2/28/2015</small>
-                        </span>
-                    <span class="contacts-list-msg">How have you been? I was...</span>
-                  </div>
-                  <!-- /.contacts-list-info -->
-                </a>
-              </li>
-              <!-- End Contact Item -->
-            </ul>
-            <!-- /.contatcts-list -->
-          </div>
-          <!-- /.direct-chat-pane -->
         </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-            <div class="input-group">
-              <input id="compose-box" type="text" name="message" placeholder="Type Message ..." class="form-control">
-                  <span class="input-group-btn">
-                    <button id="send-btn" type="submit" class="btn btn-@ViewBag.CssClass btn-flat">Send</button>
-                  </span>
-            </div>
-
-        </div>
-        <!-- /.box-footer-->
-      </div>
-        </div>
-        </div>
-      <!--/.direct-chat -->
+        <!--/.direct-chat -->
     </div>
 
 </div>
@@ -125,63 +128,63 @@
     <div class="col-md-3">
         <div id="users-list" class="span2">
             <h4>Users</h4>
-            <ul data-bind="foreach: contacts"  class="contacts-list">
+            <ul data-bind="foreach: contacts" class="contacts-list">
 
-              <li>
-                <a href="#">
-                  <img class="contacts-list-img" src="http://bootdey.com/img/Content/user_1.jpg">
+                <li>
+                    <a href="#">
+                        <img class="contacts-list-img" src="http://bootdey.com/img/Content/user_1.jpg">
 
-                  <div class="contacts-list-info">
-                        <span class="contacts-list-name"  data-bind="text: username">
+                        <div class="contacts-list-info">
+                            <span class="contacts-list-name" data-bind="text: username">
 
-                          <small class="contacts-list-date pull-right">0/00/0000</small>
-                        </span>
-                    <span class="contacts-list-msg">How have you been? I was...</span>
-                  </div>
-                  <!-- /.contacts-list-info -->
-                </a>
-              </li>
-              <!-- End Contact Item -->
+                                <small class="contacts-list-date pull-right">0/00/0000</small>
+                            </span>
+                            <span class="contacts-list-msg">How have you been? I was...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                    </a>
+                </li>
+                <!-- End Contact Item -->
             </ul>
         </div>
 
     </div>
     <div class="col-md-9">
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
 
-                    <span class="glyphicon glyphicon-user"></span>
-                    Username:
-                    <span class="pull-right">@Html.Raw(Json.Encode(Model.username))</span>
-                </h4>
+                        <span class="glyphicon glyphicon-user"></span>
+                        Username:
+                        <span class="pull-right">@Html.Raw(Json.Encode(Model.username))</span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+
+                        <span class="glyphicon glyphicon-home"></span>
+                        Room Name:
+                        <span class="pull-right">@Html.Raw(Json.Encode(Model.roomname))</span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 pull-right">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+
+                        <button class="btn btn-@ViewBag.CssClass" style="width: 100%" id="share-button">SHARE ROOM</button>
+                    </h4>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-
-                    <span class="glyphicon glyphicon-home"></span>
-                    Room Name:
-                    <span class="pull-right">@Html.Raw(Json.Encode(Model.roomname))</span>
-                </h4>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-5 pull-right">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-
-                    <button class="btn btn-@ViewBag.CssClass" style="width: 100%" id="share-button">SHARE ROOM</button>
-                </h4>
-            </div>
-        </div>
-    </div>
-        </div>
 </div>
 
 
@@ -256,7 +259,9 @@ on the server. Each hub on the server will become a property on the client side 
         // Client-side event handlers, as declared inside the  Hub
         chatHub.client.onMessageReceived = function (message) {
             // Play some sound
-            $.playSound("http://static1.grsites.com/archive/sounds/cartoon/cartoon015");
+            if($("#volume-control").data("volume") > 0){
+                $.playSound("http://static1.grsites.com/archive/sounds/cartoon/cartoon015");
+            }
             //Change favicon badge if youser is not on focus
             if ($.browser.webkit) {
                 var isFocus = $(window).is(":focus");
@@ -322,7 +327,21 @@ on the server. Each hub on the server will become a property on the client side 
         $("#clean-history").click(function () {
             cleanHistory();
         });
+        $("#volume-control").click(function () {
+            var volumeLevel = $(this).data("volume");
+            console.log(volumeLevel);
+            if(volumeLevel == 100){
+                $("#volume-control i").attr('class',"fa fa-volume-off");
+                $(this).data("volume", "0");
+                $(this).attr("style", "background: #DDD")
 
+            } else {
+                $("#volume-control i").attr('class',"fa fa-volume-up");
+                $(this).data("volume", "100");
+                $(this).attr("style", "")
+
+            }
+        });
 
         $("#send-btn").click(function () {
             sendMessageContent();
@@ -359,11 +378,11 @@ on the server. Each hub on the server will become a property on the client side 
     $("#share-button").click(function () {
         var url      = window.location.href;
         console.log(url);
-          copyToClipboard(url)
+        copyToClipboard(url)
     });
 
     function copyToClipboard(text) {
-    window.prompt("Copy URL to clipboard: Ctrl+C, Enter", text);
-}
+        window.prompt("Copy URL to clipboard: Ctrl+C, Enter", text);
+    }
 
 </script>

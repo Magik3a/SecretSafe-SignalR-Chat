@@ -821,7 +821,7 @@ h1 {
     margin-top: 20px;
 }
 #chat-list{
-        height: 20em;
+        height: 24em;
     background: white;
     overflow-y: auto;
 }

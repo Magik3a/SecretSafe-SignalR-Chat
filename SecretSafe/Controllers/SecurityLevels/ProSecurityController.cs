@@ -38,7 +38,7 @@
                 }
                 ViewBag.SecurityLevelName = "Pro Security";
                 ViewBag.CssClass = "warning";
-                return View("~/Views/Home/_LayoutTemplate.cshtml", "_Layout", new UserTest { username = currentUserNickName, roomname = roomname });
+                return View("~/Views/Home/Chat.cshtml", "_LayoutTemplate", new UserTest { username = currentUserNickName, roomname = roomname });
             }
             else
             {
@@ -56,7 +56,7 @@
             }
             ViewBag.SecurityLevelName = "Pro Security";
             ViewBag.CssClass = "warning";
-            return View("~/Views/Home/_LayoutTemplate.cshtml", "_Layout", new UserTest { username = username, roomname = roomname });
+            return View("~/Views/Home/Chat.cshtml", "_LayoutTemplate", new UserTest { username = username, roomname = roomname });
         }
 
         public class UserTest
