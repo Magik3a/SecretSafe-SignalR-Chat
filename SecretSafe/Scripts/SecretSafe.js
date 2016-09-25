@@ -16,11 +16,11 @@ secretSafe.chatMessage = function (sender, content, dateSent, color) {
     }
     self.color = color;
 
-    
-    console.log(sender + " for js");
-    console.log(content + " for js");
-    console.log(dateSent + " for js");
-    console.log(color + " for js");
+
+    //console.log(sender + " for js");
+    //console.log(content + " for js");
+    //console.log(dateSent + " for js");
+    //console.log(color + " for js");
 }
 
 secretSafe.user = function (username, userId, roomname, color) {

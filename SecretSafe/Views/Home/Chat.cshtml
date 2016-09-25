@@ -37,7 +37,7 @@
                         <h3 class="box-title">Direct Chat</h3>
 
                         <div class="box-tools pull-right">
-                            <span data-toggle="tooltip" title="" class="badge bg-light-blue" data-original-title="3 New Messages">3</span>
+                            <span data-toggle="tooltip" title="" class="badge bg-light-blue" data-original-title="3 New Messages" id="message-badge">0</span>
 
 
                             <button id="clean-history" class="btn btn-box-tool btn-@ViewBag.CssClass btnclean-history">
@@ -46,7 +46,7 @@
                             </button>
                             <button class="btn btn-box-tool btn-@ViewBag.CssClass" id="volume-control" data-volume="100">
                                 <i class="fa fa-volume-up" aria-hidden="true"></i>
-                               Toggle sound
+                                Toggle sound
                             </button>
                         </div>
                     </div>
@@ -246,8 +246,15 @@ on the server. Each hub on the server will become a property on the client side 
         }
         return this;
     };
+    var window_focus;
 
+    $(window).focus(function() {
+        window_focus = true;
+    }).blur(function() {
+        window_focus = false;
+    });
     $(document).ready(function () {
+        window_focus  = true;
         var chat = new secretSafe.chatViewModel();
         var users = new secretSafe.connectedUsersViewModel();
         var currentUser = new secretSafe.user(@Html.Raw(Json.Encode(Model.username)),"",@Html.Raw(Json.Encode(Model.roomname)), ""); // The username chose by the user is stored in the model
@@ -263,14 +270,24 @@ on the server. Each hub on the server will become a property on the client side 
                 $.playSound("http://static1.grsites.com/archive/sounds/cartoon/cartoon015");
             }
             //Change favicon badge if youser is not on focus
+
+
             if ($.browser.webkit) {
                 var isFocus = $(window).is(":focus");
-                if (isFocus) {
-                    favicon.badge(0);
+                console.log(window_focus);
 
+                if (window_focus ) {
+                    favicon.badge(0);
+                    console.log("IS FOCUSED");
+                    $("#message-badge").html(0);
                 } else {
-                    favicon.badge(valFavicon);
                     valFavicon += 1;
+                    favicon.badge(valFavicon);
+
+                    var currentValue = parseInt($("#message-badge").html());
+                    currentValue += 1;
+                    $("#message-badge").html(currentValue)
+
                 }
             }
             var date = new Date();
@@ -284,6 +301,8 @@ on the server. Each hub on the server will become a property on the client side 
             if ($.browser.webkit) {
                 valFavicon = 0;
                 favicon.badge(0);
+                $("#message-badge").html(0);
+
                 $("#chat-list").empty();
             }
         };
@@ -304,6 +323,8 @@ on the server. Each hub on the server will become a property on the client side 
             if ($.browser.webkit) {
                 valFavicon = 0;
                 favicon.badge(0);
+                $("#message-badge").html(0);
+
             }
             var content = $("#compose-box").val();
             if (content != "" && content != null) {
