@@ -1,12 +1,28 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
+<head  prefix="og: http://ogp.me/ns#">
     <title>@ViewBag.Title SecretSaved.com</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- for Google -->
+    <meta name="description" content="Totally secret chat application." />
+  <meta name="author" content="Svetlin Krastanov - www.s2kdesign.com" />
+    <!-- for Facebook -->
+    <meta property="og:title" content="www.secretsaved.com" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://secretsaved.com/images/social.png" />
+    <meta property="og:url" content="https://secretsaved.com/" />
+    <meta property="og:description" content="Totally secret chat application." />
+    <meta property="fb:app_id" content="602016046625818"/>
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="www.secretsaved.com" />
+    <meta name="twitter:description" content="Totally secret chat application." />
+    <meta name="twitter:image" content="https://secretsaved.com/images/social.png" />
 
 
 
@@ -15,11 +31,8 @@
     <link href="~/Content/templatemo_misc.css" rel="stylesheet" />
     <link href="~/Content/templatemo_style.css" rel="stylesheet" />
     <link href="~/Content/ChatBox.css" rel="stylesheet" />
-    <!-- JavaScripts -->
-    <!-- JavaScripts -->
+
     <script src="~/Scripts/jquery-2.2.4.min.js"></script>
-
-
     <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
     <script src="~/Scripts/knockout-3.4.0.js"></script>
     <script src="~/Scripts/knockout.mapping-latest.js"></script>
@@ -30,8 +43,8 @@
     <script src="~/Scripts/jquery.lightbox.js"></script>
 </head>
 <body>
-    <div id="templatemo_home" class="templatemo_headerimg"><img src="../images/templatemo_header.jpg" alt="templatemo header"></div>
-    <div class="templatemo_headerimg_cover"><img src="../images/templatemo_header.png" alt="templatemo header"></div>
+    <div id="templatemo_home" class="templatemo_headerimg"><img src="~/Images/templatemo_header.jpg" alt="templatemo header"></div>
+    <div class="templatemo_headerimg_cover"><img src="~/Images/templatemo_header.png" alt="templatemo header"></div>
     <div class="templatemo_headerwrapper">
         <div class="templatemo_menu">
             <nav class="navbar navbar-default" role="navigation">
@@ -71,9 +84,9 @@
 
                 }
 
-                <div class="templatemo_social"><a href="#"><img src="../images/facebook.png" alt="templatemo facebook"></a></div>
-                <div class="templatemo_social"><a href="#"><img src="../images/twitter.png" alt="templatemo twitter"></a></div>
-                <div class="templatemo_social"><a href="#"><img src="../images/googleplus.png" alt="templatemo googleplus"></a></div>
+                <div class="templatemo_social"><a href="https://www.facebook.com/sharer/sharer.php?u=secretsaved.com" target="_blank"><img src="~/Images/facebook.png" alt="facebook"></a></div>
+                <div class="templatemo_social"><a href="https://twitter.com/share?url=secretsaved.com" target="_blank"><img src="~/Images/twitter.png" alt="twitter"></a></div>
+                <div class="templatemo_social"><a href="https://plus.google.com/share?url=secretsaved.com" target="_blank"><img src="~/Images/googleplus.png" alt="googleplus"></a></div>
             </div>
         </div>
         <div class="clear"></div>

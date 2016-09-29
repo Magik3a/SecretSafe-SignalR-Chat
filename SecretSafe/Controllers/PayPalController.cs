@@ -160,6 +160,8 @@ namespace SecretSafe.Controllers
                             userManager.RemoveFromRole(userID, currentRole[0]);
 
                             userManager.AddToRole(userID, securityLevelName);
+
+                            // TODO Add payment to DB 
                         }
 
                     }

@@ -23,8 +23,8 @@ namespace Models
 
             return userIdentity;
         }
-        
 
+        public virtual ICollection<UserPayments> Payments { get; set; }
 
     }
 

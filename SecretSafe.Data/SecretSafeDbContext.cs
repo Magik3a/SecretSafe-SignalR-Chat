@@ -26,6 +26,7 @@ namespace Data
 
         public virtual IDbSet<SecurityLelvelAddons> SecurityLelvelAddons { get; set; }
 
+        public virtual IDbSet<UserPayments> Payments { get; set; }
 
         public static SecretSafeDbContext Create()
         {
