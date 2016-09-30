@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SecretSafe.Models;
+using SecretSafe.DataServices;
 
 namespace SecretSafe.Controllers
 {
@@ -15,15 +16,18 @@ namespace SecretSafe.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private UserManager _userManager;
+        private readonly ISecurityLevelsService securityLevels;
 
-        public ManageController()
+        public ManageController(ISecurityLevelsService securityLevels)
         {
+            this.securityLevels = securityLevels;
         }
 
-        public ManageController(UserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ISecurityLevelsService securityLevels, UserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            this.securityLevels = securityLevels;
         }
 
         public ApplicationSignInManager SignInManager
@@ -32,9 +36,9 @@ namespace SecretSafe.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -71,7 +75,8 @@ namespace SecretSafe.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                SecurityLevel = securityLevels.GetByName(User.Identity.GetUserRole()).Level
             };
             return View(model);
         }

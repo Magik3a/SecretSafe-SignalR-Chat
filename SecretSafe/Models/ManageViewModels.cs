@@ -12,6 +12,10 @@ namespace SecretSafe.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+
+        public int CompletedPayments { get; set; }
+
+        public int SecurityLevel { get; set; }
     }
 
     public class ManageLoginsViewModel

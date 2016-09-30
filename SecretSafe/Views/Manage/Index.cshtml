@@ -74,7 +74,7 @@
 
                     </tr>
 
-                    <tr class="dl-horizontal">
+                    <tr>
                         <td>
                             <h3>
                                 Security level:
@@ -88,7 +88,28 @@
                         </td>
 
                     </tr>
-                    <tr class="dl-horizontal">
+                    <tr>
+                        <td>
+                            <h3>
+                                Expiration date:
+                            </h3>
+                        </td>
+                        <td>
+                            @if (Model.SecurityLevel > 1)
+                            {
+                                <a class="templatemo_homebuton" href="@Url.Action("Index", "Update", new { SecurityLevel = Model.SecurityLevel })" data-toggle="tooltip" data-placement="left" title="EXTEND">
+                                    @User.Identity.GetExpirationDateForCurrentRole()
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="templatemo_homebuton" href="@Url.Action("Prices", "Home")" data-toggle="tooltip" data-placement="left" title="UPDATE YOUR SECURITY PACKAGE">
+                                    @User.Identity.GetExpirationDateForCurrentRole()
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <h3>
                                 Completed payments:
@@ -97,7 +118,7 @@
                         <td>
 
                             <a class="templatemo_homebuton" href="@Url.Action("Prices","Home")" title="Payments">
-                                View payments    <span class="badge"> @Model.Logins.Count</span>
+                                View payments    <span class="badge"> @Model.CompletedPayments</span>
                             </a>
                         </td>
 

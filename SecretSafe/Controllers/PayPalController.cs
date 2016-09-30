@@ -18,6 +18,7 @@ using Data;
 using AutoMapper;
 using System.Web.Security;
 using System.Security.Claims;
+using Microsoft.Owin;
 
 namespace SecretSafe.Controllers
 {

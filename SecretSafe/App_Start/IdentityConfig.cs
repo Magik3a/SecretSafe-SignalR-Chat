@@ -131,8 +131,9 @@ namespace SecretSafe
             ((ClaimsIdentity)identity).AddClaim(new Claim("ExpirationDateForCurrentRole", ExpirationDate.ToString()));
 
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
-            authenticationManager.AuthenticationResponseGrant = new AuthenticationResponseGrant(new ClaimsPrincipal(identity), new AuthenticationProperties() { IsPersistent = true });
-
+            authenticationManager.AuthenticationResponseGrant = new AuthenticationResponseGrant(
+                new ClaimsPrincipal(identity),
+                new AuthenticationProperties() { IsPersistent = true });
         }
 
         public static string GetUserRole(this IIdentity identity)
