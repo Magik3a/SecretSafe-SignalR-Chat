@@ -41,6 +41,7 @@
     <script src="~/Scripts/templatemo_custom.js"></script>
     <script src="~/Scripts/bootstrap-collapse.js"></script>
     <script src="~/Scripts/jquery.lightbox.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
     <div id="templatemo_home" class="templatemo_headerimg"><img src="~/Images/templatemo_header.jpg" alt="templatemo header"></div>
@@ -79,7 +80,8 @@
                     var userRoles = userManager.GetRoles(User.Identity.GetUserId());
                     var role = userRoles[0].ToUpper();
                     <div class="templatemo_social">
-                        <button class="btn btn-success"> @role</button>
+                        <button class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Expiration date: @User.Identity.GetExpirationDateForCurrentRole()"> @role</button>
+
                     </div>
 
                 }
@@ -116,5 +118,11 @@
             </div>
         </div>
     </div>
+
+     <script>
+         $(function () {
+             $('[data-toggle="tooltip"]').tooltip()
+         });
+    </script>
 </body>
 </html>

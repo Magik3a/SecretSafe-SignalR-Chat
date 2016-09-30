@@ -81,7 +81,7 @@ namespace Data.Migrations
             {
                 var userStore = new UserStore<SecretSafeUser>(context);
                 var userManager = new UserManager<SecretSafeUser>(userStore);
-                var userToInsert = new SecretSafeUser { UserName = "svetlin.krastanov90@gmail.com", PhoneNumber = "0888017004", Email = "svetlin.krastanov90@gmail.com", NickName="Svetlin" };
+                var userToInsert = new SecretSafeUser { UserName = "svetlin.krastanov90@gmail.com", PhoneNumber = "0888017004", Email = "svetlin.krastanov90@gmail.com", NickName="Svetlin", ExpirationDateForCurrentRole = DateTime.Now.AddYears(20) };
                 userManager.Create(userToInsert, "svetlin90");
                 userManager.AddToRole(userToInsert.Id, "Administrator");
             }

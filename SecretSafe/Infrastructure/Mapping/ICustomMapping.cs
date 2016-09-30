@@ -4,6 +4,6 @@
 
     public interface ICustomMapping
     {
-        void CreateMappings(IConfiguration config);
+        void CreateMappings(IMapperConfigurationExpression config);
     }
 }

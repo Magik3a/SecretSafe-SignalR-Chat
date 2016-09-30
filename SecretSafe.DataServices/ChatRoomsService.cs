@@ -16,8 +16,6 @@
 
         public Guid CreateChatRoom(ChatRoom ChatRoom)
         {
-            ChatRoom.CreatedOn = DateTime.Now;
-            ChatRoom.ModifiedOn = DateTime.Now;
             db.Add(ChatRoom);
             db.SaveChanges();
 
@@ -50,7 +48,8 @@
 
         public IQueryable<ChatRoom> GetChatRoomsForUser(string UserId)
         {
-            return db.All().Where(u => u.UserId == UserId).OrderBy(c => c.SecurityLevelId).ThenByDescending(c => c.CreatedOn);
+            var all = db.All().Where(u => u.UserId == UserId).OrderBy(c => c.SecurityLevelId).ThenByDescending(c => c.CreatedOn);
+            return all;
         }
     }
 }

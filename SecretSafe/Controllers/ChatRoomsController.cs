@@ -24,8 +24,8 @@ namespace SecretSafe.Controllers
             this.chatRoomsService = chatRoomsService;
             this.securityLevelsService = securityLevelsService;
             // TODO: This should not be needed, but mapper don't create maps from chatRoomsService to view models
-            Mapper.CreateMap<ChatRoom, ChatRoomsViewModel>();
-            Mapper.CreateMap<ChatRoom, ChatRoomsViewModel>().ReverseMap();
+            //Mapper.CreateMap<ChatRoom, ChatRoomsViewModel>();
+            //Mapper.CreateMap<ChatRoom, ChatRoomsViewModel>().ReverseMap();
 
             //Mapper.AssertConfigurationIsValid();
         }

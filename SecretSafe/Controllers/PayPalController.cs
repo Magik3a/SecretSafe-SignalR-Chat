@@ -21,11 +21,13 @@ namespace SecretSafe.Controllers
     public class PayPalController : Controller
     {
         private readonly ISecurityLevelsService securityLevels;
+        private readonly IPaymentsService paymentsService;
 
 
-        public PayPalController(ISecurityLevelsService securityLevels)
+        public PayPalController(ISecurityLevelsService securityLevels, IPaymentsService paymentsService)
         {
             this.securityLevels = securityLevels;
+            this.paymentsService = paymentsService;
         }
         // GET: PayPal
         public ActionResult CreatePayment(string Total, string SecurityLevelName)
@@ -75,7 +77,7 @@ namespace SecretSafe.Controllers
 
                 if (approvalUrl != null)
                 {
-                    Session.Add(guid, new PaymentDescription{ Id = createdPayment.id, SecurityLevelName = SecurityLevelName });
+                    Session.Add(guid, new PaymentDescription { Id = createdPayment.id, SecurityLevelName = SecurityLevelName });
 
                     return Redirect(approvalUrl.href);
                 }
@@ -161,7 +163,16 @@ namespace SecretSafe.Controllers
 
                             userManager.AddToRole(userID, securityLevelName);
 
-                            // TODO Add payment to DB 
+                            var payment = new PaymentViewModel()
+                            {
+                                BeforeRole = currentRole[0],
+                                PaymentRole = securityLevelName,
+                                DateCreated = DateTime.Now,
+                                PaymentNumber = capture.parent_payment,
+                                Total = Decimal.Parse(capture.amount.total),
+                                UserId = userID,
+                                ExpirationDate = DateTime.Now.AddMonths(1)
+                            };
                         }
 
                     }
@@ -214,9 +225,9 @@ namespace SecretSafe.Controllers
 
         private class PaymentDescription
         {
-          public  string Id { get; set; }
+            public string Id { get; set; }
 
-          public  string SecurityLevelName { get; set; }
+            public string SecurityLevelName { get; set; }
         }
     }
 }

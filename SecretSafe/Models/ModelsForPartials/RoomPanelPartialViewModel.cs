@@ -20,21 +20,21 @@ namespace SecretSafe.Models
 
         public string UserId { get; set; }
 
-        public void CreateMappings(IConfiguration config)
+        public void CreateMappings(IMapperConfigurationExpression config)
         {
-            config.CreateMap<RoomPanelPartialViewModel, ChatRoom>("RoomPanelPartialViewModel")
+            config.CreateMap<RoomPanelPartialViewModel, ChatRoom>()
                 .ForMember(c => c.SecurityLevelId, opt => opt.UseValue(SecurityLevelId));
 
-            config.CreateMap<RoomPanelPartialViewModel, ChatRoom>("RoomPanelPartialViewModel")
+            config.CreateMap<RoomPanelPartialViewModel, ChatRoom>()
                 .ForMember(c => c.Id, opt => opt.UseValue(RoomId));
 
-            config.CreateMap<RoomPanelPartialViewModel, ChatRoom>("RoomPanelPartialViewModel")
+            config.CreateMap<RoomPanelPartialViewModel, ChatRoom>()
             .ForMember(c => c.CreatedOn, opt => opt.UseValue(CreatedOn));
 
-            config.CreateMap<RoomPanelPartialViewModel, ChatRoom>("RoomPanelPartialViewModel")
+            config.CreateMap<RoomPanelPartialViewModel, ChatRoom>()
             .ForMember(c => c.ModifiedOn, opt => opt.UseValue(DateTime.Now));
         }
 
-    
+
     }
 }

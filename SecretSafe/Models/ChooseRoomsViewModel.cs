@@ -20,13 +20,12 @@
         public DateTime ModifiedOn { get; set; }
 
         public string SecurityLevel { get; set; }
-        
 
-        public void CreateMappings(IConfiguration config)
+        public void CreateMappings(IMapperConfigurationExpression config)
         {
-            config.CreateMap<ChatRoom, ChooseRoomsViewModel>("SecurityLevel")
+            config.CreateMap<ChatRoom, ChooseRoomsViewModel>()
                  .ForMember(c => c.SecurityLevel, opt => opt.MapFrom(c => c.SecurityLevels.Name));
-            
+
         }
     }
 }

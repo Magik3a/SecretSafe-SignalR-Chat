@@ -1,14 +1,14 @@
-﻿using Models;
+﻿using SecretSafe.Infrastructure.Mapping;
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using AutoMapper;
 
 namespace SecretSafe.Models
 {
-    public class UserPayments
+    public class PaymentViewModel : IMapFrom<UserPayments>
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
         public int PaymentID { get; set; }
 
         public string UserId { get; set; }
@@ -24,8 +24,6 @@ namespace SecretSafe.Models
         public DateTime DateCreated { get; set; }
 
         public DateTime ExpirationDate { get; set; }
-
-        public virtual SecretSafeUser User { get; set; }
 
     }
 }

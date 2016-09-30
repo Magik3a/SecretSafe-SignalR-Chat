@@ -15,6 +15,7 @@ using Models;
 using Data;
 using SecretSafe.Common.Functions;
 using System.Net.Mail;
+using System.Security.Principal;
 
 namespace SecretSafe
 {
@@ -110,6 +111,14 @@ namespace SecretSafe
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<SecretSafeUserManager>(), context.Authentication);
+        }
+    }
+
+    public static class IdentityExtensions
+    {
+        public static DateTime GetExpirationDateForCurrentRole(this IIdentity identity)
+        {
+            return Convert.ToDateTime(((ClaimsIdentity)identity).FindFirst("ExpirationDateForCurrentRole").Value);
         }
     }
 }
