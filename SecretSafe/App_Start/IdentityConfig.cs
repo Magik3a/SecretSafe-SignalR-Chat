@@ -16,6 +16,8 @@ using Data;
 using SecretSafe.Common.Functions;
 using System.Net.Mail;
 using System.Security.Principal;
+using System.Net;
+using System.Web.Security;
 
 namespace SecretSafe
 {
@@ -40,16 +42,16 @@ namespace SecretSafe
     }
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-    public class SecretSafeUserManager : UserManager<SecretSafeUser>
+    public class UserManager : UserManager<SecretSafeUser>
     {
-        public SecretSafeUserManager(IUserStore<SecretSafeUser> store)
+        public UserManager(IUserStore<SecretSafeUser> store)
             : base(store)
         {
         }
 
-        public static SecretSafeUserManager Create(IdentityFactoryOptions<SecretSafeUserManager> options, IOwinContext context)
+        public static UserManager Create(IdentityFactoryOptions<UserManager> options, IOwinContext context)
         {
-            var manager = new SecretSafeUserManager(new UserStore<SecretSafeUser>(context.Get<SecretSafeDbContext>()));
+            var manager = new UserManager(new UserStore<SecretSafeUser>(context.Get<SecretSafeDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<SecretSafeUser>(manager)
             {
@@ -98,19 +100,19 @@ namespace SecretSafe
     // Configure the application sign-in manager which is used in this application.
     public class ApplicationSignInManager : SignInManager<SecretSafeUser, string>
     {
-        public ApplicationSignInManager(SecretSafeUserManager userManager, IAuthenticationManager authenticationManager)
+        public ApplicationSignInManager(UserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
         }
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(SecretSafeUser user)
         {
-            return user.GenerateUserIdentityAsync((SecretSafeUserManager)UserManager);
+            return user.GenerateUserIdentityAsync((UserManager)UserManager);
         }
 
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
-            return new ApplicationSignInManager(context.GetUserManager<SecretSafeUserManager>(), context.Authentication);
+            return new ApplicationSignInManager(context.GetUserManager<UserManager>(), context.Authentication);
         }
     }
 
@@ -120,5 +122,18 @@ namespace SecretSafe
         {
             return Convert.ToDateTime(((ClaimsIdentity)identity).FindFirst("ExpirationDateForCurrentRole").Value);
         }
+
+        public static void SetNewExpirationDateForCurrentRole(this IIdentity identity, DateTime ExpirationDate)
+        {
+            var currentClaim = ((ClaimsIdentity)identity).FindFirst("ExpirationDateForCurrentRole");
+
+            ((ClaimsIdentity)identity).RemoveClaim(currentClaim);
+            ((ClaimsIdentity)identity).AddClaim(new Claim("ExpirationDateForCurrentRole", ExpirationDate.ToString()));
+
+            var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+            authenticationManager.AuthenticationResponseGrant = new AuthenticationResponseGrant(new ClaimsPrincipal(identity), new AuthenticationProperties() { IsPersistent = true });
+            
+        }
+
     }
 }

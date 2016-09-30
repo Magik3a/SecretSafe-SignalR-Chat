@@ -15,6 +15,9 @@ namespace SecretSafe.App_Start
     using System.Web.Mvc;
     using Ninject.Web.Mvc;
     using global::Common.Constants;
+    using global::Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public static class NinjectConfig
     {
@@ -23,13 +26,13 @@ namespace SecretSafe.App_Start
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -37,7 +40,7 @@ namespace SecretSafe.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -80,6 +83,9 @@ namespace SecretSafe.App_Start
             kernel.Bind(b => b.From(Assemblies.DataServices)
             .SelectAllClasses()
             .BindDefaultInterface());
-        }        
+
+            kernel.Bind<IUserStore<SecretSafeUser>>().To<UserStore<SecretSafeUser>>().WithConstructorArgument("context", kernel.Get<SecretSafeDbContext>());
+            kernel.Bind<UserManager<SecretSafeUser>>().ToSelf();
+        }
     }
 }

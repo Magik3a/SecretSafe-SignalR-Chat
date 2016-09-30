@@ -66,7 +66,7 @@
 
                 @if (Request.IsAuthenticated)
                 {
-                    var userManager = Request.GetOwinContext().GetUserManager<SecretSafeUserManager>();
+                    var userManager = Request.GetOwinContext().GetUserManager<UserManager>();
                     var userRoles = userManager.GetRoles(User.Identity.GetUserId());
                     var role = userRoles[0].ToUpper();
 

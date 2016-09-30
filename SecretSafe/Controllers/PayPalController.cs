@@ -15,19 +15,38 @@ using Microsoft.AspNet.Identity;
 using Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Data;
+using AutoMapper;
+using System.Web.Security;
+using System.Security.Claims;
 
 namespace SecretSafe.Controllers
 {
-    public class PayPalController : Controller
+    public class PayPalController : BaseController<SecretSafeDbContext>
     {
         private readonly ISecurityLevelsService securityLevels;
         private readonly IPaymentsService paymentsService;
+        private UserManager _userManager;
 
+        public UserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
-        public PayPalController(ISecurityLevelsService securityLevels, IPaymentsService paymentsService)
+        public PayPalController(
+            ISecurityLevelsService securityLevels,
+            IPaymentsService paymentsService,
+            UserManager userManager) : base(new SecretSafeDbContext())
         {
             this.securityLevels = securityLevels;
             this.paymentsService = paymentsService;
+            UserManager = userManager;
         }
         // GET: PayPal
         public ActionResult CreatePayment(string Total, string SecurityLevelName)
@@ -134,6 +153,12 @@ namespace SecretSafe.Controllers
             {
                 var accessToken = new OAuthTokenCredential(ConfigManager.Instance.GetProperties()["ClientID"], ConfigManager.Instance.GetProperties()["ClientSecret"]).GetAccessToken();
                 var apiContext = new APIContext(accessToken);
+                if (authorizationId == null)
+                {
+                    viewData.ErrorMessage = "Could not find previous authorization.";
+
+                    return View("Error", viewData);
+                }
                 var authorization = Authorization.Get(apiContext, authorizationId);
 
                 if (authorization != null)
@@ -154,26 +179,24 @@ namespace SecretSafe.Controllers
                     viewData.JsonResponse = JObject.Parse(capture.ConvertToJson()).ToString(Formatting.Indented);
                     if (capture.state == "completed")
                     {
+                        var userId = User.Identity.GetUserId();
+                        var currentRole = UserManager.GetRoles(userId);
 
-                        using (var userManager = new UserManager<SecretSafeUser>(new UserStore<SecretSafeUser>(new SecretSafeDbContext())))
+                        var payment = new PaymentViewModel()
                         {
-                            var userID = User.Identity.GetUserId();
-                            var currentRole = userManager.GetRoles(userID);
-                            userManager.RemoveFromRole(userID, currentRole[0]);
+                            BeforeRole = currentRole[0],
+                            PaymentRole = securityLevelName,
+                            DateCreated = DateTime.Now,
+                            PaymentNumber = capture.parent_payment,
+                            Total = Decimal.Parse(capture.amount.total),
+                            UserId = User.Identity.GetUserId(),
+                            ExpirationDate = DateTime.Now.AddMonths(1)
+                        };
 
-                            userManager.AddToRole(userID, securityLevelName);
+                        // Save the completed payment in database
+                        paymentsService.CreatePayment(Mapper.Map<PaymentViewModel, UserPayments>(payment));
 
-                            var payment = new PaymentViewModel()
-                            {
-                                BeforeRole = currentRole[0],
-                                PaymentRole = securityLevelName,
-                                DateCreated = DateTime.Now,
-                                PaymentNumber = capture.parent_payment,
-                                Total = Decimal.Parse(capture.amount.total),
-                                UserId = userID,
-                                ExpirationDate = DateTime.Now.AddMonths(1)
-                            };
-                        }
+                        ChangeUserRoleAfterPayment(securityLevelName);
 
                     }
                     viewData.SecurityLevelName = securityLevelName;
@@ -190,6 +213,36 @@ namespace SecretSafe.Controllers
 
                 return View("Error", viewData);
             }
+        }
+
+
+
+        private bool ChangeUserRoleAfterPayment(string securityLevelName)
+        {
+            var userID = User.Identity.GetUserId();
+            var currentRole = UserManager.GetRoles(userID);
+
+            // Remove User from current role and add the new one if is different
+            if (currentRole[0] != securityLevelName)
+            {
+                UserManager.RemoveFromRole(userID, currentRole[0]);
+                UserManager.AddToRole(userID, securityLevelName);
+
+                // TODO Count remaining days and add them to the new role
+                User.Identity.SetNewExpirationDateForCurrentRole(DateTime.Now.AddMonths(1));
+
+            }
+            else
+            {
+                var currentExpirationDate = User.Identity.GetExpirationDateForCurrentRole();
+                User.Identity.SetNewExpirationDateForCurrentRole(currentExpirationDate.AddMonths(1));
+            }
+
+            var user = UserManager.FindById(userID);
+            user.ExpirationDateForCurrentRole = User.Identity.GetExpirationDateForCurrentRole();
+            IdentityResult result = UserManager.Update(user);
+
+            return true;
         }
 
         public ActionResult Void(string authorizationId)

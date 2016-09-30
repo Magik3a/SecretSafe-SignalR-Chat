@@ -19,15 +19,15 @@ namespace SecretSafe.Controllers
     public class AccountController : BaseController<SecretSafeDbContext>
     {
         private ApplicationSignInManager _signInManager;
-        private SecretSafeUserManager _userManager;
+        private UserManager _userManager;
         private ILoginHistoryService loginHistory;
 
-        public AccountController(ILoginHistoryService loginHistory):base(new SecretSafeDbContext())
+        public AccountController(ILoginHistoryService loginHistory) : base(new SecretSafeDbContext())
         {
             this.loginHistory = loginHistory;
         }
 
-        public AccountController(ILoginHistoryService loginHistory, SecretSafeUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ILoginHistoryService loginHistory, UserManager userManager, ApplicationSignInManager signInManager)
             : base(new SecretSafeDbContext())
         {
             UserManager = userManager;
@@ -47,11 +47,11 @@ namespace SecretSafe.Controllers
             }
         }
 
-        public SecretSafeUserManager UserManager
+        public UserManager UserManager
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<SecretSafeUserManager>();
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>();
             }
             private set
             {
@@ -64,7 +64,7 @@ namespace SecretSafe.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if(Request.IsAjaxRequest())
+            if (Request.IsAjaxRequest())
                 return PartialView("_LoginViewPartial");
 
             ViewBag.ReturnUrl = returnUrl;
@@ -132,7 +132,7 @@ namespace SecretSafe.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account
             // will be locked out for a specified amount of time.
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -164,13 +164,19 @@ namespace SecretSafe.Controllers
             if (ModelState.IsValid)
             {
 
-                var user = new SecretSafeUser { UserName = model.Email, NickName = model.NickName, Email = model.Email };
+                var user = new SecretSafeUser
+                {
+                    UserName = model.Email,
+                    NickName = model.NickName,
+                    Email = model.Email,
+                    ExpirationDateForCurrentRole = DateTime.Now.AddYears(1)
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 result = await UserManager.AddToRoleAsync(user.Id, "Normal Security");
 
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -393,7 +399,7 @@ namespace SecretSafe.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new SecretSafeUser { UserName = model.Email, Email = model.Email, NickName= model.Email };
+                var user = new SecretSafeUser { UserName = model.Email, Email = model.Email, NickName = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

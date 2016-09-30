@@ -22,6 +22,7 @@ namespace SecretSafe.DataServices
             //Payment.DateCreated = DateTime.Now;
 
             this.db.Add(Payment);
+            this.db.SaveChanges();
             return Payment.PaymentID;
         }
 

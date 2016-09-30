@@ -14,13 +14,13 @@ namespace SecretSafe.Controllers
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
-        private SecretSafeUserManager _userManager;
+        private UserManager _userManager;
 
         public ManageController()
         {
         }
 
-        public ManageController(SecretSafeUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(UserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -38,11 +38,11 @@ namespace SecretSafe.Controllers
             }
         }
 
-        public SecretSafeUserManager UserManager
+        public UserManager UserManager
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<SecretSafeUserManager>();
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<UserManager>();
             }
             private set
             {
