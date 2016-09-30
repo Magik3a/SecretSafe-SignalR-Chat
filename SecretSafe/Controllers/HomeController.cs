@@ -97,15 +97,20 @@ namespace SecretSafe.Controllers
             }
         }
 
-        [Authorize]
         public ActionResult Rooms()
         {
-            List<ChooseRoomsViewModel> chatRooms = chatRoomsService
-                .GetChatRoomsForUser(User.Identity.GetUserId())
-                .ProjectTo<ChooseRoomsViewModel>()
-                .ToList();
+
+
             ViewBag.SecurityLevels = securityLevels.GetAll().ToList();
-            return View(chatRooms);
+            if (User.Identity.IsAuthenticated)
+            {
+                List<ChooseRoomsViewModel> chatRooms = chatRoomsService
+                 .GetChatRoomsForUser(User.Identity.GetUserId())
+                 .ProjectTo<ChooseRoomsViewModel>()
+                 .ToList();
+                return View(chatRooms);
+            }
+            return View();
         }
 
 
@@ -145,7 +150,13 @@ namespace SecretSafe.Controllers
             var securityLevelTitle = GetClassSecurityLevel(SecurityLevel);
             int securityLevelId = securityLevels.GetByName(securityLevelTitle).SecurityLevelId;
 
+            if (!Request.IsAjaxRequest() || !User.Identity.IsAuthenticated)
+            {
+                int securityLevel = securityLevels.GetByName(securityLevelTitle).Level;
 
+                return Json(new { status = false, title = securityLevelTitle, cssClass = SecurityLevel, securityLevel = securityLevel }, JsonRequestBehavior.AllowGet);
+
+            }
             if (!CheckUserPermissions(securityLevelTitle, GetSecurityLevelForUser()))
             {
                 int securityLevel = securityLevels.GetByName(securityLevelTitle).Level;

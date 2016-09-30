@@ -132,8 +132,16 @@ namespace SecretSafe
 
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
             authenticationManager.AuthenticationResponseGrant = new AuthenticationResponseGrant(new ClaimsPrincipal(identity), new AuthenticationProperties() { IsPersistent = true });
-            
+
         }
 
+        public static string GetUserRole(this IIdentity identity)
+        {
+            var roles = ((ClaimsIdentity)identity).Claims
+                .Where(c => c.Type == ClaimTypes.Role)
+                .Select(c => c.Value);
+
+            return roles.FirstOrDefault();
+        }
     }
 }

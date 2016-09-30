@@ -30,57 +30,79 @@
             <div class="templatemo_hometext">
                 <p class="text-success">@ViewBag.StatusMessage</p>
 
+                <table class="table text-justify">
+                    <tr>
+                        <td>
+                            <h3>
+                                Password:
+                            </h3>
+                        </td>
+                        <td>
+                            @if (Model.HasPassword)
+                            {
+                                @Html.ActionLink("Change your password", "ChangePassword", null, new { @class = "templatemo_homebuton" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Create", "SetPassword", null, new { @class = "templatemo_homebuton" })
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>
+                                DIsplay name:
+                            </h3>
+                        </td>
+                        <td>
+                            @Html.ActionLink("Change display name", "ChangeNick", "Manage", null, new { @class = "templatemo_homebuton" })
+                        </td>
+                    </tr>
+                    <tr class="dl-horizontal">
+                        <td>
+                            <h3>
+                                External Logins:
+                            </h3>
+                        </td>
+                        <td>
 
-                <dl class="dl-horizontal">
-                    <dt>Password:</dt>
-                    <dd>
-                        @if (Model.HasPassword)
-                        {
-                            @Html.ActionLink("Change your password", "ChangePassword", null, new { @class = "templatemo_homebuton" })
-                        }
-                        else
-                        {
-                            @Html.ActionLink("Create", "SetPassword", null, new { @class = "templatemo_homebuton" })
-                        }
-                    </dd>
-                </dl>
-                <dl class="dl-horizontal">
-                    <dt>DIsplay name:</dt>
-                    <dd>
-                        @Html.ActionLink("Change display name", "ChangeNick", "Manage", null, new { @class = "templatemo_homebuton" })
-                    </dd>
-                </dl>
-                <dl class="dl-horizontal">
-                    <dt>External Logins:</dt>
-                    <dd>
+                            <a class="templatemo_homebuton" href="@Url.Action("ManageLogins")" title="Manage Logins">
+                                Manage
+                                <span class="badge"> @Model.Logins.Count</span>
+                            </a>
+                        </td>
 
-                        <a class="templatemo_homebuton" href="@Url.Action("ManageLogins")" title="Manage Logins">
-                            Manage
-                            <span class="badge"> @Model.Logins.Count</span>
-                        </a>
-                    </dd>
+                    </tr>
 
-                </dl>
-                @using Microsoft.AspNet.Identity
-                @using Microsoft.AspNet.Identity.Owin;
-
-                @if (Request.IsAuthenticated)
-                {
-                    var userManager = Request.GetOwinContext().GetUserManager<UserManager>();
-                    var userRoles = userManager.GetRoles(User.Identity.GetUserId());
-                    var role = userRoles[0].ToUpper();
-
-                    <dl class="dl-horizontal">
-                        <dt>Security level:</dt>
-                        <dd>
+                    <tr class="dl-horizontal">
+                        <td>
+                            <h3>
+                                Security level:
+                            </h3>
+                        </td>
+                        <td>
 
                             <a class="templatemo_homebuton" href="@Url.Action("Prices","Home")" title="Security Level">
-                              @role
+                                @User.Identity.GetUserRole()
                             </a>
-                        </dd>
+                        </td>
 
-                    </dl>
-                }
+                    </tr>
+                    <tr class="dl-horizontal">
+                        <td>
+                            <h3>
+                                Completed payments:
+                            </h3>
+                        </td>
+                        <td>
+
+                            <a class="templatemo_homebuton" href="@Url.Action("Prices","Home")" title="Payments">
+                                View payments    <span class="badge"> @Model.Logins.Count</span>
+                            </a>
+                        </td>
+
+                    </tr>
+                </table>
             </div>
             <div class="clear"></div>
         </div>

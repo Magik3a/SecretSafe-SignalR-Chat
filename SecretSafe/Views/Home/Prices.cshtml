@@ -18,7 +18,19 @@
         <div class="col-sm-6 templatemo_home">
             <div class="templatemo_headertitle">SECRET PACKAGES</div>
             <div class="clear"></div>
-            <div class="templatemmo_subheader">CHOOSE HOW MUCH YOUR PRIVACY COST</div>
+            <div class="templatemmo_subheader">
+                CHOOSE HOW MUCH YOUR PRIVACY COST
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <hr />
+                    <span>
+                        CURRENT PACKAGE:  @User.Identity.GetUserRole().ToUpper()
+                        <br />
+                      EXPIRE ON:  @User.Identity.GetExpirationDateForCurrentRole()
+                    </span>
+                          <hr />
+                }
+            </div>
 
 
             <div class="templatemo_hometext">

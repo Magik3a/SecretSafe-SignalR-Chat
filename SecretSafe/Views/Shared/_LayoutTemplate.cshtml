@@ -76,11 +76,8 @@
 
                 @if (Request.IsAuthenticated)
                 {
-                    var userManager = Request.GetOwinContext().GetUserManager<UserManager>();
-                    var userRoles = userManager.GetRoles(User.Identity.GetUserId());
-                    var role = userRoles[0].ToUpper();
                     <div class="templatemo_social">
-                        <button class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Expiration date: @User.Identity.GetExpirationDateForCurrentRole()"> @role</button>
+                        <button class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Expiration date: @User.Identity.GetExpirationDateForCurrentRole()"> @User.Identity.GetUserRole().ToUpper()</button>
 
                     </div>
 
