@@ -61,7 +61,7 @@
                                     <span class="direct-chat-timestamp pull-right" data-bind="text: timestamp.toLocaleTimeString()"></span>
                                 </div>
                                 <!-- /.direct-chat-info -->
-                                <img class="direct-chat-img" src="http://bootdey.com/img/Content/user_1.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
+                                <img class="direct-chat-img" src="~/Images/user_1.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
                                 <div class="direct-chat-text" data-bind="html: content">
                                 </div>
                                 <!-- /.direct-chat-text -->
@@ -86,7 +86,7 @@
                             <ul class="contacts-list">
                                 <li>
                                     <a href="#">
-                                        <img class="contacts-list-img" src="http://bootdey.com/img/Content/user_1.jpg">
+                                        <img class="contacts-list-img" src="~/Images/user_1.jpg">
 
                                         <div class="contacts-list-info">
                                             <span class="contacts-list-name">
@@ -132,7 +132,7 @@
 
                 <li>
                     <a href="#">
-                        <img class="contacts-list-img" src="http://bootdey.com/img/Content/user_1.jpg">
+                        <img class="contacts-list-img" src="~/Images/user_1.jpg">
 
                         <div class="contacts-list-info">
                             <span class="contacts-list-name" data-bind="text: username">
@@ -200,7 +200,7 @@ If you navigate to signalr/hubs in your browser, you'll see a script that is dyn
 on the server. Each hub on the server will become a property on the client side $.connection, e.g. $.connection.myHub.
  -->
 <script type="text/javascript" src="@Url.Content("/signalr/hubs")"></script>
-<script src="~/Scripts/SecretSafe.js"></script>
+<script src="~/Models/KnockoutJSModels/SecretSafe.js"></script>
 <script src="~/Scripts/favico.min.js"></script>
 <script src="~/Scripts/jquery.browser.min.js"></script>
 <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
@@ -267,7 +267,7 @@ on the server. Each hub on the server will become a property on the client side 
         chatHub.client.onMessageReceived = function (message) {
             // Play some sound
             if($("#volume-control").data("volume") > 0){
-                $.playSound("http://static1.grsites.com/archive/sounds/cartoon/cartoon015");
+                $.playSound("https://static1.grsites.com/archive/sounds/cartoon/cartoon015");
             }
             //Change favicon badge if youser is not on focus
 
