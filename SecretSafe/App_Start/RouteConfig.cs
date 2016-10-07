@@ -15,28 +15,33 @@ namespace SecretSafe
 
             routes.MapRoute(
              name: "Default2",
-             url: "NormalSecurity/{id}",
+             url: "{lang}/NormalSecurity/{id}",
+             constraints: new { lang = @"(\w{2})|(\w{2}-\w{2})"},
              defaults: new { controller = "NormalSecurity", action = "Index", id = UrlParameter.Optional }
          );
             routes.MapRoute(
           name: "Default3",
-          url: "MediumSecurity/{id}",
+          url: "{lang}/MediumSecurity/{id}",
+             constraints: new { lang = @"(\w{2})|(\w{2}-\w{2})" },
           defaults: new { controller = "MediumSecurity", action = "Index", id = UrlParameter.Optional }
       );
             routes.MapRoute(
           name: "Default4",
-          url: "ProSecurity/{id}",
+          url: "{lang}/ProSecurity/{id}",
+             constraints: new { lang = @"(\w{2})|(\w{2}-\w{2})" },
           defaults: new { controller = "ProSecurity", action = "Index", id = UrlParameter.Optional }
       );
             routes.MapRoute(
           name: "Default5",
-          url: "MaximumSecurity/{id}",
+          url: "{lang}/MaximumSecurity/{id}",
+             constraints: new { lang = @"(\w{2})|(\w{2}-\w{2})" },
           defaults: new { controller = "MaximumSecurity", action = "Index", id = UrlParameter.Optional }
       );
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{lang}/{controller}/{action}/{id}",
+             constraints: new { lang = @"(\w{2})|(\w{2}-\w{2})" },
+                defaults: new { lang = "en", controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

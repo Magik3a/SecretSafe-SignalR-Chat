@@ -3,20 +3,20 @@
     height:100%;
 }
 
-body 
+body
 {
-	font-family: Helvetica;		
-      
-  
-    margin-top: 65px; 
-} 
- 
+	font-family: Helvetica;
+
+
+    margin-top: 65px;
+}
+
 .navbar-inverse .navbar-brand{
     color: #D8D8D8;
 }
- 
+
 .navbar-inverse .navbar-nav > li > a{
-    color: #D8D8D8; 
+    color: #D8D8D8;
 }
 @media only screen and (min-device-width : 320px) and (max-device-width : 690px) {
 
@@ -28,8 +28,8 @@ body
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', endColorstr='#a849a3',GradientType=0 ); /* IE6-9 */
     }
 }
-footer{   
-   text-align: center; 
+footer{
+   text-align: center;
    bottom: 0;
 
 }
@@ -46,26 +46,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', end
 }
 
 /*#header-title
-{ 
-    margin-top: 10px;    
+{
+    margin-top: 10px;
     font-size: 30px;
-    font-weight: bold;        
+    font-weight: bold;
 }*/
 
-#myContainer h1 
+#myContainer h1
 {
-	font-size: 50px;     
-	padding-bottom: 20px;	
+	font-size: 50px;
+	padding-bottom: 20px;
 }
 
-#myContainer h2 
+#myContainer h2
 {
-	font-size: 25px;    	
+	font-size: 25px;
 	padding-left: 20px;
 	font-weight: lighter;
 }
 
-#myContainer ul 
+#myContainer ul
 {
     list-style: none;
     list-style-image: none;
@@ -80,20 +80,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', end
 	padding-bottom: 5px;
 }
 
-#myContainer 
-{   
+#myContainer
+{
     /*margin-top: 40px;*/
-        
+
 }
  .btnclean-history{
      margin-bottom: 20px;
  }
 
-#form-container 
+#form-container
 {
 	display: block;
 	height: 500px;
-	width: 100%;    
+	width: 100%;
 	margin: 0 auto;
 	margin-top: 5%;
 }
@@ -102,7 +102,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', end
         height: 500px;
     }
 #form-container {
-	width: 40%;    
+	width: 40%;
   }
 }
 @media (max-width: 800px){
@@ -115,25 +115,25 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e570e7', end
 	font-size: larger;
 }
 
-#input-box 
+#input-box
 {
 	margin-top: 40px;
 }
 .security-rooms-alert{
     margin-top: 40px;
 }
-label 
-{    
+label
+{
 	font-size: 18px;
 }
 
-input, button 
+input, button
 {
 	margin-right: 25px;
 }
- 
-#username 
-{     
+
+#username
+{
 }
 
 #room-label{
@@ -143,31 +143,31 @@ input, button
 
 #room{
         margin-bottom: 15px;
- 
+
 }
 /* Chat specific style */
-#chat-list 
-{    
+#chat-list
+{
     position:relative;
-    
+
     overflow-y:auto;
-    background-color: White;	    
+    background-color: White;
     -moz-border-radius: 2px;
-    border-radius: 2px;     
+    border-radius: 2px;
 }
 
-#chat-list div 
+#chat-list div
 {
     float:left;
 }
 
 #chat-list ul {
-	list-style: none;				
+	list-style: none;
 }
 #chat-list li:hover {
-	background-color: #ffc578 ;			 
+	background-color: #ffc578 ;
 }
-#chat-list ul li 
+#chat-list ul li
 {
     float:left;
 	display:inline;
@@ -178,60 +178,60 @@ input, button
 	padding-bottom:0px;
 }
 
-.chat-listitem-username 
+.chat-listitem-username
 {
     display:block;
     float: left;
     width: 120px;
-    padding: 5px;        
-    background-color:#D8D8D8;    
+    padding: 5px;
+    background-color:#D8D8D8;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
-.chat-listitem-message 
-{   
+.chat-listitem-message
+{
     /*width:530px;*/
     margin-right: 90px;
-    padding: 5px;    
-    word-wrap: break-word;    
+    padding: 5px;
+    word-wrap: break-word;
 }
 
-.chat-listitem-timestamp 
-{   
+.chat-listitem-timestamp
+{
     position: absolute;
     right: 0px;
     margin-right:0px;
-    text-align: center; 
-    font-weight:lighter;    
-    padding: 5px;    
+    text-align: center;
+    font-weight:lighter;
+    padding: 5px;
     width: 100px;
     background-color: #F2F2F2;
     color: Gray;
 }
 
-#users-list 
+#users-list
 {
     /*height: 510px;*/
-    overflow-y: auto;    
+    overflow-y: auto;
     -moz-border-radius: 2px;
     border-radius: 2px;
-} 
+}
 
-#users-list li 
+#users-list li
 {
     margin-bottom: 5px;
 }
 
- 
-.user-box { 
+
+.user-box {
 	width: 90%;
-	/*background-color: #ffc578;*/ 
+	/*background-color: #ffc578;*/
 	-moz-border-radius: 3px;
     border-radius: 3px;
     height: 35px;
     padding: 5px;
-    opacity: 0.8;    
+    opacity: 0.8;
 }
 
     .user-box:hover {
@@ -242,24 +242,24 @@ input, button
         box-shadow: 0 0 5px black;
     }
 
-.user-box-name 
+.user-box-name
 {
     font-size: larger;
     margin-left: 3px;
     font-weight: bolder;
 }
 
-#compose 
+#compose
 {
     margin-top: 30px;
 }
 
-#compose-box 
-{    
+#compose-box
+{
     width: 100%;
 }
 
-#send-btn 
+#send-btn
 {
     margin-top:5px;
     width: 100%;
@@ -275,7 +275,7 @@ input, button
     }
 }
 .price-box{
-    padding: 6px !important; 
+    padding: 6px !important;
     font-size: 18px;
 }
     .price-box table {
@@ -300,5 +300,5 @@ input, button
 
 .login{
 
-    
+
 }

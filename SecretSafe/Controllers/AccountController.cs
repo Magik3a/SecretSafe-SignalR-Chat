@@ -399,7 +399,7 @@ namespace SecretSafe.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new SecretSafeUser { UserName = model.Email, Email = model.Email, NickName = model.Email };
+                var user = new SecretSafeUser { UserName = model.Email, Email = model.Email, NickName = model.Email, ExpirationDateForCurrentRole=DateTime.Now.AddYears(1) };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

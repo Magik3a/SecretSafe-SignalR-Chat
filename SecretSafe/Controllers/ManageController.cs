@@ -17,17 +17,20 @@ namespace SecretSafe.Controllers
         private ApplicationSignInManager _signInManager;
         private UserManager _userManager;
         private readonly ISecurityLevelsService securityLevels;
+        private readonly IPaymentsService paymentsService;
 
-        public ManageController(ISecurityLevelsService securityLevels)
+        public ManageController(ISecurityLevelsService securityLevels, IPaymentsService paymentsService)
         {
             this.securityLevels = securityLevels;
+            this.paymentsService = paymentsService;
         }
 
-        public ManageController(ISecurityLevelsService securityLevels, UserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ISecurityLevelsService securityLevels, IPaymentsService paymentsService, UserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
             this.securityLevels = securityLevels;
+            this.paymentsService = paymentsService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -76,7 +79,8 @@ namespace SecretSafe.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                SecurityLevel = securityLevels.GetByName(User.Identity.GetUserRole()).Level
+                SecurityLevel = securityLevels.GetByName(User.Identity.GetUserRole()).Level,
+                CompletedPayments = paymentsService.GetPaymentsForUser(userId).Count()
             };
             return View(model);
         }
