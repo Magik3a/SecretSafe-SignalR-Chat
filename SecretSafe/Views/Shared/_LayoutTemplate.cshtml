@@ -42,6 +42,8 @@
     <script src="~/Scripts/bootstrap-collapse.js"></script>
     <script src="~/Scripts/jquery.lightbox.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/Models/KnockoutJSModels/MultiLanguageViewModel.js"></script>
 </head>
 <body>
     <div id="templatemo_home" class="templatemo_headerimg"><img src="~/Images/templatemo_header.jpg" alt="templatemo header"></div>
@@ -106,7 +108,6 @@
                     </div>
 
                 }
-
                 <div class="templatemo_social"><a href="https://www.facebook.com/sharer/sharer.php?u=secretsaved.com" target="_blank"><img src="~/Images/facebook.png" alt="facebook"></a></div>
                 <div class="templatemo_social"><a href="https://twitter.com/share?url=secretsaved.com" target="_blank"><img src="~/Images/twitter.png" alt="twitter"></a></div>
                 <div class="templatemo_social"><a href="https://plus.google.com/share?url=secretsaved.com" target="_blank"><img src="~/Images/googleplus.png" alt="googleplus"></a></div>
@@ -123,7 +124,7 @@
         <div class="templatemo_footer">
             <div class="container">
                 <div class="row">
-                    <p class="pull-left col-md-6">
+                    <p class="pull-left col-md-6">@Html.MultiLanguage(2)
                         &copy; www.secretsaved.com @DateTime.Now.Year - Version @typeof(SecretSafe.MvcApplication).Assembly.GetName().Version <br />
                         Programmed and designed by Svetlin Krastanov -
                         <a href="http://s2kdesign.com/" title="www.s2kdesign.com" target="_blank">www.s2kdesign.com</a>
