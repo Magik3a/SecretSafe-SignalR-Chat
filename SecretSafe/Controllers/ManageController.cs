@@ -79,8 +79,8 @@ namespace SecretSafe.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                SecurityLevel = securityLevels.GetByName(User.Identity.GetUserRole()).Level,
-                CompletedPayments = paymentsService.GetPaymentsForUser(userId).Count()
+                SecurityLevel = securityLevels?.GetByName(User.Identity.GetUserRole()).Level??0,
+                CompletedPayments = paymentsService?.GetPaymentsForUser(userId).Count()??0
             };
             return View(model);
         }

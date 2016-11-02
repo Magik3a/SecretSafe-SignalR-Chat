@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Models;
 using SecretSafe.Models;
+using Data.Migrations;
 
 namespace Data
 {
@@ -16,6 +17,7 @@ namespace Data
         public SecretSafeDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SecretSafeDbContext, Configuration>());
         }
 
         public virtual IDbSet<LoginHistory> LoginHistory { get; set; }

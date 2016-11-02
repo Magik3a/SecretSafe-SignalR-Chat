@@ -121,6 +121,14 @@ namespace Data.Migrations
                        CreatedOn = DateTime.Now,
                        Level = 4,
                        price = 15
+                   },
+                   new SecretSafe.Models.SecurityLevel()
+                   {
+                       SecurityLevelId = 5,
+                       Name = "Administrator",
+                       CreatedOn = DateTime.Now,
+                       Level = 5,
+                       price = 0
                    }
             );
 
