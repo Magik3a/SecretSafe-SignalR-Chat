@@ -24,7 +24,6 @@ namespace SecretSafe
             {
                 try
                 {
-                    Thread.CurrentThread.CurrentCulture = 
                         Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(lang);
                 }
                 catch (Exception ex)

@@ -18,6 +18,7 @@ using System.Net.Mail;
 using System.Security.Principal;
 using System.Net;
 using System.Web.Security;
+using System.Globalization;
 
 namespace SecretSafe
 {
@@ -120,7 +121,13 @@ namespace SecretSafe
     {
         public static DateTime GetExpirationDateForCurrentRole(this IIdentity identity)
         {
-            return Convert.ToDateTime(((ClaimsIdentity)identity).FindFirst("ExpirationDateForCurrentRole").Value);
+            DateTime dateValue;
+            DateTimeStyles styles = DateTimeStyles.None;
+
+            var date = ((ClaimsIdentity)identity).FindFirst("ExpirationDateForCurrentRole").Value;
+            DateTime.TryParse(date, CultureInfo.InvariantCulture, styles, out dateValue);
+
+            return dateValue;
         }
 
         public static void SetNewExpirationDateForCurrentRole(this IIdentity identity, DateTime ExpirationDate)

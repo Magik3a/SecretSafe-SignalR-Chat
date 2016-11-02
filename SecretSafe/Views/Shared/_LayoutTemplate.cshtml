@@ -69,10 +69,28 @@
                     <div id="top-menu">
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="@ViewBag.IndexLinkActive"><a class="menu first" href="@Url.Action("Index", "Home")"><span>HOME</span></a></li>
+                                <li class="@ViewBag.IndexLinkActive">
+                                    <a class="menu first" href="@Url.Action("Index", "Home")">
+                                        <span>
+                                            @Html.MultiLanguage(2).ToUpper()
+                                        </span>
+                                    </a>
+                                </li>
 
-                                <li class="@ViewBag.PricesLinkActive"><a class="menu" href="@Url.Action("Prices", "Home")"><span>PACKAGES</span></a></li>
-                                <li class="@ViewBag.RoomsLinkActive"><a class="menu" href="@Url.Action("Rooms", "Home")"><span>ROOMS</span></a></li>
+                                <li class="@ViewBag.PricesLinkActive">
+                                    <a class="menu" href="@Url.Action("Prices", "Home")">
+                                        <span>
+                                            @Html.MultiLanguage(3).ToUpper()
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="@ViewBag.RoomsLinkActive">
+                                    <a class="menu" href="@Url.Action("Rooms", "Home")">
+                                        <span>
+                                            @Html.MultiLanguage(4).ToUpper()
+                                        </span>
+                                    </a>
+                                </li>
                                 @Html.Partial("_LoginPartial")
                             </ul>
                         </div>
@@ -81,7 +99,7 @@
                                 @{
                                     var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
                                     var action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
-                                    var id = HttpContext.Current.Request.RequestContext.RouteData.Values["id"]??HttpContext.Current.Request.RequestContext.RouteData.Values["id"];
+                                    var id = HttpContext.Current.Request.RequestContext.RouteData.Values["id"] ?? HttpContext.Current.Request.RequestContext.RouteData.Values["id"];
                                 }
                                 <li class="@((UICulture == "en-US")?"active":"")">
                                     <a href="@Url.RouteUrl(new { lang = "en", controller = controller, action = action, id= id  })" class="menu"><span>EN</span></a>
@@ -124,7 +142,9 @@
         <div class="templatemo_footer">
             <div class="container">
                 <div class="row">
-                    <p class="pull-left col-md-6">@Html.MultiLanguage(2)
+                    <p class="pull-left col-md-6">
+
+
                         &copy; www.secretsaved.com @DateTime.Now.Year - Version @typeof(SecretSafe.MvcApplication).Assembly.GetName().Version <br />
                         Programmed and designed by Svetlin Krastanov -
                         <a href="http://s2kdesign.com/" title="www.s2kdesign.com" target="_blank">www.s2kdesign.com</a>

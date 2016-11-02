@@ -19,6 +19,7 @@ using AutoMapper;
 using System.Web.Security;
 using System.Security.Claims;
 using Microsoft.Owin;
+using System.Globalization;
 
 namespace SecretSafe.Controllers
 {
@@ -54,7 +55,7 @@ namespace SecretSafe.Controllers
         {
             var viewData = new PayPalViewData();
             var guid = Guid.NewGuid().ToString();
-            decimal total = Convert.ToDecimal(Total);
+            decimal total = Convert.ToDecimal(Total, CultureInfo.InvariantCulture);
 
             var paymentInit = new Payment
             {

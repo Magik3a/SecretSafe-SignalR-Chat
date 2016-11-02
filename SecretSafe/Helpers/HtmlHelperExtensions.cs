@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
@@ -17,13 +18,14 @@ public static class HtmlHelperExtensions
 
     public static string MultiLanguage(this HtmlHelper htmlHelper, int phrase)
     {
-        var language = CultureInfo.CurrentCulture;
-        HttpResponseMessage response = Task.Run(() => client.GetAsync($"http://localhost:44113/api/Phrases/{phrase}/{language.TwoLetterISOLanguageName}")).Result;
+        var language = CultureInfo.CurrentUICulture;
+        var url = ConfigurationManager.AppSettings["MultiLanguageApiUrl"];
+        HttpResponseMessage response = Task.Run(() => client.GetAsync($"{url}/Initials/{language.TwoLetterISOLanguageName}/Phrase/{phrase}")).Result;
 
         if (response.IsSuccessStatusCode)
         {
             var task = Json.Decode(Task.Run(() => response.Content.ReadAsStringAsync()).Result);
-            return task.PhraseText;
+            return task;
         }
         else
         {
